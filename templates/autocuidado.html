@@ -1,0 +1,65 @@
+{% extends 'layout_main-drawer_footer_topbar.html' %}
+{% block page_description %}126 Te Orienta, Autocuidado y Salud Emocional, Autocuidado, Salud, Emocional{% endblock %}
+{% block page_title %}Autocuidado y Salud Emocional{% endblock %}
+{% block body %}
+<main class="s-main-content">
+    <article class="s-article">
+        <div class="container-color-background">
+            <div class="mdc-layout-grid container-size-xs">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
+                                mdc-layout-grid__cell--align-middle container-justify-center">
+                        <div
+                            class="mdc-typography--headline2 s-font-color-primary s-font-align-center s-font-family-poppins">
+                            Autocuidado y salud emocional
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-color-background">
+            <div class="mdc-layout-grid container-size-s">
+                <div class="mdc-layout-grid__inner">
+                    <div
+                        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                                mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
+                        <img src="{{ url_for('static', filename='images/manifest/user_f_03.svg') }}"
+                            class="resize-image-2fit-90" alt="Logo Seguridad" />
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                                mdc-layout-grid__cell--align-middle container-justify-center">
+                        <p class="mdc-typography--body1 s-font-color-on-background">
+                            <b>Practica el autocuidado.</b>
+                        </p>
+                        <p class="mdc-typography--body1 s-font-color-on-background">
+                            Las situaciones de violencia, incluyendo durante la pandemia de COVID-19, causan mucha
+                            incertidumbre para las mujeres afectadas. Tratar de superar este momento mientras estás
+                            experimentando abuso puede ser realmente abrumador. <b>Tomar tiempo para tu salud y
+                            bienestar puede hacer una gran diferencia en cómo te sientes</b>. Aquí encontrarás
+                            información sobre cómo practicar el autocuidado y proteger tu salud mental mientras te
+                            mantienes segura.
+                        </p>
+                        <p class="mdc-typography--body1 s-font-color-on-background">
+                            <b>El personal de 126 Te Orienta te puede ayudar a elaborar un plan personalizado para
+                            recibir apoyo emocional y social.</b>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-color-background">
+            <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
+                                mdc-layout-grid__cell--align-middle container-justify-center">
+                        <h4
+                            class="mdc-typography--headline4 s-font-color-primary s-font-align-center s-font-family-poppins">
+                            Autocuidado y salud emocional
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</main>
+{% endblock %}

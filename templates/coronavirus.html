@@ -1,0 +1,103 @@
+{% extends 'layout_main-drawer_footer_topbar.html' %}
+{% block page_description %}126 Te Orienta, COVID-19, Coronavirus, COVID, SARS{% endblock %}
+{% block page_title %}COVID-19{% endblock %}
+{% block body %}
+<main class="s-main-content">
+    <article class="s-article">
+        <div class="container-color-background">
+            <div class="mdc-layout-grid container-size-xs">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
+                                mdc-layout-grid__cell--align-middle container-justify-center">
+                        <div
+                            class="mdc-typography--headline2 s-font-color-primary s-font-align-center s-font-family-poppins">
+                            COVID-19
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-color-background">
+            <div class="mdc-layout-grid container-size-s">
+                <div class="mdc-layout-grid__inner">
+                    <div
+                        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                                mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
+                        <img src="{{ url_for('static', filename='images/assets/articles/covid19/covid.png') }}"
+                            class="resize-image-2fit-90" alt="Logo COVID-19" />
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                                mdc-layout-grid__cell--align-middle container-justify-center">
+                        <div class="mdc-typography--headline2 s-font-color-secondary s-font-family-poppins">
+                            Infórmate
+                        </div>
+                        <p class="mdc-typography--body1 s-font-color-on-background">
+                            Cuando las sobrevivientes de violencia se ven obligadas a quedarse en casa o estar en
+                            contacto con un agresor, él puede usar cualquier herramienta para ejercer control sobre su
+                            víctima, incluido un problema como la pandemia de COVID-19. Aquí encontrarás información
+                            sobre violencia doméstica y COVID-19 y de otros temas importantes para ti.
+                        </p>
+                        <p class="mdc-typography--body1 s-font-color-on-background">
+                            Informar a las mujeres y la población en general acerca de los riesgos para la salud que
+                            puede representar COVID-19, así como las medidas que puede tomar para protegerse resulta
+                            clave para reducir las probabilidades de que las personas contraigan el COVID-19 y para
+                            mitigar su propagación. La información es el primer recurso que permite a todas y todos
+                            tomar decisiones informadas para cuidar nuestra salud y prevenir rumores y desinformaciones.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-color-background">
+            <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle s-font-align-center">
+                        <div class="mdc-card">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-card__media mdc-card__media--16-9">
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/mqIfK0XDeyI"
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen>
+                                    </iframe>
+                                </div>
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Prevención COVID-19</div>
+                                <div class="mdc-typography--subtitle2">Prevención en el lugar de trabajo</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle s-font-align-center">
+                        <div class="mdc-card">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-card__media mdc-card__media--16-9">
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/3Ku2u50weVY"
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen>
+                                    </iframe>
+                                </div>
+                                <div class="mdc-typography--headline5 s-font-color-secondary">COVID-19</div>
+                                <div class="mdc-typography--subtitle2">La ciencia del COVID-19</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle s-font-align-center">
+                        <div class="mdc-card">
+                            <a href="https://www.paho.org/es/covid-19-materiales-comunicacion" target="_blank">
+                                <div class="mdc-card__primary-action" tabindex="0">
+                                    <div class="mdc-card__media">
+                                        <i class="material-icons s-font-color-primary"
+                                            aria-hidden="true">coronavirus</i>
+                                    </div>
+                                    <div class="mdc-typography--headline5 s-font-color-secondary">COVID-19</div>
+                                    <div class="mdc-typography--subtitle2">Materiales de Comunicación OPS</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</main>
+{% endblock %}

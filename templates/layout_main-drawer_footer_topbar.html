@@ -9,7 +9,7 @@
     </div>
     <div class="mdc-drawer__content">
         <nav class="mdc-list">
-            <a class="mdc-list-item" href="/" aria-current="page" tabindex="0">
+            <a class="mdc-list-item" href="/welcome/" aria-current="page" tabindex="0">
                 <span class="mdc-list-item__ripple"></span>
                 <i class="material-icons mdc-list-item__graphic" aria-hidden="true">home</i>
                 <span class="mdc-list-item__text">Bienvenido</span>
@@ -19,26 +19,42 @@
             <a class="mdc-list-item" href="/chat/admin/" aria-current="page">
                 <span class="mdc-list-item__ripple"></span>
                 <i class="material-icons mdc-list-item__graphic" aria-hidden="true">chat</i>
-                <span class="mdc-list-item__text">Chat</span>
+                <span class="mdc-list-item__text">Chatea con nosotras</span>
             </a>
                 {% elif current_user.is_user_role(['usr']) %}
             <a class="mdc-list-item" href="/chat/home/" aria-current="page">
                 <span class="mdc-list-item__ripple"></span>
                 <i class="material-icons mdc-list-item__graphic" aria-hidden="true">chat</i>
-                <span class="mdc-list-item__text">Chat</span>
+                <span class="mdc-list-item__text">Chatea con nosotras</span>
             </a>
                 {% endif %}
             {% else %}
             <a class="mdc-list-item" href="/chat/" aria-current="page">
                 <span class="mdc-list-item__ripple"></span>
                 <i class="material-icons mdc-list-item__graphic" aria-hidden="true">chat</i>
-                <span class="mdc-list-item__text">Chat</span>
+                <span class="mdc-list-item__text">Chatea con nosotras</span>
             </a>
             {% endif %}
-            <a class="mdc-list-item" href="/recursos/" aria-current="page">
+            <a class="mdc-list-item" href="/login/" aria-current="page">
                 <span class="mdc-list-item__ripple"></span>
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">library_books</i>
-                <span class="mdc-list-item__text">Recursos de ayuda</span>
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">event_available</i>
+                <span class="mdc-list-item__text">Accede a tu cita</span>
+            </a>
+            <hr class="mdc-list-divider s-mdc-list-divider">
+            <a class="mdc-list-item" href="/autocuidado/" aria-current="page">
+                <span class="mdc-list-item__ripple"></span>
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">healing</i>
+                <span class="mdc-list-item__text">Autocuidado y salud emocional</span>
+            </a>
+            <a class="mdc-list-item" href="/dirservicios/" aria-current="page">
+                <span class="mdc-list-item__ripple"></span>
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">menu_book</i>
+                <span class="mdc-list-item__text">Directorio de servicios</span>
+            </a>
+            <a class="mdc-list-item" href="/coronavirus/" aria-current="page">
+                <span class="mdc-list-item__ripple"></span>
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">coronavirus</i>
+                <span class="mdc-list-item__text">COVID-19</span>
             </a>
             <hr class="mdc-list-divider s-mdc-list-divider">
             <a class="mdc-list-item" href="/sobrenosotros/">
