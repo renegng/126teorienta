@@ -57,6 +57,8 @@ To install Swing CMS, follow the next steps (under Ubuntu 16.04):
 
 6 - Within the activated virtual environment, install Flask and all PiP applications:
 
+    ~: pip install --upgrade pip
+
     You could install all packages automatically:
 
     ~: pip install -r requirements.txt
