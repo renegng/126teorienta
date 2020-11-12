@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="generator" content="Swing CMS">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <meta name="description" content="{% block page_description %}{% endblock %}">
+    <title>{% block page_title %}{% endblock %}</title>
+    <!--
+      The `<base>` tag below is present to support two advanced deployment options:
+      1) Differential serving. 2) Serving from a non-root path.
+      Instead of manually editing the `<base>` tag yourself, you should generally either:
+      a) Add a `basePath` property to the build configuration in your `polymer.json`.
+      b) Use the `--base-path` command-line option for `polymer build`.
+    -->
+    <!-- <base href="/"> -->
+
+    <!-- Custom Font import -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700|Roboto:300,400,500,700|Lato:300,400,700" rel="stylesheet">
+
+    <!-- Material Design icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!--Font Awesome icons -->
+    <script src="https://kit.fontawesome.com/f217e8ae00.js" crossorigin="anonymous"></script>
+
+    <!-- Bundled CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bundle/swing-bundle.css') }}">
+
+    <!-- Favicon -->
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+
+    <!-- See https://goo.gl/OOhYW5 -->
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+
+    <!-- See https://goo.gl/qRE0vM -->
+    <meta name="theme-color" content="#313945">
+
+    <!-- Open Graph Metatags to share on Facebook -->
+    <meta name="twitter:site" content="@rxdbit">
+    <meta name="twitter:card" content="summary">
+    <meta property="og:url" content="{{ request.url }}">  
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ self.page_title() }}">
+    <meta property="og:site_name" content="126 Te Orienta">
+    <meta property="og:description" content="{{ self.page_description() }}">
+    <meta property="og:image" content="{{ url_for('static', filename='images/manifest/icon-512x512.png') }}">
+
+    <!-- Add to homescreen for Chrome on Android. Fallback for manifest.json -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="126 Te Orienta">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="126 Te Orienta">
+
+    <!-- Homescreen icons -->
+    <link rel="apple-touch-icon" sizes="48x48" href="{{ url_for('static', filename='images/manifest/icon-48x48.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ url_for('static', filename='images/manifest/icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="96x96" href="{{ url_for('static', filename='images/manifest/icon-96x96.png') }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ url_for('static', filename='images/manifest/icon-144x144.png') }}">
+    <link rel="apple-touch-icon" sizes="192x192" href="{{ url_for('static', filename='images/manifest/icon-192x192.png') }}">
+    <link rel="apple-touch-icon" sizes="512x512" href="{{ url_for('static', filename='images/manifest/icon-192x192.png') }}">
+
+    <!-- Tile icon for Windows 8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="{{ url_for('static', filename='images/manifest/icon-144x144.png') }}">
+    <meta name="msapplication-TileColor" content="#313945">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=XXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'XXXX');
+    </script>
+    -->
+
+    <!-- Firebase app, analytics and auth JS - Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-auth.js"></script>
+   
+    <!-- FirebaseUI JS and CSS - Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth__es_419.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.css" />
+   
+    {% block head_section %}{% endblock %}
+
+</head>
+<body class="mdc-typography">
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    {% block drawer %}{% endblock %}
+    <div class="mdc-drawer-app-content">
+        {% block topbar %}{% endblock %}
+        {% block body %}{% endblock %}
+        {% block footer %}{% endblock %}
+    </div>
+    {% block body_script_section %}{% endblock %}
+    <script src="{{ url_for('static', filename='js/bundle/swing-bundle.js') }}" async></script>
+</body>
+</html>

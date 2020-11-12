@@ -1,0 +1,26 @@
+/* SWING CMS APPLICATION - DEFAULT THEME CSS */
+
+/* *******************
+- Reusable Media Queries Sentences
+
+// Laptops and Computers
+@media all and (min-width: 52.5em) {
+}
+
+// Tablets
+@media all and (max-width: 52.49em) {
+}
+
+// Smartphones
+@media all and (max-width: 37.49em) {
+}
+
+********************** */
+
+/* Import libraries and other resources */
+@use "swing_material";
+@use "aos/src/sass/aos";
+@use "animate.css/animate";
+
+/* Import app resources */
+@use "swing_layout";

@@ -1,0 +1,145 @@
+{% extends 'layout_main-drawer_footer_topbar.html' %}
+{% block page_description %}126 Te Orienta, Recursos, Fotografías, Videos{% endblock %}
+{% block page_title %}Recursos{% endblock %}
+{% block body %}
+<main class="s-main-content">
+    <article class="s-article">
+        <div class="container-color-background">
+            <div class="mdc-layout-grid container-size-xs">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
+                                mdc-layout-grid__cell--align-middle container-justify-center">
+                        <div
+                            class="mdc-typography--headline2 s-font-color-primary s-font-align-center s-font-family-poppins">
+                            Recursos infográficos
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-color-background">
+            <div class="mdc-layout-grid container-size-s">
+                <div class="mdc-layout-grid__inner">
+                    <div
+                        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                                mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
+                        <img src="{{ url_for('static', filename='images/assets/placeholders/resources.png') }}"
+                            class="resize-image-2fit-70" alt="Logo Recursos" />
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                                mdc-layout-grid__cell--align-middle container-justify-center">
+                        <div class="mdc-typography--headline2 s-font-color-secondary s-font-family-poppins">
+                            Visualiza y descarga información
+                        </div>
+                        <p class="mdc-typography--body1 s-font-color-on-background">
+                            126 Te Orienta pone a tu disposición recursos de tu interés. En esta sección encontrarás folletos,
+                            videos y documentos de carácter informativo sobre los siguientes temas:
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-color-background">
+            <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
+                                mdc-layout-grid__cell--align-middle container-justify-center">
+                        <h4
+                            class="mdc-typography--headline4 s-font-color-primary s-font-align-center s-font-family-poppins">
+                            Archivos y vínculos
+                        </h4>
+                    </div>
+                    <div
+                        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle s-font-align-center">
+                        <div class="mdc-card">
+                            <a href="https://drive.google.com/file/d/1_NOEiz6BJ8Ne3FPHXb99fyTNg52qgT46/view?usp=sharing"
+                                target="_blank">
+                                <div class="mdc-card__primary-action" tabindex="0">
+                                    <div class="mdc-card__media">
+                                        <i class="material-icons s-font-color-primary"
+                                            aria-hidden="true">contact_phone</i>
+                                    </div>
+                                    <div class="mdc-typography--headline5 s-font-color-secondary">Instituciones
+                                        Gubernamentales</div>
+                                    <div class="mdc-typography--subtitle2">Por cabecera departamental</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div
+                        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle s-font-align-center">
+                        <div class="mdc-card">
+                            <a href="https://drive.google.com/file/d/1Xy3Y69XydxjzBxyWSO7gR1QKHiVDpRmh/view?usp=sharing"
+                                target="_blank">
+                                <div class="mdc-card__primary-action" tabindex="0">
+                                    <div class="mdc-card__media">
+                                        <i class="material-icons s-font-color-primary"
+                                            aria-hidden="true">contact_phone</i>
+                                    </div>
+                                    <div class="mdc-typography--headline5 s-font-color-secondary">Oficinas Municipales
+                                        de la Mujer</div>
+                                    <div class="mdc-typography--subtitle2">Por cabecera departamental</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div
+                        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle s-font-align-center">
+                        <div class="mdc-card">
+                            <a href="https://www.paho.org/es/covid-19-materiales-comunicacion" target="_blank">
+                                <div class="mdc-card__primary-action" tabindex="0">
+                                    <div class="mdc-card__media">
+                                        <i class="material-icons s-font-color-primary"
+                                            aria-hidden="true">coronavirus</i>
+                                    </div>
+                                    <div class="mdc-typography--headline5 s-font-color-secondary">COVID-19</div>
+                                    <div class="mdc-typography--subtitle2">Materiales de Comunicación OPS</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
+                                mdc-layout-grid__cell--align-middle container-justify-center">
+                        <h4
+                            class="mdc-typography--headline4 s-font-color-primary s-font-align-center s-font-family-poppins">
+                            Videos
+                        </h4>
+                    </div>
+                    <div
+                        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle s-font-align-center">
+                        <div class="mdc-card">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-card__media mdc-card__media--16-9">
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/mqIfK0XDeyI"
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen>
+                                    </iframe>
+                                </div>
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Prevención COVID-19</div>
+                                <div class="mdc-typography--subtitle2">Prevención en el lugar de trabajo</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle s-font-align-center">
+                        <div class="mdc-card">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-card__media mdc-card__media--16-9">
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/3Ku2u50weVY"
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen>
+                                    </iframe>
+                                </div>
+                                <div class="mdc-typography--headline5 s-font-color-secondary">COVID-19</div>
+                                <div class="mdc-typography--subtitle2">La ciencia del COVID-19</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</main>
+{% endblock %}

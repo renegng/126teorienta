@@ -1,0 +1,5 @@
+# Disallow: / - indicates that this site is not crawlable
+# Disallow:   - indicates that this site is crawlable
+
+User-agent: *
+Disallow: /

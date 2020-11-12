@@ -1,0 +1,228 @@
+{% extends 'layout_main-drawer_footer_topbar.html' %}
+{% block page_description %}126 Te Orienta, Welcome, Home, Inicio, Bienvenida{% endblock %}
+{% block page_title %}Bienvenid@ a 126 Te Orienta{% endblock %}
+{% block body %}
+<main class="s-main-content">
+    <div class="container-color-primary">
+        <div class="mdc-layout-grid container-size-l">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                            mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center"
+                    style="grid-row: span 2;">
+                    <img src="{{ url_for('static', filename='images/manifest/user_f_01.svg') }}" alt="Logo 126 Te Orienta" />
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                            mdc-layout-grid__cell--align-middle container-justify-center">
+                    <div class="mdc-typography--headline5 s-font-color-yellow-titles s-font-family-poppins">
+                        (#126)
+                    </div>
+                    <div class="mdc-typography--headline2 s-font-color-yellow-titles s-font-family-poppins">
+                        Te Orienta
+                    </div>
+                    <p class="mdc-typography--body1 s-font-color-on-primary">
+                        Es una plataforma digital de servicios para mujeres adultas y adolescentes que han experimentado
+                        cualquier situación de violencia, con el fin de asegurarles una atención integral, mediante los
+                        servicios de psicología, trabajo social y asesoría legal.
+                    </p>
+                    <p class="mdc-typography--body1 s-font-color-on-primary">
+                        <b>Estamos aquí para escucharte y apoyarte. Tu información será anónima y confidencial.</b> Para
+                        recibir orientación general o ser referida a servicios:
+                    </p>
+                    <p>
+                        <button class="mdc-button mdc-button--raised mdc-button--color-inverted animate__animated animate__tada"
+                                aria-label="Try Chat" alt="Try Chat" data-action-type="redirect" data-action-val="/chat/">
+                            <div class="mdc-button__ripple"></div>
+                            <span class="mdc-button__label">Chatea con nosotras</span>
+                        </button>
+                    </p>
+                    <p class="mdc-typography--subtitle2 s-font-color-on-primary s-font-policies">
+                        Recuerda: al utilizar la plataforma, estás aceptando nuestros
+                        <a href="/terminosdelservicio/" target="_blank">Términos y Condiciones del Servicio</a> y
+                        <a href="/politicaprivacidad/" target="_blank">Política de Privacidad</a>.
+                    </p>
+                    <br />
+                    <p class="mdc-typography--subtitle1 s-font-color-on-primary">
+                        Para <b>ASISTIR A UNA CITA</b> o <b>SOLICITAR UNA NUEVA</b>, crea o accede a tu cuenta
+                        personal:
+                    </p>
+                    <p>
+                        <button id="loginButton" class="mdc-button mdc-button--raised mdc-button--color-secondary" aria-label="Login"
+                            alt="Login" data-action-type="redirect" data-action-val="/login/">
+                            <div class="mdc-button__ripple"></div>
+                            <span class="mdc-button__label">Ingresa por aquí</span>
+                        </button>
+                    </p>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet 
+                            mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
+                    <img class="resize-image-2fit-50" src="../static/images/manifest/isdemu.svg" alt="Logo ISDEMU" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-m">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
+                            mdc-layout-grid__cell--align-middle container-justify-center">
+                    <h2
+                        class="mdc-typography--headline2 s-font-color-secondary s-font-align-center s-font-family-poppins">
+                        Servicios que ofrecemos
+                    </h2>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
+                    <i class="material-icons s-font-size-l s-font-color-yellow-titles" aria-hidden="true">chat</i>
+                    <p class="mdc-typography--headline6 s-font-color-on-background">
+                        Mensajes por chat
+                    </p>
+                    <p class="mdc-typography--body2 s-font-color-on-background">
+                        Muchas veces es más eficiente y cómodo escribir tus pensamientos.
+                    </p>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
+                    <i class="material-icons s-font-size-l s-font-color-yellow-titles" aria-hidden="true">phone</i>
+                    <p class="mdc-typography--headline6 s-font-color-on-background">
+                        Llamadas de voz
+                    </p>
+                    <p class="mdc-typography--body2 s-font-color-on-background">
+                        Agenda una llamada de voz con un agente por medio de nuestra plataforma.
+                    </p>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
+                    <i class="material-icons s-font-size-l s-font-color-yellow-titles" aria-hidden="true">voice_chat</i>
+                    <p class="mdc-typography--headline6 s-font-color-on-background">
+                        Videollamadas
+                    </p>
+                    <p class="mdc-typography--body2 s-font-color-on-background">
+                        Una videollamada puede resultar en una experiencia mucho más personalizada.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-color-primary">
+        <div class="mdc-layout-grid container-size-m">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                            mdc-layout-grid__cell--align-middle container-justify-center">
+                    <h2 class="mdc-typography--headline2 s-font-color-yellow-titles s-font-align-center s-font-family-poppins">
+                        Horarios de atención
+                    </h2>
+                    <div class="s-font-align-center">
+                        <i class="fas fa-clock s-font-size-l s-font-color-yellow-titles" aria-hidden="true"></i>
+                        <p class="mdc-typography--body1 s-font-color-on-primary">
+                            Lunes a viernes de 8:00 a.m. a 5:00 p.m.
+                        </p>
+                    </div>
+                    <br /><br />
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
+                        <i class="fas fa-phone-square-alt s-font-size-l s-font-color-yellow-titles"
+                            aria-hidden="true"></i>
+                        <p class="mdc-typography--body1 s-font-color-on-primary">
+                            Si tú u otras personas están en riesgo de muerte o daño grave, por favor, <b>llama al 911</b>.
+                        </p>
+                    </div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                            mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
+                    <img src="{{ url_for('static', filename='images/manifest/user_f_04.svg') }}" alt="Horario" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-color-surface">
+        <div class="mdc-layout-grid container-size-m">
+            <div class="mdc-layout-grid__inner">
+                <div
+                    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                            mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
+                    <img src="{{ url_for('static', filename='images/manifest/user_f_05.svg') }}" alt="How To" />
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                            mdc-layout-grid__cell--align-middle container-justify-center">
+                    <h2
+                        class="mdc-typography--headline2 s-font-color-secondary s-font-align-center s-font-family-poppins">
+                        Cómo usar la plataforma
+                    </h2>
+                    <div class="mdc-card">
+                        <div class="mdc-card__primary-action" tabindex="0">
+                            <div class="mdc-card__media mdc-card__media--16-9">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/cl5Q_3jUS6M?rel=0"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                            <div class="mdc-typography--headline6 s-font-color-primary">Video tutorial</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-color-primary">
+        <div class="mdc-layout-grid container-size-s">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
+                            mdc-layout-grid__cell--align-middle container-justify-center">
+                    <h2 class="mdc-typography--headline2 s-font-color-yellow-titles s-font-align-center s-font-family-poppins">
+                        Beneficios
+                    </h2>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
+                    <i class="material-icons s-font-size-l s-font-color-yellow-titles" aria-hidden="true">money_off</i>
+                    <p class="mdc-typography--body1 s-font-color-on-primary">
+                        La atención es <b>gratuita</b>.
+                    </p>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
+                    <i class="material-icons s-font-size-l s-font-color-yellow-titles" aria-hidden="true">alarm</i>
+                    <p class="mdc-typography--body1 s-font-color-on-primary">
+                        Las consultas duran 30 minutos, tiempo suficiente para conocer tu situación y
+                        desarrollar un plan de acción para atender tus necesidades.
+                    </p>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-top s-font-align-center">
+                    <i class="fas fa-hands-helping s-font-size-l s-font-color-yellow-titles" aria-hidden="true"></i>
+                    <p class="mdc-typography--body1 s-font-color-on-primary">
+                        Referencia a servicios de otras instituciones.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-xs">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
+                            mdc-layout-grid__cell--align-middle container-justify-center">
+                    <h2
+                        class="mdc-typography--headline2 s-font-color-secondary s-font-align-center s-font-family-poppins">
+                        Nuestros aliados:
+                    </h2>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span mdc-layout-grid__cell--align-middle s-font-align-center">
+                    <img class="resize-image-2fit-50" src="../static/images/manifest/bid_slogan.png" alt="Logo BID" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-color-primary">
+        <div class="mdc-layout-grid container-size-xs">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet 
+                            mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
+                    <img class="resize-image-2fit-50" src="../static/images/manifest/gobsv.svg" alt="Logo Gobierno El Salvador" />
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+{% block bottombar %}
+<button id="floatingButton" class="mdc-fab mdc-fab--fixed mdc-fab--whatsapp" aria-label="WhatsApp Contact Center"
+        onclick="window.open('https://wa.me/50376086805');">
+    <div class="mdc-fab__ripple"></div>
+    <span class="mdc-fab__icon fa fa-whatsapp"></span>
+</button>
+{% endblock %}

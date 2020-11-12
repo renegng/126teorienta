@@ -1,0 +1,231 @@
+{% extends 'layout_main.html' %}
+{% block drawer %}
+<aside class="s-drawer mdc-drawer">
+    <div class="mdc-drawer__header">
+        <img id="logo-nav-drawer" src="{{ url_for('static', filename='images/manifest/icon-512x512.png') }}"
+            alt="Logo 126 Te Orienta" />
+        <h3 class="mdc-drawer__title">126 Te Orienta</h3>
+        <h6 class="mdc-drawer__subtitle">Asistencia Remota</h6>
+    </div>
+    <div class="mdc-drawer__content">
+        <nav class="mdc-list">
+            <a class="mdc-list-item" href="/" aria-current="page" tabindex="0">
+                <span class="mdc-list-item__ripple"></span>
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">home</i>
+                <span class="mdc-list-item__text">Bienvenido</span>
+            </a>
+            {% if current_user.is_authenticated %}
+                {% if current_user.is_user_role(['adm','emp']) %}
+            <a class="mdc-list-item" href="/chat/admin/" aria-current="page">
+                <span class="mdc-list-item__ripple"></span>
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">chat</i>
+                <span class="mdc-list-item__text">Chat</span>
+            </a>
+                {% elif current_user.is_user_role(['usr']) %}
+            <a class="mdc-list-item" href="/chat/home/" aria-current="page">
+                <span class="mdc-list-item__ripple"></span>
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">chat</i>
+                <span class="mdc-list-item__text">Chat</span>
+            </a>
+                {% endif %}
+            {% else %}
+            <a class="mdc-list-item" href="/chat/" aria-current="page">
+                <span class="mdc-list-item__ripple"></span>
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">chat</i>
+                <span class="mdc-list-item__text">Chat</span>
+            </a>
+            {% endif %}
+            <a class="mdc-list-item" href="/recursos/" aria-current="page">
+                <span class="mdc-list-item__ripple"></span>
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">library_books</i>
+                <span class="mdc-list-item__text">Recursos de ayuda</span>
+            </a>
+            <hr class="mdc-list-divider s-mdc-list-divider">
+            <a class="mdc-list-item" href="/sobrenosotros/">
+                <span class="mdc-list-item__ripple"></span>
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
+                <span class="mdc-list-item__text">Sobre nosotros</span>
+            </a>
+        </nav>
+    </div>
+</aside>
+<div class="mdc-drawer-scrim"></div>
+{% endblock %}
+{% block topbar %}
+<header class="s-topbar mdc-top-app-bar">
+    <div class="mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+            <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" aria-label="Menu">
+                menu
+            </button>
+            <span class="mdc-top-app-bar__title topAppBar-title">
+                <a href="/">126 Te Orienta</a>
+            </span>
+        </section>
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+            <div class="mdc-menu-surface--anchor">
+                <button id="shareButton" class="mdc-top-app-bar__action-item mdc-icon-button" aria-label="Share"
+                    alt="Share">
+                    <i class="material-icons mdc-icon-button__icon">share</i>
+                </button>
+                <div id="shareMenu" class="mdc-menu mdc-menu-surface" tabindex="-1">
+                    <ul class="mdc-list mdc-menu__items" role="menu" aria-hidden="true">
+                        <li class="mdc-list-item" role="menuitem" tabindex="0">
+                            <span class="mdc-list-item__ripple"></span>
+                            <i class="s-icon-color-email material-icons mdc-list-item__graphic" aria-hidden="true">email</i>
+                            <span class="mdc-list-item__text">Email</span>
+                        </li>
+                        <li class="mdc-list-item" role="menuitem" tabindex="0">
+                            <span class="mdc-list-item__ripple"></span>
+                            <i class="s-icon-color-facebook mdc-list-item__graphic fa fa-facebook" aria-hidden="true"></i>
+                            <span class="mdc-list-item__text">Facebook</span>
+                        </li>
+                        <li class="mdc-list-item" role="menuitem" tabindex="0">
+                            <span class="mdc-list-item__ripple"></span>
+                            <i class="s-icon-color-linkedin mdc-list-item__graphic fa fa-linkedin" aria-hidden="true"></i>
+                            <span class="mdc-list-item__text">LinkedIn</span>
+                        </li>
+                        <li class="mdc-list-item" role="menuitem" tabindex="0">
+                            <span class="mdc-list-item__ripple"></span>
+                            <i class="s-icon-color-twitter mdc-list-item__graphic fa fa-twitter" aria-hidden="true"></i>
+                            <span class="mdc-list-item__text">Twitter</span>
+                        </li>
+                        <li class="mdc-list-item" role="menuitem" tabindex="0">
+                            <span class="mdc-list-item__ripple"></span>
+                            <i class="s-icon-color-whatsapp mdc-list-item__graphic fa fa-whatsapp" aria-hidden="true"></i>
+                            <span class="mdc-list-item__text">WhatsApp</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mdc-menu-surface--anchor">
+                <button id="accountButton" class="mdc-top-app-bar__action-item mdc-icon-button" aria-label="My Account" alt="My Account">
+                    <i id="accountIcon" class="material-icons mdc-icon-button__icon">person</i>
+                    <img id="accountImage" src="" class="mdc-icon-button__icon container--hidden"/>
+                </button>
+                <div id="accountMenu" class="mdc-menu mdc-menu-surface" tabindex="-1">
+                    <ul class="mdc-list mdc-menu__items" role="menu" aria-hidden="true">
+                        <li id="accountLogIn" class="mdc-list-item" role="menuitem" tabindex="0">
+                            <span class="mdc-list-item__ripple"></span>
+                            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">cloud_queue</i>
+                            <span class="mdc-list-item__text">Iniciar Sesión</span>
+                        </li>
+                        <li id="accountLogOut" class="mdc-list-item container--hidden" role="menuitem" tabindex="1">
+                            <span class="mdc-list-item__ripple"></span>
+                            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">cloud_off</i>
+                            <span class="mdc-list-item__text">Cerrar Sesión</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- <button id="loginButton" class="mdc-button mdc-button--outlined mdc-button--color-inverted" aria-label="Login" alt="Login">
+                <div class="mdc-button__ripple"></div>
+                <span class="mdc-button__label">Iniciar Sesión</span>
+            </button> -->
+        </section>
+    </div>
+</header>
+{% endblock %}
+{% block footer %}
+<div class="mdc-snackbar" aria-live="assertive" aria-atomic="true" aria-hidden="true">
+    <div class="mdc-snackbar__surface">
+        <div class="mdc-snackbar__label" role="status" aria-live="polite"></div>
+        <div class="mdc-snackbar__actions">
+            <button type="button" class="mdc-button mdc-snackbar__action"></button>
+        </div>
+    </div>
+</div>
+{% block bottombar %}{% endblock %}
+<footer class="s-footer">
+    <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell">
+                <section class="footer-about">
+                    <div class="footer-section__title">
+                        126 Te Orienta
+                    </div>
+                    <div class="footer-about__text">
+                        Acercando a las personas y los servicios.
+                    </div>
+                    <span class="footer-about__author">
+                        Gobierno de El Salvador
+                    </span>
+                </section>
+            </div>
+            <div class="mdc-layout-grid__cell">
+                <section class="footer-followus">
+                    <div class="footer-section__title">
+                        Sigue conectado con nosotros
+                    </div>
+                    <div class="footer-followus__list">
+                        <ul class="mdc-list" aria-orientation="vertical" aria-hidden="true">
+                            <li class="mdc-list-item">
+                                <span class="mdc-list-item__ripple"></span>
+                                <a href="https://www.facebook.com/" target="_blank" rel="external">
+                                    <i class="mdc-list-item__graphic fa fa-facebook" aria-hidden="true"></i>
+                                    <span class="mdc-list-item__text">Facebook</span>
+                                </a>
+                            </li>
+                            <li class="mdc-list-item">
+                                <span class="mdc-list-item__ripple"></span>
+                                <a href="https://twitter.com/" target="_blank" rel="external">
+                                    <i class="mdc-list-item__graphic fa fa-twitter" aria-hidden="true"></i>
+                                    <span class="mdc-list-item__text">Twitter</span>
+                                </a>
+                            </li>
+                            <li class="mdc-list-item">
+                                <span class="mdc-list-item__ripple"></span>
+                                <a href="https://www.youtube.com/" target="_blank" rel="external">
+                                    <i class="mdc-list-item__graphic fa fa-youtube" aria-hidden="true"></i>
+                                    <span class="mdc-list-item__text">YouTube</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+            <div class="mdc-layout-grid__cell">
+                <section class="footer-contactus">
+                    <div class="footer-section__title">
+                        Contáctanos
+                    </div>
+                    <div class="footer-contactus__list">
+                        <ul class="mdc-list" aria-orientation="vertical" aria-hidden="true">
+                            <li class="mdc-list-item">
+                                <span class="mdc-list-item__ripple"></span>
+                                <a href="https://www.google.com/maps/search/Paris" target="_blank" rel="external">
+                                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">place</i>
+                                    <span class="mdc-list-item__text">Google Maps</span>
+                                </a>
+                            </li>
+                            <li class="mdc-list-item" itemscope itemtype="http://schema.org/LocalBusiness">
+                                <span class="mdc-list-item__ripple"></span>
+                                <a href="tel:+50311223344" rel="external">
+                                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">phone</i>
+                                    <span class="mdc-list-item__text" itemprop="telephone">+503 1122 3344</span>
+                                </a>
+                            </li>
+                            <li class="mdc-list-item">
+                                <span class="mdc-list-item__ripple"></span>
+                                <a href="mailto:info@rxdbit.com" target="_blank" rel="external">
+                                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">email</i>
+                                    <span class="mdc-list-item__text">info@rxdbit.com</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+                <section class="footer-copyright">
+                    126 Te Orienta. Derechos reservados | Diseñado por RXDBit
+                </section>
+            </div>
+        </div>
+    </div>
+</footer>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'layout_main-footer_topbar.html' %}
+{% block page_description %}126 Te Orienta, Asistencia Remota, Login, Iniciar Sesión, Registrarte, Acceder{% endblock %}
+{% block page_title %}Iniciar Sesión{% endblock %}
+{% block body %}
+<main class="s-main-content">
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-m">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                            mdc-layout-grid__cell--align-middle s-font-align-center">
+                    <img class="resize-image-2fit-50"
+                        src="{{ url_for('static', filename='images/manifest/login_secure.svg') }}" alt="Logo Login" />
+                    <h6 class="mdc-typography--subtitle2">
+                        Inicia sesión con tu método favorito:
+                    </h6>
+                    <div id="s-loader" class="s-loader">
+                        <div class="s-loader-bounce1"></div>
+                        <div class="s-loader-bounce2"></div>
+                        <div class="s-loader-bounce3"></div>
+                    </div>
+                    <div id="firebaseui-auth-container" class="firebase-auth-widget"></div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                            mdc-layout-grid__cell--align-middle">
+                    <h4 class="mdc-typography--headline4 s-font-color-primary">
+                        Inicia sesión e ingresa a tu cuenta personalizada
+                    </h4>
+                    <p class="mdc-typography--body1 s-font-color-secondary">
+                        Al registrarte e iniciar sesión en <b>126 Te Orienta</b>, automáticamente se crea una cuenta única,
+                        confidencial y personalizada para ti, la cual te brinda más beneficios y te habilita el acceso a
+                        nuevos servicios y métodos de comunicación, para que puedas mantenerte en contacto de la
+                        manera que te sea más conveniente.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

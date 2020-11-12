@@ -1,0 +1,388 @@
+/* GOOGLE MATERIAL DESIGN CSS */
+
+/* *******************
+- Reusable Media Queries Sentences
+
+// Laptops and Computers
+@media all and (min-width: 52.5em) {
+}
+
+// Tablets
+@media all and (max-width: 52.49em) {
+}
+
+// Smartphones
+@media all and (max-width: 37.49em) {
+}
+
+********************** */
+
+/* Material Theme variables */
+/* These variables values are configured in swing_theme_variables.css */
+
+@use "swing_theme_variables" as stv;
+
+@use "@material/theme" with (
+    $background: stv.$swing-theme-background,
+    $error: stv.$swing-theme-error,
+    $primary: stv.$swing-theme-primary,
+    $secondary:stv.$swing-theme-secondary,
+    $surface: stv.$swing-theme-surface,
+    $on-error: stv.$swing-theme-on-error,
+    $on-primary: stv.$swing-theme-on-primary,
+    $on-secondary: stv.$swing-theme-on-secondary,
+    $on-surface: stv.$swing-theme-on-surface
+);
+
+/* Import of Material Components */
+/* These are the Material Components utilized within the project */
+
+@use "@material/animation";
+@use "@material/button";
+@use "@material/card";
+@use "@material/dialog";
+@use "@material/dialog/mdc-dialog";
+@use "@material/drawer";
+@use "@material/drawer/mdc-drawer";
+@use "@material/elevation";
+@use "@material/elevation/mdc-elevation";
+@use "@material/fab";
+@use "@material/fab/mdc-fab";
+@use "@material/floating-label";
+@use "@material/form-field";
+@use "@material/icon-button";
+@use "@material/icon-button/mdc-icon-button";
+@use "@material/image-list";
+@use "@material/image-list/mdc-image-list";
+@use "@material/layout-grid";
+@use "@material/layout-grid/mdc-layout-grid";
+@use "@material/line-ripple";
+@use "@material/list";
+@use "@material/list/mdc-list";
+@use "@material/menu";
+@use "@material/menu/mdc-menu";
+@use "@material/menu-surface";
+@use "@material/menu-surface/mdc-menu-surface";
+@use "@material/notched-outline";
+@use "@material/radio";
+@use "@material/radio/mdc-radio";
+@use "@material/ripple";
+@use "@material/rtl";
+@use "@material/rtl/mixins";
+@use "@material/select";
+@use "@material/select/mdc-select";
+@use "@material/snackbar";
+@use "@material/shape";
+@use "@material/switch";
+@use "@material/switch/mdc-switch";
+@use "@material/tab";
+@use "@material/tab/mdc-tab";
+@use "@material/tab-bar";
+@use "@material/tab-bar/mdc-tab-bar";
+@use "@material/tab-indicator";
+@use "@material/tab-indicator/mdc-tab-indicator";
+@use "@material/tab-scroller";
+@use "@material/tab-scroller/mdc-tab-scroller";
+@use "@material/textfield/icon";
+@use "@material/textfield/helper-text";
+@use "@material/textfield";
+@use "@material/top-app-bar";
+@use "@material/top-app-bar/mdc-top-app-bar";
+@use "@material/typography";
+@use "@material/typography/mdc-typography";
+
+/* Default Components Styles */
+@include button.core-styles;
+@include card.core-styles;
+@include dialog.core-styles;
+@include fab.core-styles;
+@include floating-label.core-styles;
+@include icon.icon-core-styles;
+@include icon-button.core-styles;
+@include image-list.core-styles;
+@include line-ripple.core-styles;
+@include list.core-styles;
+@include menu.core-styles;
+@include menu-surface.core-styles;
+@include notched-outline.core-styles;
+@include radio.core-styles;
+@include ripple.core-styles;
+@include select.core-styles;
+@include snackbar.core-styles;
+@include tab.core-styles;
+@include tab-bar.core-styles;
+@include tab-indicator.core-styles;
+@include tab-scroller.core-styles;
+@include textfield.core-styles;
+
+/* Material Components Theming */
+
+/* Button */
+.mdc-button {
+    height: 2.25rem;
+}
+
+.mdc-button--color-inverted {
+    @include button.container-fill-color(stv.$swing-theme-on-primary);
+    @include button.ink-color(stv.$swing-theme-primary);
+}
+
+.mdc-button--color-secondary {
+    @include button.container-fill-color(stv.$swing-theme-secondary);
+    @include button.ink-color(stv.$swing-theme-on-secondary);
+}
+
+/* Card */
+.mdc-card {
+    color: stv.$swing-theme-on-surface;
+    padding: 1rem;
+    width: 100%;
+
+    a {
+        color: inherit;
+        text-decoration: none;
+
+        i {
+            display: flex;
+            font-size: 8rem;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .mdc-card__media {
+            padding: 1rem;
+        }
+    }
+
+    iframe {
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+    }
+}
+
+/* Checkbox and radio */
+.mdc-checkbox,
+.mdc-radio {
+    margin-right: 0.25rem;
+}
+
+/* Dialog */
+.mdc-dialog {
+    justify-content: center;
+    position: absolute;
+}
+
+/* Drawer */
+.mdc-drawer__header {
+    img {
+        width: 9rem;
+        margin: 1rem auto;
+    }
+}
+.drawer-component-wrapper {
+    background: stv.$swing-theme-primary;
+
+    .mdc-drawer {
+        @include elevation.elevation(16);
+
+        .mdc-drawer__content {
+            padding: 0;
+        }
+    }
+}
+
+/* Floating Action Button */
+.mdc-fab--active {
+    @include fab.container-color(stv.$swing-theme-surface);
+    @include fab.ink-color(stv.$swing-theme-on-surface);
+}
+
+.mdc-fab--answer {
+    @include fab.container-color(#35ac19);
+    padding: 2rem;
+    
+    .mdc-fab__icon{
+        position: absolute;
+    }
+}
+
+.mdc-fab--fixed {
+    bottom: 1.5rem;
+    position: fixed;
+    right: 1.5rem;
+}
+
+.mdc-fab--hangup {
+    @include fab.container-color(#d32f2f);
+    padding: 2rem;
+
+    .mdc-fab__icon{
+        position: absolute;
+    }
+}
+
+.mdc-fab--whatsapp {
+    @include fab.container-color(#25d366);
+    @include fab.ink-color(stv.$swing-theme-on-primary);
+}
+
+/* Image list */
+.mdc-image-list {
+    // Laptops and Computers
+    @media all and (min-width: 52.5em) {
+        @include image-list.masonry-columns(5);
+    }
+
+    // Tablets
+    @media all and (max-width: 52.49em) {
+        @include image-list.masonry-columns(3);
+    }
+
+    // Smartphones
+    @media all and (max-width: 37.49em) {
+        @include image-list.masonry-columns(2);
+    }
+
+    .mdc-image-list__image {
+        cursor: pointer;
+    }
+}
+
+/* Linear progress */
+.mdc-linear-progress {
+    width: 100%;
+}
+
+/* List */
+.mdc-list {
+    .mdc-list-item {
+        a {
+            color: inherit;
+            display: inline-flex;
+            text-decoration: inherit;
+            width: 100%;
+        }
+    }
+}
+
+.component-wrapper > .mdc-list {
+    border: 0.0625rem solid rgba(0, 0, 0, 0.1);
+    background: stv.$swing-theme-background;
+
+    .mdc-list-item__graphic {
+        background-color: if(
+            theme.contrast-tone(stv.$swing-theme-background) == "dark",
+            rgba(0, 0, 0, 0.12),
+            rgba(255, 255, 255, 0.12)
+        );
+        color: if(
+            theme.contrast-tone(stv.$swing-theme-background) == "dark",
+            rgba(0, 0, 0, 0.68),
+            rgba(255, 255, 255, 0.68)
+        );
+    }
+}
+
+/* Menu */
+.mdc-menu-surface--anchor > .mdc-menu {
+    // position: relative;
+    z-index: 1;
+}
+
+/* Select */
+.mdc-select {
+    @include select.container-fill-color(stv.$swing-theme-surface);
+
+    .mdc-select__anchor, .mdc-select__menu {
+        min-width: 5rem;
+        width: 90%;
+    }
+}
+
+/* Snackbar */
+.mdc-snackbar {
+    margin: 0;
+    z-index: 1;
+}
+
+/* Switch */
+.mdc-switch {
+    @include rtl.reflexive-box(margin, right, 1.25rem);
+}
+
+/* Tabs */
+.component-wrapper .mdc-tab-bar {
+    background: stv.$swing-theme-primary;
+
+    .mdc-tab {
+        @include tab.text-label-color(stv.$swing-theme-on-primary);
+
+        .mdc-tab__ripple {
+            @include tab.states-color(stv.$swing-theme-on-primary);
+        }
+    }
+
+    .mdc-tab-indicator {
+        @include tab-indicator.underline-color(stv.$swing-theme-on-primary);
+    }
+}
+
+/* Text field */
+.mdc-text-field {
+    width: 100%;
+}
+
+/* Top app bar */
+.mdc-top-app-bar {
+    @include top-app-bar.fill-color(stv.$swing-theme-primary);
+    position: sticky;
+
+    .mdc-top-app-bar__title {
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+    }
+}
+
+.mdc-top-app-bar__navigation-icon--hidden {
+    display: none;
+}
+
+.component-wrapper .mdc-top-app-bar {
+    border-radius: 0.5rem;
+    @include top-app-bar.fill-color(stv.$swing-theme-secondary);
+    position: relative;
+    z-index: 1;
+
+    &:not(.mdc-top-app-bar--short) {
+        width: 100%;
+    }
+}
+
+.component-wrapper {
+    &.button-component-wrapper,
+    &.fab-component-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    // Offset built-in padding to left-align all components
+
+    &.chips-component-wrapper {
+        @include rtl.reflexive-box(margin, left, -0.5rem);
+    }
+
+    &.checkbox-component-wrapper,
+    &.radio-component-wrapper {
+        @include rtl.reflexive-box(margin, left, -0.625rem);
+    }
+
+    &.icon-button-component-wrapper {
+        @include rtl.reflexive-box(margin, left, -0.75rem);
+    }
+}

@@ -1,0 +1,219 @@
+{% extends 'layout_main-footer_topbar.html' %}
+{% block page_description %}126 Te Orienta Chat, Mensajes de Texto por Chat, Mensajes{% endblock %}
+{% block page_title %}126 Te Orienta Chat{% endblock %}
+{% block body %}
+<main class="s-main-content s-main-content--extend-tab-color-primary">
+    <div class="container-avcalls container--hidden">
+        <div class="container-avcalls--canvas">
+            <div class="container-avcalls--callerid s-font-align-center">
+                <div class="container-avcalls--callerid-pic">
+                    <img id="callerid-pic" src="{{ url_for('static', filename='images/manifest/agent_f.svg') }}" alt="Avatar"/>
+                </div>
+                <div class="container-avcalls--callerid-data">
+                    <span id="callerid-name" class="mdc-typography--headline2 s-font-color-on-secondary">- -</span>
+                </div>
+            </div>
+            <video class="container-avcalls--video-main container--hidden" playsinline></video>
+            <div class="container-avcalls--videos container-avcalls--videos-16x9 container--hidden">
+                <video class="container-avcalls--video-small container-elevation-s container--hidden" playsinline></video>
+            </div>
+            <audio class="container-avcalls--audio"></audio>
+            <audio id="sound-fx-calling" class="container-avcalls--fx" preload="metadata" onended="this.play();">
+                <source src="{{ url_for('static', filename='media/audio/calling_ring.mp3') }}" type="audio/mpeg"/>
+                Tu navegador no soporta este elemento.
+            </audio>
+            <audio id="sound-fx-connected" class="container-avcalls--fx" preload="metadata">
+                <source src="{{ url_for('static', filename='media/audio/call_connected.mp3') }}" type="audio/mpeg"/>
+                Tu navegador no soporta este elemento.
+            </audio>
+            <audio id="sound-fx-ended" class="container-avcalls--fx" preload="metadata">
+                <source src="{{ url_for('static', filename='media/audio/call_ended.mp3') }}" type="audio/mpeg"/>
+                Tu navegador no soporta este elemento.
+            </audio>
+        </div>
+        <div class="container-avcalls--actions">
+            <button id="toggle-video-call" class="mdc-fab mdc-fab--active container--hidden" aria-label="Toggle Video Call"
+                alt="Toggle Video Call" data-action-type="submit" data-action-fn="stopVideo">
+                <div class="mdc-fab__ripple"></div>
+                <i class="material-icons mdc-fab__icon">videocam</i>
+            </button>
+            <button id="answer-call" class="mdc-fab mdc-fab--answer container--hidden" aria-label="Answer Call"
+                alt="Answer Call" data-action-type="submit" data-action-fn="acceptAudioCall">
+                <div class="mdc-fab__ripple"></div>
+                <i class="material-icons mdc-fab__icon">call</i>
+            </button>
+            <button id="hang-up-call" class="mdc-fab mdc-fab--hangup" aria-label="Hang Up Call"
+                alt="Hang Up Call" data-action-type="submit" data-action-fn="endAVCall">
+                <div class="mdc-fab__ripple"></div>
+                <i class="material-icons mdc-fab__icon">call_end</i>
+            </button>
+            <button id="answer-videocall" class="mdc-fab mdc-fab--answer container--hidden" aria-label="Answer Video Call"
+                alt="Answer Video Call" data-action-type="submit" data-action-fn="acceptVideoCall">
+                <div class="mdc-fab__ripple"></div>
+                <i class="material-icons mdc-fab__icon">videocam</i>
+            </button>
+            <button id="mute-mic" class="mdc-fab container--hidden" aria-label="Mute Mic"
+                alt="Mute Mic" data-action-type="submit" data-action-fn="muteAudio">
+                <div class="mdc-fab__ripple"></div>
+                <i class="material-icons mdc-fab__icon">mic_off</i>
+            </button>
+        </div>
+    </div>
+    <div class="container-chat">
+        <div class="container-color-surface container-chat--canvas">
+            <div class="mdc-layout-grid container-chat--grid container-elevation-s">
+                <div class="mdc-layout-grid__inner container-chat--grid__inner">
+                    <div
+                        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet
+                                mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle container-chat--topbar">
+                        <header class="container-chat--topbar-header">
+                            <section class="container-chat--topbar-info">
+                                <div class="container-chat--topbar-info-pic">
+                                    <img id="chat-pic" src="{{ url_for('static', filename='images/manifest/wifi_antenna.svg') }}"
+                                        alt="Logo 126 Te Orienta" />
+                                </div>
+                                <div class="container-chat--topbar-info-data">
+                                    <span class="container-chat--topbar-info-data-name mdc-typography--subtitle2">
+                                        - -
+                                    </span>
+                                    <div class="container-chat--topbar-info-data-status">
+                                        <i class="material-icons container-chat--topbar-info-data-status-icon s-font-color-chat-offline">stop_circle</i>
+                                        <span class="container-chat--topbar-info-data-status-text mdc-typography--caption s-font-color-secondary">
+                                            Offline
+                                        </span>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="container-chat--topbar-actions">
+                                <button class="mdc-icon-button s-font-color-secondary" aria-label="Exit Chat" alt="Exit Chat"
+                                        data-action-type="redirect" data-action-val="/">
+                                    <i class="material-icons mdc-icon-button__icon s-font-color-very-dissatisfied">cancel</i>
+                                </button>
+                            </section>
+                        </header>
+                    </div>
+                    <div
+                        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet
+                                mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle container-chat--body">
+                        <div class="container-chat--body-messages container-chat--body-messages-active">
+                            <p class="container-chat--body-message-others">
+                                <span class="container-chat--body-message-message container-elevation-s' s-font-color-on-secondary">
+                                    Bienvenid@
+                                </span>
+                                <span class="container-chat--body-message-message-time mdc-typography--caption s-font-color-on-surface"></span>
+                                <span class="container-chat--body-message-message container-elevation-s' s-font-color-on-secondary">
+                                    Espéranos unos instantes en lo que una de nuestras agentes se conecta para
+                                    atenderte.
+                                </span>
+                                <span class="container-chat--body-message-message-time mdc-typography--caption s-font-color-on-surface"></span>
+                            </p>
+                            <div class="s-loader">
+                                <div class="s-loader-bounce1"></div>
+                                <div class="s-loader-bounce2"></div>
+                                <div class="s-loader-bounce3"></div>
+                            </div>
+                        </div>
+                        <div class="container-chat--body-message-istyping mdc-typography--caption s-font-color-secondary container--hidden">
+                            ... está escribiendo
+                        </div>
+                    </div>
+                    <div
+                        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet
+                                mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle container-chat--footer">
+                        <section class="container-chat--footer-input">
+                            <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea">
+                                <textarea id="chat-textarea-input" class="mdc-text-field__input" aria-label="Message Area"></textarea>
+                                <span class="mdc-notched-outline">
+                                    <span class="mdc-notched-outline__leading"></span>
+                                    <span class="mdc-notched-outline__notch">
+                                        <span class="mdc-floating-label" id="my-label-id">Escribe tu mensaje...</span>
+                                    </span>
+                                    <span class="mdc-notched-outline__trailing"></span>
+                                </span>
+                            </label>
+                        </section>
+                        <section class="container-chat--footer-actions">
+                            <button id="chat-textarea-button" class="mdc-fab" aria-label="Send Message"
+                                alt="Send Message" data-action-type="submit" data-action-fn="sendChatMessage">
+                                <div class="mdc-fab__ripple"></div>
+                                <i class="material-icons mdc-fab__icon">send</i>
+                            </button>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="endrtc-dialog" class="mdc-dialog">
+        <div class="mdc-dialog__container">
+            <div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-labelledby="d-endrtc-title" aria-describedby="d-endrtc-content">
+                <h2 class="mdc-dialog__title" id="d-endrtc-title">Conversación finalizada</h2>
+                <div class="mdc-dialog__content" id="d-endrtc-content">
+                    <p class="mdc-typography--body1 s-font-color-primary">Califica tu experiencia:</p>
+                    <p class="mdc-typography--body1">
+                        ¿Cómo calificas tu experiencia con el servicio recibido?
+                    </p>
+                    <ul id="usq_1" class="mdc-list container-dialog--satisfaction" 
+                        data-action-type="submit" data-action-fn="saveRating" data-action-fn-val="1">
+                        <li class="mdc-list-item">
+                            <span class="mdc-list-item__ripple"></span>
+                            <i class="material-icons mdc-list-item__graphic s-font-color-very-dissatisfied" aria-hidden="true">
+                                sentiment_very_dissatisfied
+                            </i>
+                        </li>
+                        <li class="mdc-list-item">
+                            <span class="mdc-list-item__ripple"></span>
+                            <i class="material-icons mdc-list-item__graphic s-font-color-satisfied" aria-hidden="true">
+                                sentiment_satisfied
+                            </i>
+                        </li>
+                        <li class="mdc-list-item">
+                            <span class="mdc-list-item__ripple"></span>
+                            <i class="material-icons mdc-list-item__graphic s-font-color-very-satisfied" aria-hidden="true">
+                                sentiment_very_satisfied
+                            </i>
+                        </li>
+                    </ul>
+                    <p class="mdc-typography--body1">
+                        ¿Cómo calificas tu experiencia con la plataforma?
+                    </p>
+                    <ul id="usq_2" class="mdc-list container-dialog--satisfaction" 
+                        data-action-type="submit" data-action-fn="saveRating" data-action-fn-val="2">
+                        <li class="mdc-list-item">
+                            <span class="mdc-list-item__ripple"></span>
+                            <i class="material-icons mdc-list-item__graphic s-font-color-very-dissatisfied" aria-hidden="true">
+                                sentiment_very_dissatisfied
+                            </i>
+                        </li>
+                        <li class="mdc-list-item">
+                            <span class="mdc-list-item__ripple"></span>
+                            <i class="material-icons mdc-list-item__graphic s-font-color-satisfied" aria-hidden="true">
+                                sentiment_satisfied
+                            </i>
+                        </li>
+                        <li class="mdc-list-item">
+                            <span class="mdc-list-item__ripple"></span>
+                            <i class="material-icons mdc-list-item__graphic s-font-color-very-satisfied" aria-hidden="true">
+                                sentiment_very_satisfied
+                            </i>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mdc-dialog__actions">
+                    <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="accept" 
+                            data-action-type="redirect" data-action-val="/" data-mdc-dialog-button-default>
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">OK</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="mdc-dialog__scrim"></div>
+    </div>
+</main>
+{% endblock %}
+{% block body_script_section %}
+<script src="{{ url_for('static', filename='js/socket.io.js') }}"></script>
+<script src="{{ url_for('static', filename='js/simplepeer.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/rtc-receiver.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,40 @@
+/* Swing App Theme Variables */
+
+/*  Theme typography */
+/*  We recommend importing a font from Google Fonts and setting the global font-family https://fonts.google.com */
+$swing-typography-font-family: "Roboto", "Open Sans", sans-serif !default;
+$swing-typography-parallax-font-family: "Lato", sans-serif !default;
+$swing-typography-secondary-font-family: 'Poppins', sans-serif !default;
+
+/*  Theme colors */
+/*  To change your theme's color scheme, replace the existing HEX color values with custom HEX color values.
+    Use our color palette generator to help come up with pairings and check your color contrast.
+    https://material.io/design/color/the-color-system.html#tools-for-picking-colors */
+
+/*  Primary colors ($swing-theme-primary) map to components such as app bars and buttons, 
+    while secondary colors ($swing-theme-secondary) are used as accents on components such as FABs and selection controls. */
+$swing-theme-primary: #313945 !default;
+$swing-theme-secondary: #005b9f !default;
+
+/*  Theme background ($swing-theme-background) appears behind scrollable content.
+    Surface color ($swing-theme-surface) is mapped to the surface of components such as cards, sheets, and menus. 
+    Error color ($swing-theme-error) is used to indicate an error state for components such as text fields provided with inaccurate input. */
+$swing-theme-background: #f0f5ff !default;
+$swing-theme-surface: #f5f5f6 !default;
+$swing-theme-error: #b00020 !default;
+
+/*  “On-” colors define how text, icons, and strokes are colored in relation to the surface on which they appear.
+    If you are updating these manually, be sure to consider accessible color contrast for the value pairs. */
+$swing-theme-on-primary: #ffffff !default;
+$swing-theme-on-secondary: #ffffff !default;
+$swing-theme-on-error: #ffffff !default;
+$swing-theme-on-surface: #000000 !default;
+
+/*  Shape radius */
+/*  The shapes of small, medium, and large components can be themed by overriding the default values. 
+    We recommend using our shape customization tool to help you pick your radius values.
+    https://material.io/design/shape/about-shape.html#shape-customization-tool */
+$swing-shape-s-component-radius: 0.25rem !default;
+$swing-shape-m-component-radius: 0.25rem !default;
+$swing-shape-l-component-radius: 0rem !default;
+
