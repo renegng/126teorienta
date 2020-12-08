@@ -168,10 +168,10 @@ def _recursos():
     return render_template('recursos.html')
 
 
-@home.route('/sobrenosotros/')
+@home.route('/sobrenosotras/')
 def _sobrenosotros():
-    app.logger.debug('** SWING_CMS ** - SobreNosotros')
-    return render_template('sobrenosotros.html')
+    app.logger.debug('** SWING_CMS ** - SobreNosotras')
+    return render_template('sobrenosotras.html')
 
 
 @home.route('/terminosdelservicio/')
