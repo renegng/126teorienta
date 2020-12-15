@@ -4,22 +4,22 @@
 
 const filesToPreCache = [
     // Web pages
-    { url: '/', revision: '2020-12-14-1' },
-    { url: '/login/', revision: '2020-12-14-1' },
-    { url: '/politicaprivacidad/', revision: '2020-12-14-1' },
-    { url: '/sobrenosotras/', revision: '2020-12-14-1' },
-    { url: '/terminosdelservicio/', revision: '2020-12-14-1' },
+    { url: '/', revision: '2020-12-14-2' },
+    { url: '/login/', revision: '2020-12-14-2' },
+    { url: '/politicaprivacidad/', revision: '2020-12-14-2' },
+    { url: '/sobrenosotras/', revision: '2020-12-14-2' },
+    { url: '/terminosdelservicio/', revision: '2020-12-14-2' },
     // Images
-    { url: '/static/images/manifest/agent_f.svg', revision: '2020-12-14-1' },
-    { url: '/static/images/manifest/bid_slogan.png', revision: '2020-12-14-1' },
-    { url: '/static/images/manifest/contact-os.svg', revision: '2020-12-14-1' },
-    { url: '/static/images/manifest/icon-512x512.png', revision: '2020-12-14-1' },
-    { url: '/static/images/manifest/user_f.svg', revision: '2020-12-14-1' },
-    { url: '/static/images/manifest/wifi_antenna.svg', revision: '2020-12-14-1' },
+    { url: '/static/images/manifest/agent_f.svg', revision: '2020-12-14-2' },
+    { url: '/static/images/manifest/bid_slogan.png', revision: '2020-12-14-2' },
+    { url: '/static/images/manifest/contact-os.svg', revision: '2020-12-14-2' },
+    { url: '/static/images/manifest/icon-512x512.png', revision: '2020-12-14-2' },
+    { url: '/static/images/manifest/user_f.svg', revision: '2020-12-14-2' },
+    { url: '/static/images/manifest/wifi_antenna.svg', revision: '2020-12-14-2' },
     // Audio Files
-    { url: '/static/media/audio/call_connected.mp3', revision: '2020-12-14-1' },
-    { url: '/static/media/audio/call_ended.mp3', revision: '2020-12-14-1' },
-    { url: '/static/media/audio/calling_ring.mp3', revision: '2020-12-14-1' }
+    { url: '/static/media/audio/call_connected.mp3', revision: '2020-12-14-2' },
+    { url: '/static/media/audio/call_ended.mp3', revision: '2020-12-14-2' },
+    { url: '/static/media/audio/calling_ring.mp3', revision: '2020-12-14-2' }
 ];
 
 // Importing Google's Workbox library for ServiceWorker implementation
@@ -37,7 +37,7 @@ workbox.core.clientsClaim();
 // Configuring Workbox
 workbox.core.setCacheNameDetails({
     prefix: '126teorienta',
-    suffix: 'v2020-12-14-1',
+    suffix: 'v2020-12-14-2',
     precache: 'pre-cache',
     runtime: 'run-time',
     googleAnalytics: 'ga'
