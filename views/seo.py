@@ -13,11 +13,11 @@ def seo_robots():
 def seo_sitemap():
       # Generate sitemap.xml. Makes a list of urls and date modified.
       pages = []
-      datemodified = datetime.date(2019, 5, 5).isoformat()
+      datemodified = datetime.date(2021, 2, 1).isoformat()
       
       # static pages
       for rule in current_app.url_map.iter_rules():
-          if "GET" in rule.methods and len(rule.arguments) == 0:
+          if "admin" not in rule.rule and "GET" in rule.methods and len(rule.arguments) == 0:
               pages.append([rule.rule, datemodified])
       
       sitemap_xml = render_template('sitemap_template.xml', pages = pages)

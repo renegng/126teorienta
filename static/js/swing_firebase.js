@@ -27,7 +27,7 @@ var firebaseUIConfig = {
             document.getElementById('s-loader').style.display = 'none';
         }
     },
-    signInSuccessUrl: '/chat/home/',
+    signInSuccessUrl: '/home/',
     signInOptions: [
         // Leave the lines as is for the providers you want to offer your users.
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,

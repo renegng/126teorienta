@@ -1,0 +1,144 @@
+{% extends 'layout_main-drawer_footer_topbar.html' %}
+{% block page_description %}126 Te Orienta Crear Citas, Agendar Citas, Crear Citas, Citas{% endblock %}
+{% block page_title %}126 Te Orienta Crear Citas{% endblock %}
+{% block head_section %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jsCalendar.css') }}">
+{% endblock %}
+{% block body %}
+<main class="s-main-content container-color-background">
+    <div class="mdc-layout-grid container-size-xs">
+        <div class="mdc-layout-grid__inner">
+            <header class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
+                           mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
+                <img src="{{ url_for('static', filename='images/manifest/calendar.svg') }}" class="resize-image-2fit-30" alt="Logo Citas" />
+                <div class="mdc-typography--headline2 s-font-color-primary">
+                    Solicita tu cita.
+                </div>
+            </header>
+        </div>
+    </div>
+    <div class="mdc-layout-grid container-appointment">
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top
+                        container-justify-center container-appointment-service">
+                <h5 class="mdc-typography--headline5 s-font-color-primary">
+                    Paso 1: Selecciona el servicio
+                </h5>
+                <div class="mdc-select container-appointment-service--services" role="button" data-action-fn="selectAppointmentService">
+                    <div class="mdc-select__anchor">
+                        <span class="mdc-select__ripple"></span>
+                        <input type="text" disabled readonly class="mdc-select__selected-text">
+                        <i class="mdc-select__dropdown-icon"></i>
+                        <span class="mdc-floating-label">Tipos de servicios</span>
+                        <span class="mdc-line-ripple"></span>
+                    </div>
+                    <div class="mdc-select__menu mdc-menu mdc-menu-surface" role="listbox">
+                        <ul class="mdc-list mdc-select__list">
+                            <li class="mdc-list-item" data-value="assistance">
+                                <span class="mdc-list-item__text">
+                                    Asistencia
+                                </span>
+                            </li>
+                            <li class="mdc-list-item" data-value="legal">
+                                <span class="mdc-list-item__text">
+                                    Legal
+                                </span>
+                            </li>
+                            <li class="mdc-list-item" data-value="support">
+                                <span class="mdc-list-item__text">
+                                    Orientación
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top
+                        container-justify-center container-appointment-date">
+                <h5 class="mdc-typography--headline5 s-font-color-primary">
+                    Paso 2: Selecciona la fecha
+                </h5>
+                <div id="appointment-cal" class="auto-jsCalendar primary" data-language="es" data-month-format="month YYYY"
+                     data-day-format="DDD" data-first-day-of-the-week="2">
+                </div>
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-4-tablet 
+                        mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-top s-font-align-center
+                        container-appointment-time">
+                <h5 class="mdc-typography--headline5 s-font-color-primary">
+                    Paso 3: Selecciona el horario
+                </h5>
+                <div id="appointment-hours" class="container-appointment-hours">
+                    <div class="mdc-card" onclick="selectAppointmentTime('8:00 a.m. - 8:45 a.m.');">
+                        <div class="mdc-card__primary-action" tabindex="0">
+                            <div class="mdc-typography--headline6 s-font-color-secondary">8:00 a.m. - 8:45 a.m.</div>
+                            <div class="mdc-typography--subtitle2">Matutino</div>
+                        </div>
+                    </div>
+                    <div class="mdc-card" onclick="selectAppointmentTime('9:00 a.m. - 9:45 a.m.');">
+                        <div class="mdc-card__primary-action" tabindex="0">
+                            <div class="mdc-typography--headline6 s-font-color-secondary">9:00 a.m. - 9:45 a.m.</div>
+                            <div class="mdc-typography--subtitle2">Matutino</div>
+                        </div>
+                    </div>
+                    <div class="mdc-card" onclick="selectAppointmentTime('10:00 a.m. - 10:45 a.m.');">
+                        <div class="mdc-card__primary-action" tabindex="0">
+                            <div class="mdc-typography--headline6 s-font-color-secondary">10:00 a.m. - 10:45 a.m.</div>
+                            <div class="mdc-typography--subtitle2">Matutino</div>
+                        </div>
+                    </div>
+                    <div class="mdc-card" onclick="selectAppointmentTime('11:00 a.m. - 11:45 a.m.');">
+                        <div class="mdc-card__primary-action" tabindex="0">
+                            <div class="mdc-typography--headline6 s-font-color-secondary">11:00 a.m. - 11:45 a.m.</div>
+                            <div class="mdc-typography--subtitle2">Matutino</div>
+                        </div>
+                    </div>
+                    <div class="mdc-card" onclick="selectAppointmentTime('1:00 p.m. - 1:45 p.m.');">
+                        <div class="mdc-card__primary-action" tabindex="0">
+                            <div class="mdc-typography--headline6 s-font-color-secondary">1:00 p.m. - 1:45 p.m.</div>
+                            <div class="mdc-typography--subtitle2">Vespertino</div>
+                        </div>
+                    </div>
+                    <div class="mdc-card" onclick="selectAppointmentTime('2:00 p.m. - 2:45 p.m.');">
+                        <div class="mdc-card__primary-action" tabindex="0">
+                            <div class="mdc-typography--headline6 s-font-color-secondary">2:00 p.m. - 2:45 p.m.</div>
+                            <div class="mdc-typography--subtitle2">Vespertino</div>
+                        </div>
+                    </div>
+                    <div class="mdc-card" onclick="selectAppointmentTime('3:00 p.m. - 3:45 p.m.');">
+                        <div class="mdc-card__primary-action" tabindex="0">
+                            <div class="mdc-typography--headline6 s-font-color-secondary">3:00 p.m. - 3:45 p.m.</div>
+                            <div class="mdc-typography--subtitle2">Vespertino</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet
+                        mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center
+                        container-appointment-confirm">
+                <h5 class="mdc-typography--headline5 s-font-color-primary">
+                    Paso 4: Confirma tu cita
+                </h5>
+                <div class="mdc-typography--headline6 s-font-color-secondary container-appointment-confirm--service">
+                </div>
+                <div class="mdc-typography--headline6 s-font-color-secondary container-appointment-confirm--date">
+                </div>
+                <div class="mdc-typography--headline6 s-font-color-secondary container-appointment-confirm--time">
+                </div>
+                <div class="container-appointment-confirm--submit">
+                    <button class="mdc-button mdc-button--raised" aria-label="Submit Date" alt="Submit Date"
+                        data-action-type="redirect" data-action-val="/">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">Enviar Solicitud</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+{% block body_script_section %}
+<script src="{{ url_for('static', filename='js/jsCalendar.lang.es.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jsCalendar.js') }}"></script>
+<script src="{{ url_for('static', filename='js/appointment-usr.js') }}"></script>
+{% endblock %}

@@ -4,23 +4,29 @@
 
 const filesToPreCache = [
     // Web pages
-    { url: '/', revision: '2020-12-14-2' },
-    { url: '/login/', revision: '2020-12-14-2' },
-    { url: '/politicaprivacidad/', revision: '2020-12-14-2' },
-    { url: '/sobrenosotras/', revision: '2020-12-14-2' },
-    { url: '/terminosdelservicio/', revision: '2020-12-14-2' },
+    { url: '/', revision: '2021-02-01-1' },
+    { url: '/login/', revision: '2021-02-01-1' },
+    { url: '/politicaprivacidad/', revision: '2021-02-01-1' },
+    { url: '/sobrenosotras/', revision: '2021-02-01-1' },
+    { url: '/terminosdelservicio/', revision: '2021-02-01-1' },
     // Images
-    { url: '/static/images/manifest/agent_f.svg', revision: '2020-12-14-2' },
-    { url: '/static/images/manifest/bid_slogan.png', revision: '2020-12-14-2' },
-    { url: '/static/images/manifest/contact-os.svg', revision: '2020-12-14-2' },
-    { url: '/static/images/manifest/icon-512x512.png', revision: '2020-12-14-2' },
-    { url: '/static/images/manifest/user_f.svg', revision: '2020-12-14-2' },
-    { url: '/static/images/manifest/wifi_antenna.svg', revision: '2020-12-14-2' },
+    { url: '/static/images/manifest/agent_f.svg', revision: '2021-02-01-1' },
+    { url: '/static/images/manifest/bid_slogan.png', revision: '2021-02-01-1' },
+    { url: '/static/images/manifest/contact-os.svg', revision: '2021-02-01-1' },
+    { url: '/static/images/manifest/icon-512x512.png', revision: '2021-02-01-1' },
+    { url: '/static/images/manifest/user_f.svg', revision: '2021-02-01-1' },
+    { url: '/static/images/manifest/wifi_antenna.svg', revision: '2021-02-01-1' },
     // Audio Files
-    { url: '/static/media/audio/call_connected.mp3', revision: '2020-12-14-2' },
-    { url: '/static/media/audio/call_ended.mp3', revision: '2020-12-14-2' },
-    { url: '/static/media/audio/calling_ring.mp3', revision: '2020-12-14-2' }
+    { url: '/static/media/audio/call_connected.mp3', revision: '2021-02-01-1' },
+    { url: '/static/media/audio/call_ended.mp3', revision: '2021-02-01-1' },
+    { url: '/static/media/audio/calling_ring.mp3', revision: '2021-02-01-1' }
 ];
+
+// Importing Localforage to access localStorage
+importScripts('/static/js/localforage.min.js');
+const swStore = localforage.createInstance({
+    name: 'swingcms-sw'
+});
 
 // Importing Google's Workbox library for ServiceWorker implementation
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.0.0/workbox-sw.js');
@@ -37,7 +43,7 @@ workbox.core.clientsClaim();
 // Configuring Workbox
 workbox.core.setCacheNameDetails({
     prefix: '126teorienta',
-    suffix: 'v2020-12-14-2',
+    suffix: 'v2021-02-01-1',
     precache: 'pre-cache',
     runtime: 'run-time',
     googleAnalytics: 'ga'
@@ -52,6 +58,7 @@ self.addEventListener('activate', event => {
         let validCacheSet = new Set(Object.values(workbox.core.cacheNames));
         validCacheSet.add('126teorienta-webfonts');
         validCacheSet.add('126teorienta-css_js');
+        validCacheSet.add('126teorienta-pages');
         validCacheSet.add('126teorienta-img');
 
         return Promise.all(
@@ -66,15 +73,43 @@ self.addEventListener('activate', event => {
     // Keep the service worker alive until all caches are deleted.
     event.waitUntil(promiseChain);
 });
+// Store Service Worker current version
+swStore.setItem('swVersion', workbox.core.cacheNames.suffix).then( (val) => {
+    console.log('Service Worker version: ' + val);
+});
 
 // Enable Google Analytics Offline
 workbox.googleAnalytics.initialize();
 
+// Cache for Web Pages
+workbox.routing.registerRoute(
+    ({ request }) => request.mode === 'navigate',
+    new workbox.strategies.NetworkFirst({
+        cacheName: '126teorienta-pages',
+        plugins: [
+            // Ensure that only requests that result in a 200 status are cached
+            new workbox.cacheableResponse.CacheableResponsePlugin({
+                statuses: [200],
+            }),
+        ],
+    }),
+);
+
 // Cache for Web Fonts.
 workbox.routing.registerRoute(
     new RegExp(/.*(?:fonts\.googleapis|fonts\.gstatic|cloudflare)\.com/),
-    new workbox.strategies.StaleWhileRevalidate({
-        cacheName: '126teorienta-webfonts'
+    new workbox.strategies.CacheFirst({
+        cacheName: '126teorienta-webfonts',
+        plugins: [
+            new workbox.expiration.ExpirationPlugin({
+                // Keep at most 60 entries.
+                maxEntries: 60,
+                // Don't keep any entries for more than 10 days.
+                maxAgeSeconds: 10 * 24 * 60 * 60,
+                // Automatically cleanup if quota is exceeded.
+                purgeOnQuotaError: true,
+            }),
+        ],
     }),
 );
 
@@ -89,7 +124,7 @@ workbox.routing.registerRoute(
 // Cache for Images
 workbox.routing.registerRoute(
     new RegExp('\.(?:png|gif|webp|jpg|jpeg|svg)$'),
-    new workbox.strategies.StaleWhileRevalidate({
+    new workbox.strategies.CacheFirst({
         cacheName: '126teorienta-img',
         plugins: [
             new workbox.expiration.ExpirationPlugin({

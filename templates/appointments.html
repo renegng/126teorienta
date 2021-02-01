@@ -1,0 +1,148 @@
+{% extends 'layout_main-drawer_footer_topbar.html' %}
+{% block page_description %}126 Te Orienta Citas, Citas, Ver Citas, Mis Citas{% endblock %}
+{% block page_title %}126 Te Orienta Citas{% endblock %}
+{% block head_section %}
+{% endblock %}
+{% block body %}
+<main class="s-main-content">
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-xs">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                            mdc-layout-grid__cell--align-middle container-justify-center s-font-align-center">
+                    <img class="resize-image-2fit-50" src="{{ url_for('static', filename='images/manifest/appointment.svg') }}" alt="Logo Funciones" />
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                            mdc-layout-grid__cell--align-middle container-justify-center">
+                    <div class="mdc-typography--headline2 s-font-color-primary">
+                        Citas
+                    </div>
+                    <div class="mdc-typography--headline4 s-font-color-secondary">
+                        Accede, solicita o cancela una cita.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-m">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet
+                            mdc-layout-grid__cell--align-top s-font-align-center">
+                    <h4 class="mdc-typography--headline4 s-font-color-secondary">
+                        Mis citas próximas
+                    </h4>
+                    <div class="container-appointments-list">
+                        <div class="mdc-card">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-typography--headline5 s-font-color-primary s-mdc-card__appointment-service">Apoyo psicológico</div>
+                                <div class="mdc-typography--body2 s-mdc-card__appointment-date">Jueves 19 de Noviembre, 2020</div>
+                                <div class="mdc-typography--body2 s-font-color-secondary s-mdc-card__appointment-time">11:00 a.m. - 11:45 a.m.</div>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <button class="mdc-button mdc-card__action mdc-card__action--button">
+                                    <div class="mdc-button__ripple"></div>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true">clear</i>
+                                    <span class="mdc-button__label">Cancelar</span>
+                                </button>
+                                <button class="mdc-button mdc-button--unelevated mdc-card__action mdc-card__action--button">
+                                    <div class="mdc-button__ripple"></div>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                    <span class="mdc-button__label">Acceder</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mdc-card">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-typography--headline5 s-font-color-primary s-mdc-card__appointment-service">Grupos de autoayuda</div>
+                                <div class="mdc-typography--body2 s-mdc-card__appointment-date">Jueves 19 de Noviembre, 2020</div>
+                                <div class="mdc-typography--body2 s-font-color-secondary s-mdc-card__appointment-time">11:00 a.m. - 11:45 a.m.</div>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <button class="mdc-button mdc-card__action mdc-card__action--button">
+                                    <div class="mdc-button__ripple"></div>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true">clear</i>
+                                    <span class="mdc-button__label">Cancelar</span>
+                                </button>
+                                <button class="mdc-button mdc-button--unelevated mdc-card__action mdc-card__action--button">
+                                    <div class="mdc-button__ripple"></div>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                    <span class="mdc-button__label">Acceder</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mdc-card">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-typography--headline5 s-font-color-primary s-mdc-card__appointment-service">Asistencia legal</div>
+                                <div class="mdc-typography--body2 s-mdc-card__appointment-date">Jueves 19 de Noviembre, 2020</div>
+                                <div class="mdc-typography--body2 s-font-color-secondary s-mdc-card__appointment-time">11:00 a.m. - 11:45 a.m.</div>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <button class="mdc-button mdc-card__action mdc-card__action--button">
+                                    <div class="mdc-button__ripple"></div>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true">clear</i>
+                                    <span class="mdc-button__label">Cancelar</span>
+                                </button>
+                                <button class="mdc-button mdc-button--unelevated mdc-card__action mdc-card__action--button">
+                                    <div class="mdc-button__ripple"></div>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                    <span class="mdc-button__label">Acceder</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet
+                            mdc-layout-grid__cell--align-top s-font-align-center">
+                    {% if current_user.is_user_role(['adm','emp']) %}
+                    <h4 class="mdc-typography--headline4 s-font-color-secondary">
+                        Citas por aprobar
+                    </h4>
+                    {% elif current_user.is_user_role(['usr']) %}
+                    <h4 class="mdc-typography--headline4 s-font-color-secondary">
+                        Citas solicitadas
+                    </h4>
+                    {% endif %}
+                    <div class="container-appointments-list">
+                        <div class="mdc-card">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-typography--headline5 s-font-color-primary s-mdc-card__appointment-service">Apoyo social</div>
+                                <div class="mdc-typography--body2 s-mdc-card__appointment-date">Jueves 19 de Noviembre, 2020</div>
+                                <div class="mdc-typography--body2 s-font-color-secondary s-mdc-card__appointment-time">11:00 a.m. - 11:45 a.m.</div>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <button class="mdc-button mdc-card__action mdc-card__action--button">
+                                    <div class="mdc-button__ripple"></div>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true">clear</i>
+                                    <span class="mdc-button__label">Rechazar</span>
+                                </button>
+                                <button class="mdc-button mdc-button--unelevated mdc-card__action mdc-card__action--button">
+                                    <div class="mdc-button__ripple"></div>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                    <span class="mdc-button__label">Aceptar</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+{% block bottombar %}
+{% if current_user.is_user_role(['adm','emp']) %}
+<button id="floatingButton" class="mdc-fab mdc-fab--extended mdc-fab--fixed" aria-label="Create appointment"
+        data-action-type="redirect" data-action-val="/appointments/create/admin/">
+{% elif current_user.is_user_role(['usr']) %}
+<button id="floatingButton" class="mdc-fab mdc-fab--extended mdc-fab--fixed" aria-label="Create appointment"
+        data-action-type="redirect" data-action-val="/appointments/create/">
+{% endif %}
+    <div class="mdc-fab__ripple"></div>
+    <span class="mdc-fab__label">Solicita una cita</span>
+    <span class="material-icons mdc-fab__icon">add</span>
+</button>
+{% endblock %}
+{% block body_script_section %}
+{% endblock %}

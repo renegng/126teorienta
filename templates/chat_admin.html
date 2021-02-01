@@ -75,18 +75,47 @@
                             <i class="material-icons container-chat--sidemenu-header-info-data-status-icon s-font-color-chat-offline">
                                 stop_circle
                             </i>
+                            <div class="container-chat--sidemenu-header-info-data-status-menu mdc-menu-surface--anchor">
+                                <div id="accountStatus" class="mdc-menu mdc-menu-surface" tabindex="-1">
+                                    <div class="mdc-typography--subtitle2 s-font-color-secondary s-menu-subtitle">
+                                        Selecciona tu estado:</div>
+                                    <ul class="mdc-list mdc-menu__items" role="menu" aria-hidden="true">
+                                        <li class="mdc-list-item" role="menuitem" tabindex="0">
+                                            <span class="mdc-list-item__ripple"></span>
+                                            <i class="material-icons mdc-list-item__graphic s-font-color-chat-online"
+                                                aria-hidden="true">stop_circle</i>
+                                            <span class="mdc-list-item__text">Disponible</span>
+                                        </li>
+                                        <li class="mdc-list-item" role="menuitem" tabindex="1">
+                                            <span class="mdc-list-item__ripple"></span>
+                                            <i class="material-icons mdc-list-item__graphic s-font-color-chat-away"
+                                                aria-hidden="true">stop_circle</i>
+                                            <span class="mdc-list-item__text">Ausente</span>
+                                        </li>
+                                        <li class="mdc-list-item" role="menuitem" tabindex="2">
+                                            <span class="mdc-list-item__ripple"></span>
+                                            <i class="material-icons mdc-list-item__graphic s-font-color-chat-away"
+                                                aria-hidden="true">stop_circle</i>
+                                            <span class="mdc-list-item__text">En reunión</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                             <div class="container-chat--sidemenu-header-info-data">
-                                <span class="container-chat--sidemenu-header-info-data-name mdc-typography--body1 s-font-color-primary">
+                                <span
+                                    class="container-chat--sidemenu-header-info-data-name mdc-typography--body1 s-font-color-primary">
                                     - -
                                 </span>
                                 <div class="container-chat--sidemenu-header-info-data-status">
-                                    <span class="container-chat--sidemenu-header-info-data-status-text mdc-typography--caption s-font-color-secondary">
+                                    <span
+                                        class="container-chat--sidemenu-header-info-data-status-text mdc-typography--caption s-font-color-secondary">
                                         - -
                                     </span>
                                 </div>
                             </div>
                         </header>
-                        <div class="mdc-select container-chat--sidemenu-filters" role="filters" data-action-fn="filterRTCUserList">
+                        <div class="mdc-select container-chat--sidemenu-filters" role="filters"
+                            data-action-fn="filterRTCUserList">
                             <div class="mdc-select__anchor">
                                 <span class="mdc-select__ripple"></span>
                                 <input type="text" disabled readonly class="mdc-select__selected-text">
@@ -125,18 +154,50 @@
                             </div>
                         </div>
                         <div class="container-chat--sidemenu-rooms">
-                            <ul id="no-active-room" class="mdc-list mdc-list--avatar-list mdc-list--two-line">
-                                <li class="mdc-list-item">
+                            <ul id="anon-active-rooms" class="container-chat--sidemenu-rooms-usertype mdc-list mdc-list--avatar-list mdc-list--two-line">
+                                <li class="container-chat--sidemenu-rooms-usertype-header mdc-typography--subtitle2 s-font-color-primary">
+                                    <span class="container-chat--sidemenu-rooms-usertype-text">
+                                        Anonim@s
+                                    </span>
+                                </li>
+                                <li id="anon-no-active-room" class="mdc-list-item container-chat--sidemenu-rooms-usertype-empty">
                                     <span class="mdc-list-item__ripple"></span>
-                                    <span class="mdc-list-item__graphic material-icons"
-                                        aria-hidden="true">nights_stay</span>
+                                    <span class="mdc-list-item__graphic material-icons" aria-hidden="true">nights_stay</span>
                                     <span class="mdc-list-item__text">
                                         <span class="mdc-list-item__primary-text">0 contactos.</span>
                                         <span class="mdc-list-item__secondary-text">No hay actividad.</span>
                                     </span>
                                 </li>
                             </ul>
-                            <ul id="active-rooms" class="mdc-list mdc-list--avatar-list mdc-list--two-line">
+                            <ul id="reg-active-rooms" class="container-chat--sidemenu-rooms-usertype mdc-list mdc-list--avatar-list mdc-list--two-line">
+                                <li class="container-chat--sidemenu-rooms-usertype-header mdc-typography--subtitle2 s-font-color-primary">
+                                    <span class="container-chat--sidemenu-rooms-usertype-text">
+                                        Registrad@s
+                                    </span>
+                                </li>
+                                <li id="reg-no-active-room" class="mdc-list-item container-chat--sidemenu-rooms-usertype-empty">
+                                    <span class="mdc-list-item__ripple"></span>
+                                    <span class="mdc-list-item__graphic material-icons" aria-hidden="true">nights_stay</span>
+                                    <span class="mdc-list-item__text">
+                                        <span class="mdc-list-item__primary-text">0 contactos.</span>
+                                        <span class="mdc-list-item__secondary-text">No hay actividad.</span>
+                                    </span>
+                                </li>
+                            </ul>
+                            <ul id="emp-active-rooms" class="container-chat--sidemenu-rooms-usertype mdc-list mdc-list--avatar-list mdc-list--two-line">
+                                <li class="container-chat--sidemenu-rooms-usertype-header mdc-typography--subtitle2 s-font-color-primary">
+                                    <span class="container-chat--sidemenu-rooms-usertype-text">
+                                        Funcionari@s
+                                    </span>
+                                </li>
+                                <li id="emp-no-active-room" class="mdc-list-item container-chat--sidemenu-rooms-usertype-empty">
+                                    <span class="mdc-list-item__ripple"></span>
+                                    <span class="mdc-list-item__graphic material-icons" aria-hidden="true">nights_stay</span>
+                                    <span class="mdc-list-item__text">
+                                        <span class="mdc-list-item__primary-text">0 contactos.</span>
+                                        <span class="mdc-list-item__secondary-text">No hay actividad.</span>
+                                    </span>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -316,6 +377,27 @@
                             data-action-type="submit" data-action-fn="transferRTCUser">
                         <div class="mdc-button__ripple"></div>
                         <span class="mdc-button__label">Transferir</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="mdc-dialog__scrim"></div>
+    </div>
+    <div id="disconnected-dialog" class="mdc-dialog">
+        <div class="mdc-dialog__container">
+            <div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-labelledby="d-disconnected-title"
+                aria-describedby="d-disconnected-content">
+                <h2 class="mdc-dialog__title" id="d-disconnected-title">Sesión desconectada</h2>
+                <div class="mdc-dialog__content" id="d-disconnected-content">
+                    Su sesión ha perdido conexión por inactividad (<span id="d-disconnected-inactivity"
+                        class="s-font-color-primary"></span> segundos inactivos). Presione OK para reiniciar la
+                    conexión.
+                </div>
+                <div class="mdc-dialog__actions">
+                    <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="accept"
+                        data-action-type="redirect" data-action-val="/chat/admin/" data-mdc-dialog-button-default>
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">OK</span>
                     </button>
                 </div>
             </div>

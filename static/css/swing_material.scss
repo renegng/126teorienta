@@ -135,7 +135,7 @@
 /* Card */
 .mdc-card {
     color: stv.$swing-theme-on-surface;
-    padding: 1rem;
+    padding: 0.25rem;
     width: 100%;
 
     a {
@@ -227,6 +227,12 @@
 .mdc-fab--whatsapp {
     @include fab.container-color(#25d366);
     @include fab.ink-color(stv.$swing-theme-on-primary);
+}
+
+.mdc-fab--telegram {
+    @include fab.container-color(#0088cc);
+    @include fab.ink-color(stv.$swing-theme-on-primary);
+    margin-bottom: 4.5rem;
 }
 
 /* Image list */

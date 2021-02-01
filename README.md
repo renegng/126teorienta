@@ -76,8 +76,11 @@ To install Swing CMS, follow the next steps (under Ubuntu 16.04):
     ~: pip install psycopg2-binary
     ~: pip install firebase-admin
     ~: pip install mysqlclient
+    ~: pip install cryptography
+    ~: pip install sqlalchemy-utils
 
     For ChatBot component, install following packages:
+    ~: pip install pyspellchecker
     ~: pip install chatterbot
     ~: pip install pyyaml
     ~: pip install spacy
@@ -124,11 +127,13 @@ To install Swing CMS, follow the next steps (under Ubuntu 16.04):
 # Credits to
 
 Proper credit for the following people/teams:
-- Apache HTTPD, web server that never fails.
+- Apache HTTPD, Nginx and Gunicorn web server that never fails.
 - Google's Material Design, Workbox and Firebase team, for making the web awesome!
 - Polymer Project, for an amazing main HTML PWA Template structure.
-- Python, Flask, NodeJS, SQLAlchemy, Migrate, Alembic, WTForms, Login, GitHub and everyone's amazing frameworks.
+- Python, Flask, NodeJS, SQLAlchemy(-Utils), Migrate, Alembic, WTForms, Login, Cryptography GitHub and everyone's amazing frameworks.
 - PeerJS, simple-peer, SaltyRTC for their wonderful frameworks to implement WebRTC.
+- Localforage for their simple and amazing localStorage wrapper.
+- jsCalendar for their amazing simple modern calendar library.
 - Traversy Media, for incredible tips & tricks overall.
 - Visual Studio Code, for an incredible IDE.
 - Twitter Twemoji for the amazing emojis.
@@ -136,4 +141,6 @@ Proper credit for the following people/teams:
 - Animate.css from <a href="https://animate.style/" title="Animate CSS">animate.style/</a> for their amazing css animations!
 - Icons made by <a href="http://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 - Icons made by <a href="https://www.flaticon.com/authors/vitaly-gorbachev" title="Vitaly Gorbachev">Vitaly Gorbachev</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+- Icons made by <a href="https://www.flaticon.com/authors/fjstudio" title="fjstudio">fjstudio</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+- Icons made by <a href="https://www.flaticon.com/authors/dinosoftlabs" title="DinosoftLabs">DinosoftLabs</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 - Anchorme for URL detection and replacement

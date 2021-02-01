@@ -233,6 +233,27 @@
         </div>
         <div class="mdc-dialog__scrim"></div>
     </div>
+    <div id="disconnected-dialog" class="mdc-dialog">
+        <div class="mdc-dialog__container">
+            <div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-labelledby="d-disconnected-title"
+                aria-describedby="d-disconnected-content">
+                <h2 class="mdc-dialog__title" id="d-disconnected-title">Sesión desconectada</h2>
+                <div class="mdc-dialog__content" id="d-disconnected-content">
+                    Su sesión ha perdido conexión por inactividad (<span id="d-disconnected-inactivity"
+                        class="s-font-color-primary"></span> segundos inactivos). Presione OK para reiniciar la
+                    conexión.
+                </div>
+                <div class="mdc-dialog__actions">
+                    <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="accept"
+                        data-action-type="redirect" data-action-val="/chat/" data-mdc-dialog-button-default>
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">OK</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="mdc-dialog__scrim"></div>
+    </div>
 </main>
 {% endblock %}
 {% block body_script_section %}

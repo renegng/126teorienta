@@ -1,15 +1,21 @@
-import datetime
 import firebase_admin
 
+from datetime import datetime as dt
+from datetime import timedelta as td
+from datetime import timezone as tz
 from firebase_admin import auth, credentials
 from flask import flash, render_template, jsonify, request, redirect, url_for
 from flask import current_app as app
 from flask_login import LoginManager, login_user, current_user, logout_user
-from models.models import db, User
+from models.models import crypto_key, db, User
 
 
 # Enable instance of SQLAlchemy
 db.init_app(app)
+
+
+# Init CryptoKey
+crypto_key.key = app.config['SECRET_KEY']
 
 
 # Enable Firebase Admin
@@ -67,10 +73,10 @@ def createLoginSession(user):
 def createCookieSession(idToken, cmd = None, action = None):
     try:
         # Set session expiration to 14 days.
-        expires_in = datetime.timedelta(days = 14)
+        expires_in = td(days = 14)
 
         # Set cookie policy for session cookie.
-        expires = datetime.datetime.now() + expires_in
+        expires = dt.now(tz.utc) + expires_in
 
         # Create the session cookie. This will also verify the ID token in the process.
         # The session cookie will have the same claims as the ID token.
@@ -100,14 +106,8 @@ def getUserRedirectURL(user, origin):
         # Validate User Login Redirect URL
         if origin == 'loginuser':
             # Set URL for regular registered user
-            redirectURL = '/chat/home/'
+            redirectURL = '/home/'
 
-            # Iterate through the user's roles
-            for role in user.roles:
-                # Check if user has a different role than user
-                if role.user_role.name_short != 'usr':
-                    redirectURL = '/chat/admin/'
-        
         # Validate Try Chat Redirect URL
         elif origin == 'chat':
             # Set URL for regular registered user

@@ -1,0 +1,92 @@
+{% extends 'layout_main-drawer_footer_topbar.html' %}
+{% block page_description %}126 Te Orienta Funciones, Funciones, Home{% endblock %}
+{% block page_title %}126 Te Orienta Funciones{% endblock %}
+{% block body %}
+<main class="s-main-content">
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-xs">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                            mdc-layout-grid__cell--align-middle container-justify-center s-font-align-center">
+                    <img class="resize-image-2fit-50" src="{{ url_for('static', filename='images/manifest/options.svg') }}" alt="Logo Funciones" />
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                            mdc-layout-grid__cell--align-middle container-justify-center">
+                    <div class="mdc-typography--headline2 s-font-color-primary">
+                        Hola
+                    </div>
+                    <div class="mdc-typography--headline4 s-font-color-secondary">
+                        {{ current_user.name }}
+                    </div>
+                    <p class="mdc-typography--headline4 s-font-color-primary">
+                        ¿Qué necesitas?
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-color-background">
+        <div class="mdc-layout-grid container-size-s">
+            <div class="mdc-layout-grid__inner">
+                {% if current_user.is_user_role(['adm','emp']) %}
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle s-font-align-center">
+                    <div class="mdc-card">
+                        <a href="/chat/admin/">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-card__media">
+                                    <i class="material-icons s-font-color-primary" aria-hidden="true">chat</i>
+                                </div>
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Atender chat</div>
+                                <div class="mdc-typography--subtitle2">Módulo de chat</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle s-font-align-center">
+                    <div class="mdc-card">
+                        <a href="/appointments/">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-card__media">
+                                    <i class="material-icons s-font-color-primary" aria-hidden="true">book_online</i>
+                                </div>
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Gestionar citas</div>
+                                <div class="mdc-typography--subtitle2">Módulo de citas</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% elif current_user.is_user_role(['usr']) %}
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle s-font-align-center">
+                    <div class="mdc-card">
+                        <a href="/chat/home/">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-card__media">
+                                    <i class="material-icons s-font-color-primary" aria-hidden="true">chat</i>
+                                </div>
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Chatear con nosotras</div>
+                                <div class="mdc-typography--subtitle2">Módulo de chat</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle s-font-align-center">
+                    <div class="mdc-card">
+                        <a href="/appointments/">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-card__media">
+                                    <i class="material-icons s-font-color-primary" aria-hidden="true">book_online</i>
+                                </div>
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Acceder o solicitar una cita</div>
+                                <div class="mdc-typography--subtitle2">Módulo de citas</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+{% block body_script_section %}
+{% endblock %}

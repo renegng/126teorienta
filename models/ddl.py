@@ -20,6 +20,9 @@ db.init_app(app)
 # Enable instance of Migrate-Alembic
 migrate = Migrate(app, db)
 
+# Init CryptoKey
+crypto_key.key = app.config['SECRET_KEY']
+
 def main(argv):
     #Database DDL
     with app.app_context():

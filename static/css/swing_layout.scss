@@ -71,6 +71,23 @@ body {
         margin: 0rem 1rem;
     }
 
+    .footer-section__title {
+        font-weight: bold;
+        font-variant: small-caps;
+        margin-bottom: 1rem;
+    }
+
+    .footer-about__text {
+        font-style: italic;
+        line-height: 1.5rem;
+    }
+
+    .footer-about__author {
+        float: right;
+        font-size: 0.8rem;
+        margin-top: 1rem;
+    }
+
     .footer-about__author {
         float: right;
         font-size: 0.8rem;
@@ -110,6 +127,120 @@ body {
 }
 
 /* Container layouts */
+
+.container-appointment {
+    .container-appointment-confirm {
+        div {
+            padding: 0.5rem;
+        }
+    }
+
+    .container-appointment-date {
+        grid-column-start: 1;
+        grid-row-start: 2;
+    }
+
+    .container-appointment-service {
+        grid-column-start: 1;
+    }
+
+    .container-appointment-time {
+        grid-row: span 2;
+
+        .container-appointment-hours {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+
+            .mdc-card {
+                margin: 1rem;
+                padding: 1.5rem 1rem;
+                width: 16rem;
+            }
+        }
+    }
+}
+
+.container-appointmentadm {
+    .container-appointmentadm-date {
+        grid-row-start: 1;
+        grid-row: span 1;
+
+        #appointment-cal {
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    .container-appointmentadm-emp {
+        grid-column-start: 1;
+        grid-row-start: 3;
+    }
+
+    .container-appointmentadm-service {
+        grid-column-start: 1;
+        grid-row-start: 2;
+    }
+
+    .container-appointmentadm-time {
+        grid-row-start: 2;
+        grid-row: span 2;
+
+        .container-appointment-hours {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+
+            .mdc-card {
+                margin: 1rem;
+                padding: 1.5rem 1rem;
+                width: 16rem;
+            }
+        }
+    }
+
+    .container-appointmentadm-user {
+        grid-column-start: 1;
+        grid-row-start: 1;
+
+        div:not(:last-child) {
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+.container-appointments-list {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-evenly;
+
+    .mdc-card {
+        margin: 0.25rem 0.2rem;
+        max-width: 18rem;
+        min-width: 15rem;
+        text-align: start;
+
+        .mdc-card__primary-action {
+            padding: 1rem 0.5rem 1rem 1rem;
+
+            .s-mdc-card__appointment-date {
+                margin-bottom: 0.25rem;
+            }
+
+            .s-mdc-card__appointment-service {
+                margin-bottom: 0.5rem;
+            }
+
+            .s-mdc-card__appointment-time {
+                margin-bottom: 0.25rem;
+            }
+        }
+
+        .mdc-card__actions {
+            justify-content: flex-end;
+        }
+    }
+}
 
 .container-avcalls {
     background: stv.$swing-theme-secondary;
@@ -446,11 +577,34 @@ body {
                     }
                 }
             }
+
+            .container-chat--sidemenu-header-info-data-status-menu {
+                z-index: 2;
+
+                .mdc-list-item__graphic {
+                    font-size: 0.75rem;
+                    margin-right: 1rem;
+                }
+
+                .mdc-menu-surface {
+                    min-width: 12rem;
+                }
+
+                .s-menu-subtitle {
+                    margin: 1rem 0 0 1.25rem;
+                }
+            }
         }
 
         .container-chat--sidemenu-rooms {
             max-height: 65vh;
             overflow: auto;
+
+            .container-chat--sidemenu-rooms-usertype {
+                .container-chat--sidemenu-rooms-usertype-header{
+                    padding: 1rem;
+                }
+            }
 
             .mdc-list--avatar-list {
                 padding: 0;
@@ -695,6 +849,10 @@ body {
     text-align: justify;
 }
 
+.s-font-color-chat-away {
+    color: #fdcd19 !important;
+}
+
 .s-font-color-chat-busy {
     color: #dc143c !important;
 }
@@ -830,6 +988,68 @@ body {
     max-width: 30%;
 }
 
+/* jsCalendar Theming */
+
+.jsCalendar.primary tbody td.jsCalendar-current {
+    background-color: stv.$swing-theme-primary;
+}
+
+.jsCalendar.primary *::selection {
+    background: stv.$swing-theme-primary;
+}
+
+.jsCalendar.primary *::-moz-selection {
+    background: stv.$swing-theme-primary;
+}
+
+.jsCalendar.material-theme.primary thead {
+    background-color: stv.$swing-theme-primary;
+}
+
+.jsCalendar.material-theme.primary thead .jsCalendar-nav-left:hover,
+.jsCalendar.material-theme.primary thead .jsCalendar-nav-right:hover {
+    background-color: darken(stv.$swing-theme-primary, 10%);
+}
+
+.jsCalendar.classic-theme.primary thead {
+    background-color: stv.$swing-theme-primary;
+}
+
+.jsCalendar.classic-theme.primary thead .jsCalendar-nav-left:hover,
+.jsCalendar.classic-theme.primary thead .jsCalendar-nav-right:hover {
+    background-color: darken(stv.$swing-theme-primary, 10%);;
+}
+
+.jsCalendar.secondary tbody td.jsCalendar-current {
+    background-color: stv.$swing-theme-secondary;
+}
+
+.jsCalendar.secondary *::selection {
+    background: stv.$swing-theme-secondary;
+}
+
+.jsCalendar.secondary *::-moz-selection {
+    background: stv.$swing-theme-secondary;
+}
+
+.jsCalendar.material-theme.secondary thead {
+    background-color: stv.$swing-theme-secondary;
+}
+
+.jsCalendar.material-theme.secondary thead .jsCalendar-nav-left:hover,
+.jsCalendar.material-theme.secondary thead .jsCalendar-nav-right:hover {
+    background-color: darken(stv.$swing-theme-secondary, 10%);
+}
+
+.jsCalendar.classic-theme.secondary thead {
+    background-color: stv.$swing-theme-secondary;
+}
+
+.jsCalendar.classic-theme.secondary thead .jsCalendar-nav-left:hover,
+.jsCalendar.classic-theme.secondary thead .jsCalendar-nav-right:hover {
+    background-color: darken(stv.$swing-theme-secondary, 10%);;
+}
+
 /* Loader animation */
 /* Credits to: @tobiasahlin */
 
@@ -882,4 +1102,3 @@ body {
         transform: scale(1);
     }
 }
-

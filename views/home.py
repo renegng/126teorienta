@@ -1,6 +1,6 @@
-import datetime
-
 from . import auth, createCookieSession, createLoginSession, createJsonResponse, db, getUserRedirectURL, isUserLoggedInRedirect
+from datetime import datetime as dt
+from datetime import timezone as tz
 from flask import Blueprint, redirect, render_template, request, url_for, jsonify, make_response
 from flask import current_app as app
 from flask_login import logout_user, current_user, login_required
@@ -18,6 +18,27 @@ def _index():
 def _autocuidado():
     app.logger.debug('** SWING_CMS ** - Autocuidado')
     return render_template('autocuidado.html')
+
+
+@home.route('/appointments/')
+@login_required
+def _appointments():
+    app.logger.debug('** SWING_CMS ** - Citas')
+    return render_template('appointments.html')
+
+
+@home.route('/appointments/create/')
+@login_required
+def _appointmentscreate():
+    app.logger.debug('** SWING_CMS ** - Crear Citas')
+    return render_template('appointments_create.html')
+
+
+@home.route('/appointments/create/admin/')
+@login_required
+def _appointmentscreateadmin():
+    app.logger.debug('** SWING_CMS ** - Crear Citas Admin')
+    return render_template('appointments_create_admin.html')
 
 
 @home.route('/chat/')
@@ -48,10 +69,10 @@ def _chat_home():
     return render_template('chat_home.html')
 
 
-@home.route('/components/')
-def _components():
-    app.logger.debug('** SWING_CMS ** - Components')
-    return render_template('components.html')
+# @home.route('/components/')
+# def _components():
+#     app.logger.debug('** SWING_CMS ** - Components')
+#     return render_template('components.html')
 
 
 @home.route('/coronavirus/')
@@ -70,7 +91,7 @@ def _dirservicios():
 @login_required
 def _home():
     app.logger.debug('** SWING_CMS ** - Home')
-    return render_template('acercade.html')
+    return render_template('home.html')
 
 
 @home.route('/login/')
@@ -106,7 +127,7 @@ def _loginuser():
             user.email = fbUser.email
             user.name = fbUser.display_name
             user.phonenumber = fbUser.phone_number
-            user.datecreated = datetime.datetime.utcnow()
+            user.datecreated = dt.now(tz.utc)
             user.cmuserid = '126-' + user.name.strip().upper()[0:1] + user.datecreated.strftime('-%y%m%d-%H%M%S')
             db.session.add(user)
             db.session.flush()

@@ -57,12 +57,16 @@ export function returnFormatDate(dateTime, type = '') {
     }
 
     var returnDateTime = '';
-    var formatDate = day + '/' + month + '/' + year + ' - ';
+    var formatDate = day + '/' + month + '/' + year;
     var formatTime = hoursampm + ':' + min + ' ' + ampm;
     if (type == 'full') {
+        returnDateTime += formatDate + ' - ';
+        returnDateTime += formatTime;
+    } else if (type == 'date') {
         returnDateTime += formatDate;
+    } else {
+        returnDateTime += formatTime;
     }
-    returnDateTime += formatTime;
 
     return returnDateTime;
 }
@@ -132,7 +136,7 @@ export function playAudio(audioEl, play) {
 
 
 // Send Chat Message
-export function createChatMessageContainer(txt, dateTime, user, userName = '') {
+export function createChatMessageContainer(txt, dateTime, user, userName = '', appendBefore = false) {
     let msgContainer = document.createElement('p');
     let msgContainerMsg = document.createElement('span');
     let msgContainerTime = document.createElement('span');
@@ -172,7 +176,11 @@ export function createChatMessageContainer(txt, dateTime, user, userName = '') {
     msgContainer.appendChild(msgContainerMsg);
     
     if (user != 'auto') {
-        msgContainerTime.textContent = returnFormatDate(dateTime);
+        if (appendBefore) {
+            msgContainerTime.textContent = returnFormatDate(dateTime, 'full');
+        } else {
+            msgContainerTime.textContent = returnFormatDate(dateTime);
+        }
         msgContainer.appendChild(msgContainerTime);
     }
 
@@ -180,12 +188,12 @@ export function createChatMessageContainer(txt, dateTime, user, userName = '') {
 }
 
 var lastMsgUser = '';
-export function appendChatMessage(txt, dateTime, user, userName = '', chatMsgElem = '', otherUserPhoto = '') {
+export function appendChatMessage(txt, dateTime, user, userName = '', chatMsgElem = '', otherUserPhoto = '', appendBefore = false) {
     let chatContainer = document.querySelector('.container-chat--body-messages-active');
     if (chatMsgElem) {
         chatContainer = document.getElementById('m_' + chatMsgElem);
     }
-    let msgContainer = createChatMessageContainer(txt, dateTime, user, userName);
+    let msgContainer = createChatMessageContainer(txt, dateTime, user, userName, appendBefore);
 
     if (lastMsgUser != userName && user != 'auto') {
         let msgContainerUserHeader = document.createElement('p');
@@ -210,15 +218,27 @@ export function appendChatMessage(txt, dateTime, user, userName = '', chatMsgEle
         msgContainerUserHeader.appendChild(msgContainerUserHeaderPic);
         msgContainerUserHeader.appendChild(msgContainerUserHeaderName);
 
-        chatContainer.appendChild(msgContainerUserHeader);
+        if (appendBefore) {
+            let insBefElm = chatContainer.querySelector('.container-chat--body-messages-load');
+            chatContainer.insertBefore(msgContainerUserHeader, insBefElm)
+        } else {
+            chatContainer.appendChild(msgContainerUserHeader);
+        }
 
         lastMsgUser = userName;
     }
     
-    chatContainer.appendChild(msgContainer);
+    if (appendBefore) {
+        let insBefElm = chatContainer.querySelector('.container-chat--body-messages-load');
+        chatContainer.insertBefore(msgContainer, insBefElm)
+    } else {
+        chatContainer.appendChild(msgContainer);
+    }
+    
     chatContainer.scrollTop = chatContainer.scrollHeight;
 }
 
+var isTypingTimeout = null;
 export function sendChatMessage() {
     let dateTime = Date.now();
     let textElement = document.getElementById('chat-textarea-input');
@@ -244,7 +264,30 @@ if (document.querySelector('#chat-textarea-input')) {
             evt.preventDefault();
             document.querySelector('#chat-textarea-button').click();
         }
+
+        if (isTypingTimeout !== null) {
+            window.clearTimeout(isTypingTimeout);
+            isTypingTimeout = window.setTimeout(() => {sendIsTyping(false)}, 1000);
+        } else if (isTypingTimeout === null) {
+            isTypingTimeout = window.setTimeout(() => {sendIsTyping(false)}, 1000);
+            sendIsTyping(true);
+        }
     });
+}
+/* Is Typing Function */
+function sendIsTyping(isTyping) {
+    if (peer && !peer.destroyed) {
+        // Send message of User Typing either True or False
+        peer.send(JSON.stringify({
+            msgType: 'typ',
+            msg: isTyping
+        }));
+    }
+    
+    // If User Typing has stopped, reset variable
+    if (!isTyping) {
+        isTypingTimeout = null;
+    }
 }
 
 var offlineMsgs = [];
@@ -256,6 +299,9 @@ export function sendPeerChatMessage(type, text, dateTime, userName) {
             msgDateTime: dateTime,
             msgUserName: userName
         }));
+        if (enableMsgDBStore && type == 'msg') {
+            storeConvMsg(advStreams.myUserInfo.id, text, dateTime, peer);
+        }
     } else if (enableOfflineMsgs) {
         offlineMsgs.push(JSON.stringify({
             msgType: type,
@@ -349,7 +395,7 @@ function startUserMedia(av, state) {
         if (err.name == 'NotAllowedError') {
             initSnackbar(snackbar, failedGetUserMediaSBDataObj);
         } else {
-            let errMsgSBDataObj = failedGetUserMediaSBDataObj;
+            let errMsgSBDataObj = Object.assign({}, failedGetUserMediaSBDataObj);
             errMsgSBDataObj.message = err.name;
             initSnackbar(snackbar, errMsgSBDataObj);
         }
@@ -366,42 +412,42 @@ function startUserMedia(av, state) {
 
 // Snackbar Data for Failed Get User Media Devices
 const failedGetUserMediaSBDataObj = {
-    message: 'Por favor habilite el acceso a la cámara y/o micrófono.',
+    actionHandler: () => { console.log('GetUserMedia Devices Failed...'); },
     actionText: 'OK',
-    timeout: 10000,
-    actionHandler: () => {
-        console.log('GetUserMedia Devices Failed...');
-    }
+    message: 'Por favor habilite el acceso a la cámara y/o micrófono.',
+    timeout: 10000
 };
 
 // Snackbar Data for Connecting Peers
 const conPeerSBDataObj = {
-    message: 'Conectando con usuario...',
+    actionHandler: () => { console.log('Connecting to user...'); },
     actionText: 'OK',
-    timeout: 10000,
-    actionHandler: () => {
-        console.log('Connecting to user...');
-    }
+    message: 'Conectando con Usuari@.',
+    timeout: 4500
 };
 
 // Snackbar Data for Disconnecting Peers
 const disconPeerSBDataObj = {
-    message: 'Usuario desconectado.',
+    actionHandler: () => { console.log('User disconnected.'); },
     actionText: 'OK',
-    timeout: 10000,
-    actionHandler: () => {
-        console.log('User disconnected.');
-    }
+    message: 'Usuari@ desconectad@.',
+    timeout: 10000
 };
 
 // Snackbar Data for Transfering Peers
 const transferPeerSBDataObj = {
-    message: 'Transfiriendo usuario...',
+    actionHandler: () => { console.log('Transfering user...'); },
     actionText: 'OK',
-    timeout: 10000,
-    actionHandler: () => {
-        console.log('Transfering user...');
-    }
+    message: 'Usuari@ transferid@.',
+    timeout: 5000
+};
+
+// Snackbar Data for Receiving Transferral Peers
+const transferralPeerSBDataObj = {
+    actionHandler: () => { console.log('User transferral received.'); },
+    actionText: 'OK',
+    message: 'Usuari@ asignad@.',
+    timeout: 10000
 };
 
 // Show or Hide Audio/Video Call UI
@@ -506,7 +552,7 @@ window.displayCallUI = displayCallUI;
 
 export function initAudioCall() {
     document.getElementById('chat-textarea-input').value = '- Inicio de Audio llamada';
-    document.querySelector('#chat-textarea-button').click();
+    document.getElementById('chat-textarea-button').click();
     startUserMedia('audio', 'init');
 }
 /* Allow 'window' context to reference the function */
@@ -520,7 +566,7 @@ window.acceptAudioCall = acceptAudioCall;
 
 export function initVideoCall() {
     document.getElementById('chat-textarea-input').value = '- Inicio de Video llamada';
-    document.querySelector('#chat-textarea-button').click();
+    document.getElementById('chat-textarea-button').click();
     startUserMedia('audiovideo', 'init');
 }
 /* Allow 'window' context to reference the function */
@@ -542,7 +588,7 @@ export function endAVCall(sendMsg = true) {
             advStreams.myUserInfo.name
         );
         document.getElementById('chat-textarea-input').value = '- Fin de llamada';
-        document.querySelector('#chat-textarea-button').click();
+        document.getElementById('chat-textarea-button').click();
     }
     managePeerStream('end');
 }
@@ -691,23 +737,31 @@ window.initSnackbar = initSnackbar;
 
 
 // Show Snackbars of User Connection and Disconnection
-export function showUserRTCConSnackbar(state, error = '') {
+export function showUserRTCConSnackbar(state, arg = '') {
+    let sbdo = null;
     switch (state) {
         case 'con':
-            initSnackbar(snackbar, conPeerSBDataObj);
+            sbdo = Object.assign({}, conPeerSBDataObj);
+            if (arg) { sbdo.message = sbdo.message.replace('Usuari@', arg); }
             break;
         case 'dcon':
-            initSnackbar(snackbar, disconPeerSBDataObj);
+            sbdo = Object.assign({}, disconPeerSBDataObj);
+            if (arg) { sbdo.message = sbdo.message.replace('Usuari@', arg); }
             break;
         case 'err':
-            let errSB = failedGetUserMediaSBDataObj;
-            errSB.message = error;
-            initSnackbar(snackbar, errSB);
+            sbdo = Object.assign({}, failedGetUserMediaSBDataObj);
+            if (arg) { sbdo.message = arg; }
             break;
         case 'trn':
-            initSnackbar(snackbar, transferPeerSBDataObj);
+            sbdo = Object.assign({}, transferPeerSBDataObj);
+            if (arg) { sbdo.message = sbdo.message.replace('Usuari@', arg); }
+            break;
+        case 'trnRcv':
+            sbdo = Object.assign({}, transferralPeerSBDataObj);
+            if (arg) { sbdo.message = sbdo.message.replace('Usuari@', arg); }
             break;
     }
+    initSnackbar(snackbar, sbdo);
 }
 /* Allow 'window' context to reference the function */
 window.showUserRTCConSnackbar = showUserRTCConSnackbar;
@@ -776,6 +830,11 @@ if (assignedDialogEl) {
     mdcAssignedDialogEl = new MDCDialog(assignedDialogEl);
 }
 
+var disconnectedDialogEl = document.querySelector('#disconnected-dialog');
+if (disconnectedDialogEl) {
+    mdcDisconnectedDialogEl = new MDCDialog(disconnectedDialogEl);
+}
+
 var endRTCDialogEl = document.querySelector('#endrtc-dialog');
 if (endRTCDialogEl) {
     mdcEndRTCDialogEl = new MDCDialog(endRTCDialogEl);
@@ -799,6 +858,9 @@ if (drawerEl && topAppBarEl) {
     topAppBar.setScrollTarget(mainContentEl);
 
     let isDrawerModal = false;
+    let drawerItemHref = null;
+    let isHrefNoHistory = false;
+
     const initModalDrawer = () => {
         isDrawerModal = true;
         drawerEl.classList.add("mdc-drawer--modal");
@@ -811,20 +873,15 @@ if (drawerEl && topAppBarEl) {
             drawer.open = !drawer.open;
         });
 
-        let drawerItemHref = null;
-        drawerItemsEl.addEventListener('click', (event) => {
-            drawer.open = false;
-            drawerItemHref = event.target.href;
-            if (isDrawerModal) {
-                event.preventDefault();
-            }
-        });
-
         document.body.addEventListener('MDCDrawer:closed', () => {
             drawer.handleScrimClick;
             mainContentEl.querySelector('input, button').focus();
             if (drawerItemHref) {
-                window.location.assign(drawerItemHref);
+                if (isHrefNoHistory) {
+                    window.location.replace(drawerItemHref);
+                } else {
+                    window.location.assign(drawerItemHref);
+                }
             }
         });
 
@@ -842,8 +899,21 @@ if (drawerEl && topAppBarEl) {
         return permDrawerList;
     }
 
-    let drawer = window.matchMedia("(max-width: 52.49em)").matches ?
-        initModalDrawer() : initPermanentDrawer();
+    let drawer = window.matchMedia("(max-width: 52.49em)").matches ? initModalDrawer() : initPermanentDrawer();
+    
+    drawerItemsEl.addEventListener('click', (event) => {
+        drawerItemHref = event.target.href;
+        isHrefNoHistory = event.target.hasAttribute('data-no-history');
+        if (isDrawerModal) {
+            drawer.open = false;
+            event.preventDefault();
+        } else {
+            if (isHrefNoHistory) {
+                event.preventDefault();
+                window.location.replace(drawerItemHref);
+            }
+        }
+    });
 
     // Toggle between permanent drawer and modal drawer at breakpoint 52.49em
     const resizeHandler = () => {
@@ -919,6 +989,19 @@ if (accountMenuButton != null) {
     accountMenuButton.addEventListener('click', () => (accountMenu.open = !accountMenu.open));
     accountMenu.setAnchorCorner(Corner.BOTTOM_START);
     document.querySelector('#accountMenu').addEventListener('MDCMenu:selected', evt => accountRedirect(evt));
+}
+
+var accountStatus = null;
+var accountStatusButton = null;
+if (document.querySelector('#accountStatus')) {
+    accountStatus = new MDCMenu(document.querySelector('#accountStatus'));
+    accountStatusButton = document.querySelector('#header-accountImage');
+}
+if (accountStatusButton != null) {
+    let fn = window['updateRTCUserPersonalStatus'];
+    accountStatusButton.addEventListener('click', () => (accountStatus.open = !accountStatus.open));
+    accountStatus.setAnchorCorner(Corner.BOTTOM_START);
+    document.querySelector('#accountStatus').addEventListener('MDCMenu:selected', evt => fn(evt));
 }
 
 var moreOptionMenu = null;
@@ -1016,7 +1099,13 @@ document.querySelectorAll('.mdc-button[data-action-type], .mdc-icon-button[data-
     let actionType = buttonEl.getAttribute('data-action-type');
     if (actionType == 'redirect') {
         let actionVal = buttonEl.getAttribute('data-action-val');
-        buttonEl.addEventListener('click', () => (window.location.href = actionVal));
+        buttonEl.addEventListener('click', () => {
+            if (buttonEl.hasAttribute('data-no-history')) {
+                window.location.replace(actionVal);
+            } else {
+                window.location.assign(actionVal);
+            }
+        });
     } else if (actionType == 'submit') {
         let actionFn = buttonEl.getAttribute('data-action-fn');
         let fn = (typeof actionFn == "string") ? window[actionFn] : actionFn;
@@ -1057,10 +1146,26 @@ if (document.querySelector('.s-googlemaps')) {
 // Even though this service worker is not on the root of this web application
 // It has been configured, through swing_main.py to make it look like it is.
 
+
+// Instance of Local Storage to retrieve SW Version
+const swStore = localforage.createInstance({
+    name: 'swingcms-sw'
+});
+
+
+// Evaluate if Browser accepts Service Workers
 if ('serviceWorker' in navigator) {
     const wb = new Workbox('/sw.js', { scope: '/' });
     // Detects an update for the app's content and prompts user to refresh
     wb.addEventListener('installed', event => {
+        // Retrieve SW version
+        let swVerEl = document.querySelector('#s-version');
+        if (swVerEl) {
+            swStore.getItem('swVersion').then( (val) => {
+                swVerEl.textContent = val;
+            });
+        }
+
         if (event.isUpdate) {
             console.log('App update found...');
             initSnackbar(snackbar, updateSBDataObj);
@@ -1130,3 +1235,14 @@ window.addEventListener('beforeinstallprompt', (e) => {
     }
 });
 
+
+// Show SW Version
+let swVerEl = document.querySelector('#s-version');
+if (swVerEl) {
+    // Retrieve SW version
+    swStore.getItem('swVersion').then( (val) => {
+        if (val) {
+            swVerEl.textContent = val;
+        }
+    });
+}
