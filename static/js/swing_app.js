@@ -41,7 +41,7 @@ export function returnFormatDate(dateTime, type = '') {
     var hoursampm = ((hours + 11) % 12 + 1);
 
     if (month.toString().length == 1) {
-        month = '0' + month;
+        month = '0' + (month +1);
     }
     if (day.toString().length == 1) {
         day = '0' + day;
