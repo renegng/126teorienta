@@ -31,7 +31,7 @@ import { Workbox } from 'workbox-window/Workbox.mjs';
 export function returnFormatDate(dateTime, type = '') {
     var dt = new Date(dateTime);
     var year = dt.getFullYear();
-    var month = dt.getMonth();
+    var month = dt.getMonth() + 1; //months starts at 0
     var day = dt.getDate();
     var hours = dt.getHours();
     var min = dt.getMinutes();
@@ -41,7 +41,7 @@ export function returnFormatDate(dateTime, type = '') {
     var hoursampm = ((hours + 11) % 12 + 1);
 
     if (month.toString().length == 1) {
-        month = '0' + (month +1);
+        month = '0' + month;
     }
     if (day.toString().length == 1) {
         day = '0' + day;
