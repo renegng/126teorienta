@@ -46,7 +46,7 @@ def _connect():
         # Retrieve the user list depending on the user's role and Append User into the list
         new_oul = cur_oul
         if current_user.is_authenticated:
-            if current_user.is_user_role(['adm', 'emp']):
+            if current_user.is_user_role(['adm', 'ori', 'abo', 'psi', 'soc', 'coo']):
                 new_oul.userlist.get('rtc_online_users', {}).get('emp_users').append(rtc_user)
             else:
                 new_oul.userlist.get('rtc_online_users', {}).get('reg_users').append(rtc_user)
@@ -80,7 +80,7 @@ def _connect():
 
         # Add Employee to Room and Send User List
         if current_user.is_authenticated:
-            if current_user.is_user_role(['adm', 'emp']):
+            if current_user.is_user_role(['adm', 'ori', 'abo', 'psi', 'soc', 'coo']):
                 join_room('126-EMPS')
         
         socketio.emit('userIsConnected', { 'status' : 'success', 'id' : user.id, 'roles' : user.get_user_roles() }, room=request.sid)
@@ -107,7 +107,7 @@ def _disconnect():
         # Retrieve the user list depending on the user's role and Remove User from List
         new_oul = cur_oul
         if current_user.is_authenticated:
-            if current_user.is_user_role(['adm', 'emp']):
+            if current_user.is_user_role(['adm', 'ori', 'abo', 'psi', 'soc', 'coo']):
                 removeItemFromList(new_oul.userlist.get('rtc_online_users', {}).get('emp_users'), 'id', user.id)
                 
                 # Update all users assigned status back to default
@@ -155,7 +155,7 @@ def _disconnect():
 
         # Remove Employee to Room
         if current_user.is_authenticated:
-            if current_user.is_user_role(['adm', 'emp']):
+            if current_user.is_user_role(['adm', 'ori', 'abo', 'psi', 'soc', 'coo']):
                 leave_room('126-EMPS')
         
         socketio.emit('RTCUserList', new_userlist, room='126-EMPS')
