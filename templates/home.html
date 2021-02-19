@@ -28,7 +28,7 @@
     <div class="container-color-background">
         <div class="mdc-layout-grid container-size-s">
             <div class="mdc-layout-grid__inner">
-                {% if current_user.is_user_role(['adm','emp']) %}
+                {% if current_user.is_user_role(['adm', 'ori', 'abo', 'psi', 'soc', 'coo']) %}
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle s-font-align-center">
                     <div class="mdc-card">
                         <a href="/chat/admin/">
@@ -55,6 +55,21 @@
                         </a>
                     </div>
                 </div>
+                    {% if current_user.is_user_role(['adm','coo']) %}
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle s-font-align-center">
+                    <div class="mdc-card">
+                        <a href="/recursos/">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-card__media">
+                                    <i class="material-icons s-font-color-primary" aria-hidden="true">analytics</i>
+                                </div>
+                                <div class="mdc-typography--headline5 s-font-color-secondary">Gestionar reportes</div>
+                                <div class="mdc-typography--subtitle2">Módulo de reportería</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                    {% endif %}
                 {% elif current_user.is_user_role(['usr']) %}
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-middle s-font-align-center">
                     <div class="mdc-card">
