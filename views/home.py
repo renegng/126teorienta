@@ -205,3 +205,8 @@ def _terminosdelservicio():
 def _welcome():
     app.logger.debug('** SWING_CMS ** - Welcome')
     return render_template('welcome.html')
+
+@home.route('/welcome/2/')
+def _welcome_alternate():
+    app.logger.debug('** SWING_CMS ** - Welcome Alternate')
+    return render_template('welcome_alternate.html')

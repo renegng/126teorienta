@@ -2,4 +2,4 @@
 # Disallow:   - indicates that this site is crawlable
 
 User-agent: *
-Disallow: /
+Disallow:

@@ -50,6 +50,20 @@ body {
     border: none;
 }
 
+.s-list-steps {
+    display: flex;
+    margin-bottom: 1rem;
+
+    .s-list-steps--bullet {
+        justify-content: flex-start;
+        margin-right: 1rem;
+    }
+
+    .s-list-steps--text {
+        justify-content: flex-end;
+    }
+}
+
 .s-main-content {
     display: flex;
     flex-wrap: wrap;
