@@ -70,6 +70,28 @@ body {
     justify-content: space-evenly;
 }
 
+.s-main-logo {
+    // Laptops and Computers
+    @media all and (min-width: 52.5em) {
+        text-align: justify;
+
+        img {
+            max-height: 50%;
+            max-width: 50%;
+        }
+    }
+
+    // Tablets & Smartphones
+    @media all and (max-width: 52.49em) {
+        text-align: center;
+
+        img {
+            max-height: 70%;
+            max-width: 70%;
+        }
+    }
+}
+
 .s-main-content--extend-tab-color-primary {
     background: linear-gradient(180deg, stv.$swing-theme-primary 20%, stv.$swing-theme-background 20%);
 }
