@@ -20,7 +20,7 @@
                 <i class="material-icons mdc-list-item__graphic" aria-hidden="true">widgets</i>
                 <span class="mdc-list-item__text">Funciones</span>
             </a>
-                {% if current_user.is_user_role(['adm','emp']) %}
+                {% if current_user.is_user_role(['adm', 'ori', 'abo', 'psi', 'soc', 'coo']) %}
             <a class="mdc-list-item" href="/chat/admin/" aria-current="page">
                 <span class="mdc-list-item__ripple"></span>
                 <i class="material-icons mdc-list-item__graphic" aria-hidden="true">chat</i>

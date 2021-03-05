@@ -95,7 +95,7 @@
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet
                             mdc-layout-grid__cell--align-top s-font-align-center">
-                    {% if current_user.is_user_role(['adm','emp']) %}
+                    {% if current_user.is_user_role(['adm', 'ori', 'abo', 'psi', 'soc', 'coo']) %}
                     <h4 class="mdc-typography--headline4 s-font-color-secondary">
                         Citas por aprobar
                     </h4>
@@ -132,7 +132,7 @@
 </main>
 {% endblock %}
 {% block bottombar %}
-{% if current_user.is_user_role(['adm','emp']) %}
+{% if current_user.is_user_role(['adm', 'ori', 'abo', 'psi', 'soc', 'coo']) %}
 <button id="floatingButton" class="mdc-fab mdc-fab--extended mdc-fab--fixed" aria-label="Create appointment"
         data-action-type="redirect" data-action-val="/appointments/create/admin/">
 {% elif current_user.is_user_role(['usr']) %}
