@@ -81,6 +81,12 @@ def _coronavirus():
     return render_template('coronavirus.html')
 
 
+@home.route('/comoiniciar/')
+def _comoiniciarsesion():
+    app.logger.debug('** SWING_CMS ** - Como Iniciar Sesion')
+    return render_template('comoiniciarsesion.html')
+
+
 @home.route('/dirservicios/')
 def _dirservicios():
     app.logger.debug('** SWING_CMS ** - Directorio de Servicios')
@@ -205,8 +211,3 @@ def _terminosdelservicio():
 def _welcome():
     app.logger.debug('** SWING_CMS ** - Welcome')
     return render_template('welcome.html')
-
-@home.route('/welcome/2/')
-def _welcome_alternate():
-    app.logger.debug('** SWING_CMS ** - Welcome Alternate')
-    return render_template('welcome_alternate.html')

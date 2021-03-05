@@ -1,0 +1,100 @@
+{% extends 'layout_main-drawer_footer_topbar.html' %}
+{% block page_description %}126 Te Orienta, Como Iniciar Sesión, Login, Log In, Sesión{% endblock %}
+{% block page_title %}¿Como iniciar sesión?{% endblock %}
+{% block body %}
+<main class="s-main-content">
+    <article class="s-article">
+        <div class="container-color-background">
+            <div class="mdc-layout-grid container-size-xs">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-8-tablet 
+                                mdc-layout-grid__cell--align-middle container-justify-center">
+                        <div
+                            class="mdc-typography--headline2 s-font-color-primary s-font-align-center s-font-family-poppins">
+                            ¿Como iniciar sesión?
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-color-background">
+            <div class="mdc-layout-grid container-size-s">
+                <div class="mdc-layout-grid__inner">
+                    <div
+                        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                                mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle s-font-align-center">
+                        <img src="{{ url_for('static', filename='images/manifest/user_f_05.svg') }}"
+                            class="resize-image-2fit-90" alt="Logo Seguridad" />
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                                mdc-layout-grid__cell--align-middle container-justify-center">
+                        <p class="mdc-typography--headline5 s-font-color-on-background">
+                            <b>Inicio de sesión en 126 Te Orienta.</b>
+                        </p>
+                        <p class="mdc-typography--body1 s-font-color-on-background">
+                            Iniciar sesión es importante ya que nos permite identificarte y guardar tu cita. Además
+                            podrás ingresar nuevamente y verificar el día y hora, en caso de que lo hayas olvidado o
+                            necesites estar segura de esta información.
+                        </p>
+                        <p class="mdc-typography--body1 s-font-color-on-background">
+                            Hay tres formas de iniciar sesión:
+                        </p>
+                        <ol class="mdc-typography--headline5">
+                            <li>
+                                <b>A través de tu cuenta de Google</b>: Si tienes tu correo de Gmail abierto
+                                <ul class="mdc-typography--body1">
+                                    <li>
+                                        Haz clic en “Acceder con Google”.
+                                    </li>
+                                    <li>
+                                        Si tienes más de una cuenta abierta deberás seleccionar una y listo habrás iniciado sesión.
+                                    </li>
+                                </ul>
+                            </li>
+                            <br />
+                            <li>
+                                <b>Por medio de tu Facebook</b>:
+                                <ul class="mdc-typography--body1">
+                                    <li>
+                                        Haz clic en “Acceder con Facebook”.
+                                    </li>
+                                    <li>
+                                        Coloca tu correo y contraseña de esta red social.
+                                    </li>
+                                    <li>
+                                        Si tienes abierto tu Facebook en otra pestaña no necesitarás escribir estos datos nuevamente.
+                                    </li>
+                                    <li>
+                                        Listo, tu cuenta está creada.
+                                    </li>
+                                </ul>
+                            </li>
+                            <br />
+                            <li>
+                                <b>Con tu correo electrónico</b>: Si ya tienes un correo electrónico y recuerdas la contraseña
+                                <ul class="mdc-typography--body1">
+                                    <li>
+                                        Haz clic en “Acceder con correo electrónico”.
+                                    </li>
+                                    <li>
+                                        Escribe tu dirección electrónica, por ejemplo anamaria@gmail.com.
+                                    </li>
+                                    <li>
+                                        Escribe tu nombre y apellido.
+                                    </li>
+                                    <li>
+                                        Elige una contraseña, procura que contenga números y letras y que sea algo que solo tú puedas recordar.
+                                    </li>
+                                    <li>
+                                        Listo, tu cuenta está creada.
+                                    </li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</main>
+{% endblock %}
