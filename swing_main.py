@@ -15,10 +15,14 @@ app.config.from_object(cfgmodels[cfgType])
 app.logger.info("** SWING_CMS ** - CONFIG: {}".format(app.config))
 
 with app.app_context():
+    from views.api import api as api_view
     from views.home import home as home_view
     from views.seo import seo as seo_view
     from views.socketio import sio as sio_view
 
+    # API Fetchs
+    app.register_blueprint(api_view)
+    
     # Home
     app.register_blueprint(home_view)
 

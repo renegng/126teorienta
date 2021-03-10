@@ -36,6 +36,21 @@ def initPopulateDB():
     app.logger.info('** SWING_CMS ** - Populate Database FINISHED.')
 
 
+# Initialize Elastic Search Populate Function
+def initPopulateES():
+    try:
+        # Delete current indexes
+        User.delete_index()
+
+        # Index available records
+        User.reindex()
+
+        return jsonify({ 'status': 'success' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - Initialize Populate Elastic Search Error: {}'.format(e))
+        return jsonify({ 'status': 'error' })
+
+
 # Populate Default RTC Online User List
 def populateDefaultRTC_OUL():
     try:
@@ -286,5 +301,31 @@ def populateCatalogUserRoles():
         return jsonify({ 'status': 'success' })
     except Exception as e:
         app.logger.error('** SWING_CMS ** - Populate Catalog User Roles Error: {}'.format(e))
+        return jsonify({ 'status': 'error' })
+
+
+# Populate Specified Table
+def populateTable(dp_name, dp_options=None):
+    try:
+        app.logger.debug('** SWING_CMS ** - Populate Specified Table')
+
+        data_procedures = {
+            "catalog_operations": populateCatalogOperations,
+            "catalog_services": populateServicesCatalog,
+            "catalog_user_roles": populateCatalogUserRoles,
+            "default_rtc_oul": populateDefaultRTC_OUL,
+            "default_users": populateDefaultUsers,
+            "survey_answer_types": populateSurveysAnswerTypesCatalog,
+            "survey_uss": populateSurveyUserSatisfaction
+        }
+
+        if dp_options is not None:
+            data_procedures[dp_name](dp_options)
+        else:
+            data_procedures[dp_name]()
+
+        return jsonify({ 'status': 'success' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - Populate Specified Table Error: {}'.format(e))
         return jsonify({ 'status': 'error' })
 

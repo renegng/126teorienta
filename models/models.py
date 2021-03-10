@@ -1,16 +1,16 @@
 from datetime import datetime as dt
 from datetime import timezone as tz
+from elasticsearch import Elasticsearch
 from flask import jsonify
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy, orm
+from operator import attrgetter
 from sqlalchemy_utils import EncryptedType
 from sqlalchemy_utils.types import JSONType
 from sqlalchemy_utils.types.encrypted.encrypted_type import AesEngine
 
-db = SQLAlchemy()
-
 # **************************************************************************
-# Utilities
+# SQLAlchemy Utilities
 # **************************************************************************
 
 class AESCryptoKey():
@@ -25,16 +25,182 @@ class AESCryptoKey():
     def key(self, val):
         self._crypKey = val
 
-crypto_key = AESCryptoKey()
-
 def get_crypto_key():
     return crypto_key.key
 
 
 # **************************************************************************
-# Database models
+# SQLAlchemy init instances
 # **************************************************************************
 
+db = SQLAlchemy()
+crypto_key = AESCryptoKey()
+
+
+# **************************************************************************
+# ElasticSearch Utilities
+# **************************************************************************
+
+class ElasticSearchInit():
+    def __init__(self):
+        self._es = None
+    
+    def init_app(self, app):
+        # Validate that Elastic Search URL Exists
+        if 'ELASTICSEARCH_URL' in app.config:
+            self._es = Elasticsearch(app.config['ELASTICSEARCH_URL'])
+        
+    @property
+    def instance(self):
+        return self._es
+
+    @instance.setter
+    def instance(self, val):
+        self._es = val
+
+
+# **************************************************************************
+# ElasticSearch init instances
+# **************************************************************************
+
+es = ElasticSearchInit()
+
+
+# **************************************************************************
+# ElasticSearch/SQLAlchemy implementation
+# **************************************************************************
+
+def add_to_index(index, model):
+    if not es.instance:
+        return
+    if not es.instance.indices.exists(index=index):
+        settings = {
+            "mappings": {
+                "dynamic_templates": [{
+                    "case_accent_insensitive": {
+                        "match_mapping_type": "string",
+                        "mapping": {
+                            "analyzer": "asciif_ngram_lowcase",
+                            "search_analyzer": "asciif_lowcase"
+                        }
+                    }
+                }]
+            },
+            "settings": {
+                "analysis": {
+                    "analyzer": {
+                        "asciif_lowcase": {
+                            "tokenizer": "standard",
+                            "filter": [
+                                "asciifolding",
+                                "lowercase"
+                            ]
+                        },
+                        "asciif_ngram_lowcase": {
+                            "tokenizer": "standard",
+                            "filter": [
+                                "asciifolding",
+                                "ngram_filter",
+                                "lowercase"
+                            ]
+                        }
+                    },
+                    "filter": {
+                        "ngram_filter": {
+                            "type": "ngram",
+                            "max_gram": 10,
+                            "min_gram": 2
+                        }
+                    }
+                },
+                "index.max_ngram_diff" : 10
+            }
+        }
+        es.instance.indices.create(index=index, body=settings)
+    indexData = {}
+    for field in model.__searchable__:
+        ag = attrgetter(field)
+        try:
+            indexData[field] = ag(model)
+        except Exception as e:
+            pass
+    es.instance.index(index=index, id=model.id, body=indexData)
+
+def query_index(index, query, page, per_page):
+    if not es.instance:
+        return [], 0
+    search = es.instance.search(
+        index = index,
+        body = {
+            "from": (page - 1) * per_page,
+            "query": {
+                "multi_match": {
+                    "fields": ["*"],
+                    "query": query
+                }
+            },
+            "size": per_page
+        }
+    )
+    ids = [int(hit['_id']) for hit in search['hits']['hits']]
+    return ids, search['hits']['total']['value']
+
+def remove_from_index(index, model = None):
+    if not es.instance:
+        return
+    if not model:
+        es.instance.indices.delete(index=index, ignore=[404])
+    else:
+        es.instance.delete(index=index, id=model.id)
+
+class ElasticMixin(object):
+    @classmethod
+    def after_commit(cls, session):
+        for obj in session._changes['add']:
+            if isinstance(obj, ElasticMixin):
+                add_to_index(obj.__tablename__, obj)
+        for obj in session._changes['update']:
+            if isinstance(obj, ElasticMixin):
+                add_to_index(obj.__tablename__, obj)
+        for obj in session._changes['delete']:
+            if isinstance(obj, ElasticMixin):
+                remove_from_index(obj.__tablename__, obj)
+        session._changes = None
+
+    @classmethod
+    def before_commit(cls, session):
+        session._changes = {
+            'add': list(session.new),
+            'update': list(session.dirty),
+            'delete': list(session.deleted)
+        }
+    
+    @classmethod
+    def delete_index(cls):
+        remove_from_index(cls.__tablename__)
+
+    @classmethod
+    def reindex(cls):
+        for obj in cls.query:
+            add_to_index(cls.__tablename__, obj)
+    
+    @classmethod
+    def search(cls, expression, page, per_page):
+        ids, total = query_index(cls.__tablename__, expression, page, per_page)
+        if total == 0:
+            return cls.query.filter_by(id=0), 0
+        when = []
+        for i in range(len(ids)):
+            when.append((ids[i], i))
+        return cls.query.filter(cls.id.in_(ids)).order_by(db.case(when, value=cls.id)), total
+
+db.event.listen(db.session, 'before_commit', ElasticMixin.before_commit)
+db.event.listen(db.session, 'after_commit', ElasticMixin.after_commit)
+
+
+# **************************************************************************
+# Database Models
+# **************************************************************************
 
 # Appointments Class
 class Appointments(db.Model):
@@ -65,6 +231,21 @@ class Appointments(db.Model):
         )
 
 
+# Catalog - ID Document Type Class
+class CatalogIDDocumentType(db.Model):
+    __tablename__ = 'catalog_id_document_types'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(60), unique=True, nullable=False)
+    name_short = db.Column(db.String(6), unique=True, nullable=True)
+
+    def __repr__(self):
+        return jsonify(
+            id = self.id,
+            name = self.name,
+            name_short = self.name_short
+        )
+
+
 # Catalog - Operations Class
 class CatalogOperations(db.Model):
     __tablename__ = 'catalog_operations'
@@ -90,6 +271,7 @@ class CatalogServices(db.Model):
     break_minutes = db.Column(db.Integer, unique=False, nullable=True, default=15)
     duration_minutes = db.Column(db.Integer, unique=False, nullable=True, default=45)
     service_user_role = db.Column(db.Integer, db.ForeignKey('catalog_user_roles.id'), nullable=True)
+    sessions_schedule = db.Column(db.JSON, nullable=True)
 
     def __repr__(self):
         return jsonify(
@@ -323,8 +505,9 @@ class SurveysQuestions(db.Model):
 
 
 # User Class
-class User(UserMixin, db.Model):
+class User(ElasticMixin, UserMixin, db.Model):
     __tablename__ = 'user'
+    __searchable__ = ['email', 'name', 'extra_info.names', 'extra_info.last_names']
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     uid = db.Column(db.String(255), unique=True, nullable=False)
     email = db.Column(db.String(255), unique=False, nullable=False)
@@ -336,6 +519,7 @@ class User(UserMixin, db.Model):
     enabled = db.Column(db.Boolean, unique=False, nullable=True, default=True)
     datecreated = db.Column(db.DateTime, unique=False, nullable=False, index=True, default=dt.now(tz.utc))
     roles = db.relationship('UserXRole', lazy='subquery', back_populates='user')
+    extra_info = db.relationship('UserExtraInfo', lazy='subquery', back_populates='user', uselist=False)
 
     # UserClass properties and methods
     @orm.reconstructor
@@ -379,12 +563,12 @@ class User(UserMixin, db.Model):
         return self.uid
     
     # Method to return user roles
-    def get_user_roles(self):
+    def get_user_roles(self, name_short = False):
         u_roles = []
 
         # Iterate through all roles
         for role in self.roles:
-            u_roles.append(role.user_role.name)
+            u_roles.append(role.user_role.name if not name_short else role.user_role.name_short)
         
         return u_roles
     
@@ -405,16 +589,21 @@ class User(UserMixin, db.Model):
 class UserExtraInfo(db.Model):
     __tablename__ = 'user_extra_info'
     id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    national_id_type = db.Column(db.Integer, db.ForeignKey('catalog_id_document_types.id'), nullable=True)
+    national_id = db.Column(db.String(30), unique=False, nullable=True)
     last_names = db.Column(db.String(300), unique=False, nullable=True)
     names = db.Column(db.String(300), unique=False, nullable=True)
+    alias = db.Column(db.String(300), unique=False, nullable=True)
     avatar = db.Column(db.String(16), unique=False, nullable=True)
     country = db.Column(db.JSON, unique=False, nullable=True)
     state = db.Column(db.JSON, unique=False, nullable=True)
     city = db.Column(db.JSON, unique=False, nullable=True)
+    user = db.relationship('User', lazy='subquery', back_populates='extra_info')
 
     def __repr__(self):
         return jsonify(
             id = self.id,
+            alias = self.alias,
             names = self.names,
             last_names = self.last_names,
             avatar = self.avatar,

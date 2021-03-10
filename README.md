@@ -76,6 +76,7 @@ To install Swing CMS, follow the next steps (under Ubuntu 16.04):
     ~: pip install psycopg2-binary
     ~: pip install firebase-admin
     ~: pip install mysqlclient
+    ~: pip install elasticsearch
     ~: pip install cryptography
     ~: pip install sqlalchemy-utils
 

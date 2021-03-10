@@ -7,7 +7,7 @@ from firebase_admin import auth, credentials
 from flask import flash, render_template, jsonify, request, redirect, url_for
 from flask import current_app as app
 from flask_login import LoginManager, login_user, current_user, logout_user
-from models.models import crypto_key, db, User
+from models.models import crypto_key, db, es, User
 
 
 # Enable instance of SQLAlchemy
@@ -16,6 +16,10 @@ db.init_app(app)
 
 # Init CryptoKey
 crypto_key.key = app.config['SECRET_KEY']
+
+
+# Init Elasticsearch
+es.init_app(app)
 
 
 # Enable Firebase Admin
