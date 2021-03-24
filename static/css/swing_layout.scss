@@ -162,6 +162,12 @@ body {
     }
 }
 
+.s-topbar-loading {
+    position: sticky;
+    top: 0;
+    z-index: 4;
+}
+
 /* Container layouts */
 
 .container-appointment {
@@ -190,18 +196,33 @@ body {
 
             .mdc-card {
                 margin: 1rem;
-                padding: 1.5rem 1rem;
                 width: 16rem;
+
+                .mdc-card__primary-action {
+                    padding: 1.5rem 1rem;
+                }
             }
         }
     }
 }
 
 .container-appointmentadm {
-    .container-appointmentadm-date {
-        grid-row-start: 1;
-        grid-row: span 1;
+    .container-appointmentadm-confirm {
+        .container-appointment-confirm--review {
+            display: flex;
+            justify-content: center;
 
+            .material-icons {
+                font-size: 1.75rem;
+            }
+        }
+
+        .container-appointment-confirm--submit {
+            margin-top: 1rem;
+        }
+    }
+
+    .container-appointmentadm-date {
         #appointment-cal {
             display: flex;
             justify-content: center;
@@ -209,37 +230,57 @@ body {
     }
 
     .container-appointmentadm-emp {
-        grid-column-start: 1;
-        grid-row-start: 3;
+        .container-appointmentadm-emp--record-info {
+            display: flex;
+            flex-direction: column;
+            margin-left: 0.5rem;
+        }
+
+        div:not(:last-child) {
+            margin-bottom: 1rem;
+        }
     }
 
-    .container-appointmentadm-service {
-        grid-column-start: 1;
-        grid-row-start: 2;
+    .container-appointmentadm-searchmenu {
+        min-width: 100%;
     }
 
     .container-appointmentadm-time {
-        grid-row-start: 2;
-        grid-row: span 2;
-
         .container-appointment-hours {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
 
+            .container-appointment-hours--daytime {
+                align-items: center;
+                display: flex;
+
+                span {
+                    margin-left: 0.5rem;
+                }
+            }
+
             .mdc-card {
                 margin: 1rem;
-                padding: 1.5rem 1rem;
                 width: 16rem;
+
+                .mdc-card__primary-action {
+                    padding: 1.5rem 1rem;
+                }
             }
         }
     }
 
     .container-appointmentadm-user {
-        grid-column-start: 1;
-        grid-row-start: 1;
+        grid-row: span 2;
+        
+        .container-appointmentadm-user--record-info {
+            display: flex;
+            flex-direction: column;
+            margin-left: 0.5rem;
+        }
 
-        div:not(:last-child) {
+        div:not(:last-child):not(.mdc-select) {
             margin-bottom: 1rem;
         }
     }
@@ -252,30 +293,45 @@ body {
 
     .mdc-card {
         margin: 0.25rem 0.2rem;
-        max-width: 18rem;
+        max-width: 20rem;
         min-width: 15rem;
         text-align: start;
 
         .mdc-card__primary-action {
             padding: 1rem 0.5rem 1rem 1rem;
 
-            .s-mdc-card__appointment-date {
-                margin-bottom: 0.25rem;
-            }
-
+            .s-mdc-card__appointment-createdby,
+            .s-mdc-card__appointment-date,
             .s-mdc-card__appointment-service {
-                margin-bottom: 0.5rem;
+                margin: 0.35rem 0;
             }
 
-            .s-mdc-card__appointment-time {
-                margin-bottom: 0.25rem;
+            .s-mdc-card__appointment-createdfor,
+            .s-mdc-card__appointment-daytime,
+            .s-mdc-card__appointment-empassigned {
+                align-items: center;
+                display: flex;
+                margin: 0.35rem 0;
+
+                div {
+                    margin-left: 0.75rem;
+                }
             }
+
         }
 
         .mdc-card__actions {
             justify-content: flex-end;
         }
     }
+}
+
+.container-appointments-list--empty {
+    padding: 5rem 0;
+}
+
+.container-appointments-tabs {
+    margin-bottom: 1rem;
 }
 
 .container-avcalls {
@@ -1053,7 +1109,7 @@ body {
 
 .jsCalendar.classic-theme.primary thead .jsCalendar-nav-left:hover,
 .jsCalendar.classic-theme.primary thead .jsCalendar-nav-right:hover {
-    background-color: darken(stv.$swing-theme-primary, 10%);;
+    background-color: darken(stv.$swing-theme-primary, 10%);
 }
 
 .jsCalendar.secondary tbody td.jsCalendar-current {
@@ -1084,6 +1140,47 @@ body {
 .jsCalendar.classic-theme.secondary thead .jsCalendar-nav-left:hover,
 .jsCalendar.classic-theme.secondary thead .jsCalendar-nav-right:hover {
     background-color: darken(stv.$swing-theme-secondary, 10%);;
+}
+
+.jsCalendar-date-available {
+    background-color: #12e288;
+}
+
+.jsCalendar-date-booked {
+    background-color: #ffd23f;
+}
+
+.jsCalendar-date-booked-full {
+    background-color: #ee4266;
+}
+
+.jsCalendar-date-unavailable {
+    color: #f0efeb !important;
+}
+
+.jsCalendar-date-weekend-currentmonth {
+    color: #c32525 !important;
+}
+
+.jsCalendar-date-weekend-othermonth {
+    color: #ffb4b4 !important;
+}
+
+.jsCalendar-caption {
+    display: flex;
+    justify-content: center;
+}
+
+.jsCalendar-caption-available {
+    color: #12e288;
+}
+
+.jsCalendar-caption-booked {
+    color: #ffd23f;
+}
+
+.jsCalendar-caption-booked-full {
+    color: #ee4266;
 }
 
 /* Loader animation */

@@ -19,49 +19,95 @@
     </div>
     <div class="mdc-layout-grid container-appointmentadm">
         <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top
-                        container-justify-center container-appointmentadm-user">
-                <h5 class="mdc-typography--headline5 s-font-color-primary">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5-desktop mdc-layout-grid__cell--span-4-tablet
+                        mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-top container-justify-center container-appointmentadm-user">
+                <h5 class="mdc-typography--headline5 s-font-color-primary" id="step-one">
                     Paso 1: Selecciona la usuaria
                 </h5>
-                <div>
+                <div class="mdc-menu-surface--anchor">
                     <label class="mdc-text-field mdc-text-field--filled">
                         <span class="mdc-text-field__ripple"></span>
                         <input id="f-appointment-ufilter-input" class="mdc-text-field__input" type="text" 
-                                aria-labelledby="f-appointment-ufilter-label" tabindex="-1">
+                                aria-labelledby="f-appointment-ufilter-label" tabindex="0">
                         <span class="mdc-floating-label" id="f-appointment-ufilter-label">Buscar usuaria</span>
                         <i class="material-icons mdc-text-field__icon">search</i>
                         <span class="mdc-line-ripple"></span>
                     </label>
+                    <div id="searchUsersMenu" class="mdc-menu mdc-menu-surface container-appointmentadm-searchmenu" tabindex="-1">
+                        <ul class="mdc-list mdc-list--two-line mdc-menu__items" role="menu" aria-hidden="true">
+                        </ul>
+                    </div>
+                </div>
+                <div class="container-appointmentadm-user--record-info container--hidden">
+                    <span class="mdc-typography--caption">-</span>
+                    <span class="mdc-typography--subtitle2">-</span>
                 </div>
                 <div>
-                    <label class="mdc-text-field mdc-text-field--filled">
+                    <label class="mdc-text-field mdc-text-field--filled" id="u.names" data-assigned-var>
                         <span class="mdc-text-field__ripple"></span>
-                        <input id="f-appointment-names-input" class="mdc-text-field__input" type="text" 
-                                aria-labelledby="f-appointment-names-label" tabindex="-1">
+                        <input id="f-appointment-names-input" class="mdc-text-field__input" type="text" tabindex="0" maxlength="300"
+                                aria-labelledby="f-appointment-names-label">
                         <span class="mdc-floating-label" id="f-appointment-names-label">Nombres</span>
                         <span class="mdc-line-ripple"></span>
                     </label>
                 </div>
                 <div>
-                    <label class="mdc-text-field mdc-text-field--filled">
+                    <label class="mdc-text-field mdc-text-field--filled" id="u.last_names" data-assigned-var>
                         <span class="mdc-text-field__ripple"></span>
-                        <input id="f-appointment-lastnames-input" class="mdc-text-field__input" type="text" 
-                                aria-labelledby="f-appointment-lastnames-label" tabindex="-1">
+                        <input id="f-appointment-lastnames-input" class="mdc-text-field__input" type="text"
+                                aria-labelledby="f-appointment-lastnames-label" tabindex="0" maxlength="300">
                         <span class="mdc-floating-label" id="f-appointment-lastnames-label">Apellidos</span>
                         <span class="mdc-line-ripple"></span>
                     </label>
                 </div>
                 <div>
-                    <label class="mdc-text-field mdc-text-field--filled">
+                    <label class="mdc-text-field mdc-text-field--filled" id="u.birthdate" data-assigned-var>
                         <span class="mdc-text-field__ripple"></span>
-                        <input id="f-appointment-birthdate-input" class="mdc-text-field__input" type="date" 
-                                aria-labelledby="f-appointment-birthdate-label" tabindex="-1">
+                        <input id="f-appointment-birthdate-input" class="mdc-text-field__input" type="date"
+                                aria-labelledby="f-appointment-birthdate-label" tabindex="0" min="1900-01-01">
                         <span class="mdc-floating-label" id="f-appointment-birthdate-label">Fecha de Nacimiento</span>
                         <span class="mdc-line-ripple"></span>
                     </label>
                 </div>
-                <div class="mdc-select" role="button">
+                <div class="mdc-select container-appointment-id-types" role="button" id="u.national_id_type" data-assigned-var>
+                    <div class="mdc-select__anchor">
+                        <span class="mdc-select__ripple"></span>
+                        <input type="text" disabled readonly class="mdc-select__selected-text">
+                        <i class="mdc-select__dropdown-icon"></i>
+                        <span class="mdc-floating-label">Tipo de identificación</span>
+                        <span class="mdc-line-ripple"></span>
+                    </div>
+                    <div class="mdc-select__menu mdc-menu mdc-menu-surface" role="listbox" tabindex="0">
+                        <ul id="f-appointment-nat-id-type-select" class="mdc-list mdc-select__list">
+                            {% for id_doc in ids_docs_types %}
+                            <li class="mdc-list-item" data-value="{{ id_doc.name_short }}">
+                                <span class="mdc-list-item__text">
+                                    {{ id_doc.name }}
+                                </span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <label class="mdc-text-field mdc-text-field--filled" id="u.national_id" data-assigned-var>
+                        <span class="mdc-text-field__ripple"></span>
+                        <input id="f-appointment-nationalid-input" class="mdc-text-field__input" type="text"
+                                aria-labelledby="f-appointment-nationalid-label" tabindex="0" maxlength="30">
+                        <span class="mdc-floating-label" id="f-appointment-nationalid-label">Número de identificación</span>
+                        <span class="mdc-line-ripple"></span>
+                    </label>
+                </div>
+                <div>
+                    <label class="mdc-text-field mdc-text-field--filled" id="u.phonenumber" data-assigned-var>
+                        <span class="mdc-text-field__ripple"></span>
+                        <input id="f-appointment-phonenumber-input" class="mdc-text-field__input" type="tel"
+                                aria-labelledby="f-appointment-phonenumber-label" tabindex="0" maxlength="20">
+                        <span class="mdc-floating-label" id="f-appointment-phonenumber-label">Número Telefónico</span>
+                        <span class="mdc-line-ripple"></span>
+                    </label>
+                </div>
+                <div class="mdc-select container-appointment-csc--state" role="button" id="u.state" data-action-fn="getCities" data-assigned-var>
                     <div class="mdc-select__anchor">
                         <span class="mdc-select__ripple"></span>
                         <input type="text" disabled readonly class="mdc-select__selected-text">
@@ -69,12 +115,12 @@
                         <span class="mdc-floating-label">Departamento</span>
                         <span class="mdc-line-ripple"></span>
                     </div>
-                    <div class="mdc-select__menu mdc-menu mdc-menu-surface" role="listbox">
+                    <div class="mdc-select__menu mdc-menu mdc-menu-surface" role="listbox" tabindex="0">
                         <ul id="f-appointment-department-select" class="mdc-list mdc-select__list">
                         </ul>
                     </div>
                 </div>
-                <div class="mdc-select" role="button">
+                <div class="mdc-select container-appointment-csc--city" role="button" id="u.city" data-assigned-var>
                     <div class="mdc-select__anchor">
                         <span class="mdc-select__ripple"></span>
                         <input type="text" disabled readonly class="mdc-select__selected-text">
@@ -82,15 +128,15 @@
                         <span class="mdc-floating-label">Municipio</span>
                         <span class="mdc-line-ripple"></span>
                     </div>
-                    <div class="mdc-select__menu mdc-menu mdc-menu-surface" role="listbox">
+                    <div class="mdc-select__menu mdc-menu mdc-menu-surface" role="listbox" tabindex="0">
                         <ul id="f-appointment-city-select" class="mdc-list mdc-select__list">
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top
-                        container-justify-center container-appointmentadm-service">
-                <h5 class="mdc-typography--headline5 s-font-color-primary">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-7-desktop mdc-layout-grid__cell--span-4-tablet
+                        mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-top container-justify-center container-appointmentadm-service">
+                <h5 class="mdc-typography--headline5 s-font-color-primary" id="step-two">
                     Paso 2: Selecciona el servicio
                 </h5>
                 <div class="mdc-select container-appointment-service--services" role="button" data-action-fn="selectAppointmentService">
@@ -101,39 +147,26 @@
                         <span class="mdc-floating-label">Tipos de servicios</span>
                         <span class="mdc-line-ripple"></span>
                     </div>
-                    <div class="mdc-select__menu mdc-menu mdc-menu-surface" role="listbox">
+                    <div class="mdc-select__menu mdc-menu mdc-menu-surface" role="listbox" tabindex="0">
                         <ul id="f-appointment-service-select" class="mdc-list mdc-select__list">
-                            <li class="mdc-list-item" data-value="psi">
+                            {% for service in services %}
+                            <li class="mdc-list-item" data-value="{{ service.name_short }}">
                                 <span class="mdc-list-item__text">
-                                    Apoyo psicológico
+                                    {{ service.name }}
                                 </span>
                             </li>
-                            <li class="mdc-list-item" data-value="soc">
-                                <span class="mdc-list-item__text">
-                                    Apoyo social
-                                </span>
-                            </li>
-                            <li class="mdc-list-item" data-value="abo">
-                                <span class="mdc-list-item__text">
-                                    Asistencia legal
-                                </span>
-                            </li>
-                            <li class="mdc-list-item" data-value="gaa">
-                                <span class="mdc-list-item__text">
-                                    Grupos de autoayuda
-                                </span>
-                            </li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--align-top
-                        container-justify-center container-appointmentadm-emp">
-                <h5 class="mdc-typography--headline5 s-font-color-primary">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-7-desktop mdc-layout-grid__cell--span-4-tablet
+                        mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-top container-justify-center container-appointmentadm-emp">
+                <h5 class="mdc-typography--headline5 s-font-color-primary" id="step-three">
                     Paso 3: Selecciona la funcionaria
                 </h5>
-                <div class="container-appointment-service--user">
-                    <label class="mdc-text-field mdc-text-field--filled">
+                <div class="mdc-menu-surface--anchor">
+                    <label class="mdc-text-field mdc-text-field--filled" id="e.name" data-assigned-var>
                         <span class="mdc-text-field__ripple"></span>
                         <input id="f-appointment-efilter-input" class="mdc-text-field__input" type="text" 
                                 aria-labelledby="f-appointment-efilter-label" tabindex="-1">
@@ -141,67 +174,63 @@
                         <i class="material-icons mdc-text-field__icon">search</i>
                         <span class="mdc-line-ripple"></span>
                     </label>
+                    <div id="searchEmployeesMenu" class="mdc-menu mdc-menu-surface container-appointmentadm-searchmenu" tabindex="-1">
+                        <ul class="mdc-list mdc-list--two-line mdc-menu__items" role="menu" aria-hidden="true">
+                        </ul>
+                    </div>
                 </div>
+                <div class="container-appointmentadm-emp--record-info container--hidden">
+                    <span class="mdc-typography--caption">-</span>
+                    <span class="mdc-typography--subtitle2">-</span>
+                </div>
+                <div class="container-placeholder"></div>
             </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-4-tablet 
-                        mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-top s-font-align-center
-                        container-appointmentadm-date">
-                <h5 class="mdc-typography--headline5 s-font-color-primary">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5-desktop mdc-layout-grid__cell--span-4-tablet
+                        mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-top s-font-align-center container-appointmentadm-date">
+                <h5 class="mdc-typography--headline5 s-font-color-primary" id="step-four">
                     Paso 4: Selecciona la fecha
                 </h5>
                 <div id="appointment-cal" class="auto-jsCalendar primary" data-language="es" data-month-format="month YYYY"
                      data-day-format="DDD" data-first-day-of-the-week="2">
                 </div>
+                <div class="jsCalendar-caption">
+                    <ul class="mdc-list mdc-list--non-interactive">
+                        <li class="mdc-list-item">
+                            <i class="mdc-list-item__graphic material-icons s-font-color-primary">trip_origin</i>
+                            <span class="mdc-list-item__text mdc-typography--subtitle2">Fecha seleccionada</span>
+                        </li>
+                        <li class="mdc-list-item">
+                            <i class="mdc-list-item__graphic material-icons jsCalendar-caption-available">trip_origin</i>
+                            <span class="mdc-list-item__text mdc-typography--subtitle2">Disponible</span>
+                        </li>
+                        <li class="mdc-list-item">
+                            <i class="mdc-list-item__graphic material-icons jsCalendar-caption-booked">trip_origin</i>
+                            <span class="mdc-list-item__text mdc-typography--subtitle2">Varias reservaciones</span>
+                        </li>
+                        <li class="mdc-list-item">
+                            <i class="mdc-list-item__graphic material-icons jsCalendar-caption-booked-full">trip_origin</i>
+                            <span class="mdc-list-item__text mdc-typography--subtitle2">Agotado</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-4-tablet 
-                        mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-top s-font-align-center
-                        container-appointmentadm-time">
-                <h5 class="mdc-typography--headline5 s-font-color-primary">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-7-desktop mdc-layout-grid__cell--span-4-tablet
+                        mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-top container-appointmentadm-time">
+                <h5 class="mdc-typography--headline5 s-font-color-primary s-font-align-center" id="step-five">
                     Paso 5: Selecciona el horario
                 </h5>
-                <div id="appointment-hours" class="container-appointment-hours">
-                    <div class="mdc-card" onclick="selectAppointmentTime('8:00 a.m. - 8:45 a.m.');">
-                        <div class="mdc-card__primary-action" tabindex="0">
-                            <div class="mdc-typography--headline6 s-font-color-secondary">8:00 a.m. - 8:45 a.m.</div>
-                            <div class="mdc-typography--subtitle2">Matutino</div>
-                        </div>
-                    </div>
-                    <div class="mdc-card" onclick="selectAppointmentTime('9:00 a.m. - 9:45 a.m.');">
-                        <div class="mdc-card__primary-action" tabindex="0">
-                            <div class="mdc-typography--headline6 s-font-color-secondary">9:00 a.m. - 9:45 a.m.</div>
-                            <div class="mdc-typography--subtitle2">Matutino</div>
-                        </div>
-                    </div>
-                    <div class="mdc-card" onclick="selectAppointmentTime('10:00 a.m. - 10:45 a.m.');">
-                        <div class="mdc-card__primary-action" tabindex="0">
-                            <div class="mdc-typography--headline6 s-font-color-secondary">10:00 a.m. - 10:45 a.m.</div>
-                            <div class="mdc-typography--subtitle2">Matutino</div>
-                        </div>
-                    </div>
-                    <div class="mdc-card" onclick="selectAppointmentTime('11:00 a.m. - 11:45 a.m.');">
-                        <div class="mdc-card__primary-action" tabindex="0">
-                            <div class="mdc-typography--headline6 s-font-color-secondary">11:00 a.m. - 11:45 a.m.</div>
-                            <div class="mdc-typography--subtitle2">Matutino</div>
-                        </div>
-                    </div>
-                    <div class="mdc-card" onclick="selectAppointmentTime('1:00 p.m. - 1:45 p.m.');">
-                        <div class="mdc-card__primary-action" tabindex="0">
-                            <div class="mdc-typography--headline6 s-font-color-secondary">1:00 p.m. - 1:45 p.m.</div>
-                            <div class="mdc-typography--subtitle2">Vespertino</div>
-                        </div>
-                    </div>
-                    <div class="mdc-card" onclick="selectAppointmentTime('2:00 p.m. - 2:45 p.m.');">
-                        <div class="mdc-card__primary-action" tabindex="0">
-                            <div class="mdc-typography--headline6 s-font-color-secondary">2:00 p.m. - 2:45 p.m.</div>
-                            <div class="mdc-typography--subtitle2">Vespertino</div>
-                        </div>
-                    </div>
-                    <div class="mdc-card" onclick="selectAppointmentTime('3:00 p.m. - 3:45 p.m.');">
-                        <div class="mdc-card__primary-action" tabindex="0">
-                            <div class="mdc-typography--headline6 s-font-color-secondary">3:00 p.m. - 3:45 p.m.</div>
-                            <div class="mdc-typography--subtitle2">Vespertino</div>
-                        </div>
-                    </div>
+                <div class="container-appointment-empty s-font-align-center">
+                    <p>
+                        <i class="material-icons s-font-size-xl s-font-color-secondary">event_busy</i>
+                    </p>
+                    <p class="mdc-typography--body1">
+                        No hay horarios disponibles.
+                    </p>
+                    <p class="mdc-typography--caption s-font-color-secondary">
+                        Selecciona una fecha con disponibilidad y recuerda completar los pasos anteriores.
+                    </p>
+                </div>
+                <div class="container-appointment-sessions container--hidden">
                 </div>
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet
@@ -210,17 +239,39 @@
                 <h5 class="mdc-typography--headline5 s-font-color-primary">
                     Paso 6: Confirma tu cita
                 </h5>
-                <div class="mdc-typography--headline6 s-font-color-secondary container-appointment-confirm--service">
-                </div>
-                <div class="mdc-typography--headline6 s-font-color-secondary container-appointment-confirm--date">
-                </div>
-                <div class="mdc-typography--headline6 s-font-color-secondary container-appointment-confirm--time">
+                <div class="container-appointment-confirm--review">
+                    <ul class="mdc-list mdc-list--non-interactive">
+                        <li class="mdc-list-item">
+                            <i class="mdc-list-item__graphic material-icons s-font-color-secondary">how_to_reg</i>
+                            <span class="mdc-list-item__text mdc-typography--body1 container-appointment-confirm--user">-</span>
+                            <input type="hidden" id="app_usr_id" value="">
+                        </li>
+                        <li class="mdc-list-item">
+                            <i class="mdc-list-item__graphic material-icons s-font-color-secondary">handyman</i>
+                            <span class="mdc-list-item__text mdc-typography--body1 container-appointment-confirm--service">-</span>
+                            <input type="hidden" id="app_svc_id" value="">
+                        </li>
+                        <li class="mdc-list-item">
+                            <i class="mdc-list-item__graphic material-icons s-font-color-secondary">support_agent</i>
+                            <span class="mdc-list-item__text mdc-typography--body1 container-appointment-confirm--emp">-</span>
+                            <input type="hidden" id="app_emp_id" value="">
+                        </li>
+                        <li class="mdc-list-item">
+                            <i class="mdc-list-item__graphic material-icons s-font-color-secondary">today</i>
+                            <span class="mdc-list-item__text mdc-typography--body1 container-appointment-confirm--date">-</span>
+                        </li>
+                        <li class="mdc-list-item">
+                            <i class="mdc-list-item__graphic material-icons s-font-color-secondary">schedule</i>
+                            <span class="mdc-list-item__text mdc-typography--body1 container-appointment-confirm--time">-</span>
+                            <input type="hidden" id="app_sch_dt" value="">
+                        </li>
+                    </ul>
                 </div>
                 <div class="container-appointment-confirm--submit">
-                    <button class="mdc-button mdc-button--raised" aria-label="Submit Date" alt="Submit Date"
-                        data-action-type="redirect" data-action-val="/">
+                    <button id="submitSaveButton" class="mdc-button mdc-button--raised" aria-label="Submit Appointment" alt="Submit Appointment"
+                        data-action-type="submit" data-action-fn="saveAppointment">
                         <div class="mdc-button__ripple"></div>
-                        <span class="mdc-button__label">Enviar Solicitud</span>
+                        <span class="mdc-button__label">Reservar cita</span>
                     </button>
                 </div>
             </div>
@@ -231,5 +282,5 @@
 {% block body_script_section %}
 <script src="{{ url_for('static', filename='js/jsCalendar.lang.es.js') }}"></script>
 <script src="{{ url_for('static', filename='js/jsCalendar.js') }}"></script>
-<script src="{{ url_for('static', filename='js/appointment-emp.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bundle/appointments-e.min.js') }}"></script>
 {% endblock %}

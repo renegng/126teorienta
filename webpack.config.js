@@ -1,5 +1,7 @@
 const autoprefixer = require('autoprefixer');
 
+/*** Main General Bundle ***/
+
 // Creates the general bundle
 var wpBundle = new Object({
     entry: [
@@ -61,6 +63,118 @@ var wpBundle = new Object({
     }
 });
 
+/*** Specific Bundles ***/
+
+// Creates the employees appointments bundle
+var wpAppointmentsEmp = new Object({
+    entry: [
+        './instance/js/swing_countrycitystate-api-key.json',
+        './static/js/appointment-emp.js'
+    ],
+    output: {
+        filename: 'static/js/bundle/appointments-e.min.js',
+        library: 'swapn',
+        libraryTarget: 'var',
+        path: __dirname
+    },
+    externals: {
+        jsCalendar: 'jsCalendar'
+    },
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                loader: 'babel-loader',
+                query: {
+                    plugins: [
+                        '@babel/plugin-proposal-class-properties'
+                    ],
+                    presets: [
+                        [
+                            '@babel/preset-env', {
+                                'useBuiltIns': 'entry',
+                                'corejs': {'version': '3', 'proposals': true},
+                            }
+                        ]
+                    ]
+                }
+            }
+        ]
+    }
+});
+
+// Creates the users appointments bundle
+var wpAppointmentsUsr = new Object({
+    entry: [
+        './instance/js/swing_countrycitystate-api-key.json',
+        './static/js/appointment-usr.js'
+    ],
+    output: {
+        filename: 'static/js/bundle/appointments-u.min.js',
+        library: 'swapn',
+        libraryTarget: 'var',
+        path: __dirname
+    },
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                loader: 'babel-loader',
+                query: {
+                    plugins: [
+                        '@babel/plugin-proposal-class-properties'
+                    ],
+                    presets: [
+                        [
+                            '@babel/preset-env', {
+                                'useBuiltIns': 'entry',
+                                'corejs': {'version': '3', 'proposals': true},
+                            }
+                        ]
+                    ]
+                }
+            }
+        ]
+    }
+});
+
+// Creates the view appointments bundle
+var wpAppointmentsView = new Object({
+    entry: [
+        './static/js/appointments-view.js'
+    ],
+    output: {
+        filename: 'static/js/bundle/appointments-v.min.js',
+        library: 'swapn',
+        libraryTarget: 'var',
+        path: __dirname
+    },
+    externals: {
+        jsCalendar: 'jsCalendar'
+    },
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                loader: 'babel-loader',
+                query: {
+                    plugins: [
+                        '@babel/plugin-proposal-class-properties'
+                    ],
+                    presets: [
+                        [
+                            '@babel/preset-env', {
+                                'useBuiltIns': 'entry',
+                                'corejs': {'version': '3', 'proposals': true},
+                            }
+                        ]
+                    ]
+                }
+            }
+        ]
+    }
+});
+
 // Creates the initiator bundle - NOT IN USE
 var wpRTCInitiator = new Object({
     entry: [
@@ -68,7 +182,7 @@ var wpRTCInitiator = new Object({
     ],
     output: {
         filename: 'static/js/bundle/rtc-initiator.min.js',
-        library: 'swcms',
+        library: 'swrtc',
         libraryTarget: 'var',
         path: __dirname
     },
@@ -102,7 +216,7 @@ var wpRTCReceiver = new Object({
     ],
     output: {
         filename: 'static/js/bundle/rtc-receiver.min.js',
-        library: 'swcms',
+        library: 'swrtc',
         libraryTarget: 'var',
         path: __dirname
     },
@@ -129,9 +243,14 @@ var wpRTCReceiver = new Object({
     }
 });
 
+/*** Compilation of Bundles ***/
+
 // Compile all modules
 module.exports = [
     // wpRTCInitiator,
     // wpRTCReceiver,
+    wpAppointmentsEmp,
+    wpAppointmentsUsr,
+    wpAppointmentsView,
     wpBundle
 ];

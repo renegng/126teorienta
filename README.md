@@ -72,6 +72,7 @@ To install Swing CMS, follow the next steps (under Ubuntu 16.04):
     ~: pip install flask-migrate
     ~: pip install flask-wtf
     ~: pip install flask-socketio
+    ~: pip install flask-babel
     ~: pip install gunicorn[eventlet]
     ~: pip install psycopg2-binary
     ~: pip install firebase-admin

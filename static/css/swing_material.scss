@@ -57,6 +57,8 @@
 @use "@material/layout-grid";
 @use "@material/layout-grid/mdc-layout-grid";
 @use "@material/line-ripple";
+@use "@material/linear-progress";
+@use "@material/linear-progress/mdc-linear-progress";
 @use "@material/list";
 @use "@material/list/mdc-list";
 @use "@material/menu";
@@ -97,10 +99,12 @@
 @include dialog.core-styles;
 @include fab.core-styles;
 @include floating-label.core-styles;
+@include helper-text.helper-text-core-styles;
 @include icon.icon-core-styles;
 @include icon-button.core-styles;
 @include image-list.core-styles;
 @include line-ripple.core-styles;
+@include linear-progress.core-styles;
 @include list.core-styles;
 @include menu.core-styles;
 @include menu-surface.core-styles;
@@ -120,6 +124,10 @@
 /* Button */
 .mdc-button {
     height: 2.25rem;
+}
+
+.mdc-button--color-cancel {
+    @include button.ink-color(stv.$swing-theme-error);
 }
 
 .mdc-button--color-inverted {
@@ -161,6 +169,11 @@
         width:100%;
         height:100%;
     }
+}
+
+.mdc-card--selected {
+    @include elevation.elevation(5);
+    transition: box-shadow ease-in 0.25s;
 }
 
 /* Checkbox and radio */
@@ -213,6 +226,7 @@
     bottom: 1.5rem;
     position: fixed;
     right: 1.5rem;
+    z-index: 2;
 }
 
 .mdc-fab--hangup {
@@ -295,7 +309,7 @@
 /* Menu */
 .mdc-menu-surface--anchor > .mdc-menu {
     // position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 /* Select */
@@ -311,7 +325,33 @@
 /* Snackbar */
 .mdc-snackbar {
     margin: 0;
-    z-index: 1;
+    z-index: 2;
+
+    .mdc-snackbar__label-error {
+        color: #dc143c;
+        display: none;
+        font-weight: bold;
+        padding-left: 1rem;
+    }
+
+    .mdc-snackbar__label-success {
+        color: #35ac19;
+        display: none;
+        font-weight: bold;
+        padding-left: 1rem;
+    }
+
+    &.mdc-snackbar__label-error-show {
+        .mdc-snackbar__label-error {
+            display: block;
+        }
+    }
+
+    &.mdc-snackbar__label-success-show {
+        .mdc-snackbar__label-success {
+            display: block;
+        }
+    }
 }
 
 /* Switch */

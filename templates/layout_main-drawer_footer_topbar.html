@@ -149,17 +149,28 @@
                     </ul>
                 </div>
             </div>
-            <!-- <button id="loginButton" class="mdc-button mdc-button--outlined mdc-button--color-inverted" aria-label="Login" alt="Login">
-                <div class="mdc-button__ripple"></div>
-                <span class="mdc-button__label">Iniciar Sesión</span>
-            </button> -->
         </section>
     </div>
 </header>
+<div class="s-topbar-loading mdc-linear-progress mdc-linear-progress--indeterminate mdc-linear-progress--closed"
+     role="progressbar" aria-label="Progress Bar" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0">
+    <div class="mdc-linear-progress__buffer">
+        <div class="mdc-linear-progress__buffer-bar"></div>
+        <div class="mdc-linear-progress__buffer-dots"></div>
+    </div>
+    <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+        <span class="mdc-linear-progress__bar-inner"></span>
+    </div>
+    <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+        <span class="mdc-linear-progress__bar-inner"></span>
+    </div>
+</div>
 {% endblock %}
 {% block footer %}
 <div class="mdc-snackbar" aria-live="assertive" aria-atomic="true" aria-hidden="true">
     <div class="mdc-snackbar__surface">
+        <div class="mdc-snackbar__label-error">ERROR:</div>
+        <div class="mdc-snackbar__label-success">ÉXITO:</div>
         <div class="mdc-snackbar__label" role="status" aria-live="polite"></div>
         <div class="mdc-snackbar__actions">
             <button type="button" class="mdc-button mdc-snackbar__action"></button>

@@ -9,6 +9,7 @@ import { MDCDialog } from '@material/dialog';
 import { MDCDrawer } from "@material/drawer";
 import { MDCFloatingLabel } from '@material/floating-label';
 import { MDCIconButtonToggle } from '@material/icon-button';
+import { MDCLinearProgress } from '@material/linear-progress';
 import { MDCLineRipple } from '@material/line-ripple';
 import { MDCList } from "@material/list";
 import { MDCMenu, Corner } from '@material/menu';
@@ -26,6 +27,35 @@ import { Workbox } from 'workbox-window/Workbox.mjs';
 
 
 /************************** FUNCTIONS **************************/
+
+// Date getWeekOfMonth and getWeekOfYear implementation
+Date.prototype.getDayString = function() {
+    var weekdays = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+    return weekdays[this.getDay()];
+};
+
+Date.prototype.getWeekOfMonth = function(isMondayFirstDayOfWeek = true) {
+    var d = new Date(this.getFullYear(), this.getMonth(), 1);
+    var firstWeekday = d.getDay() - isMondayFirstDayOfWeek;
+    if (firstWeekday < 0) firstWeekday = 6;
+    var offsetDate = this.getDate() + firstWeekday - 1;
+    return Math.floor(offsetDate / 7) + 1;
+};
+
+Date.prototype.getWeekOfYear = function() {
+    var d = new Date(this.getFullYear(), this.getMonth(), this.getDate());
+    var dayNum = d.getDay() || 7;
+    d.setDate(d.getDate() + 4 - dayNum);
+    var yearStart = new Date(d.getFullYear(),0,1);
+    return Math.ceil((((d - yearStart) / 86400000) + 1)/7)
+};
+
+export function newDate(dt = new Date()) {
+    return new Date(dt);
+}
+/* Allow 'window' context to reference the function */
+window.newDate = newDate;
+
 
 // Date Format
 export function returnFormatDate(dateTime, type = '') {
@@ -46,8 +76,8 @@ export function returnFormatDate(dateTime, type = '') {
     if (day.toString().length == 1) {
         day = '0' + day;
     }
-    if (hours.toString().length == 1) {
-        hours = '0' + hours;
+    if (hoursampm.toString().length == 1) {
+        hoursampm = '0' + hoursampm;
     }
     if (min.toString().length == 1) {
         min = '0' + min;
@@ -75,8 +105,9 @@ window.returnFormatDate = returnFormatDate;
 
 
 // Fetch API
-export function getFetch(url) {
-    fetch(url)
+export function getFetch(url, actionFn = null, options = {}) {
+    mdcTopBarLoading.open();
+    return fetch(url, options)
         .then((response) => {
             if (response.status >= 200 && response.status < 300) {
                 return Promise.resolve(response)
@@ -89,14 +120,23 @@ export function getFetch(url) {
         })
         .then((data) => {
             console.log('Request succeeded with JSON response: ', data);
+            mdcTopBarLoading.close();
+            if (actionFn) {
+                let fn = (typeof actionFn == "string") ? window[actionFn] : actionFn;
+                fn(data);
+            }
+            return Promise.resolve(data);
         })
         .catch(function (error) {
             console.log('Request failed: ', error);
+            mdcTopBarLoading.close();
+            return Promise.reject(error);
         });
 }
 
 export function postFetch(url, postData) {
-    fetch(url, {
+    mdcTopBarLoading.open();
+    return fetch(url, {
         method: 'POST',
         headers: {
             "Accept": "application/json",
@@ -105,18 +145,22 @@ export function postFetch(url, postData) {
         credentials: 'include',
         body: JSON.stringify(postData)
     })
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {
-            console.log('Request succeeded with JSON response: ', data);
-            if (data.cmd == 'redirectURL') {
-                window.location.assign(data.action);
-            }
-        })
-        .catch(function (error) {
-            console.log('Request failed: ', error);
-        });
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        console.log('Request succeeded with JSON response: ', data);
+        mdcTopBarLoading.close();
+        if ('cmd' in data && data.cmd == 'redirectURL') {
+            window.location.assign(data.action);
+        }
+        return Promise.resolve(data);
+    })
+    .catch(function (error) {
+        console.log('Request failed: ', error);
+        mdcTopBarLoading.close();
+        return Promise.reject(error);
+    });
 }
 
 
@@ -715,15 +759,27 @@ export function showTabContent(e) {
 // Snackbar init function
 let sbCurrEvent = null;
 export function initSnackbar(sb, initObject) {
-    sb.labelText = initObject.message;
-    sb.actionButtonText = initObject.actionText;
-    sb.timeoutMs = initObject.timeout;
+    if (!sb) sb = snackbar;
     if (sb.isOpen) {
         sb.close('New snackbar initialization...');
     }
     if (sbCurrEvent) {
         sb.unlisten('MDCSnackbar:closed', sbCurrEvent);
     }
+    if ('showError' in initObject && initObject.showError) {
+        sb.foundation_.adapter_.addClass('mdc-snackbar__label-error-show');
+    } else {
+        sb.foundation_.adapter_.removeClass('mdc-snackbar__label-error-show');
+    }
+    if ('showSuccess' in initObject && initObject.showSuccess) {
+        sb.foundation_.adapter_.addClass('mdc-snackbar__label-success-show');
+    } else {
+        sb.foundation_.adapter_.removeClass('mdc-snackbar__label-success-show');
+    }
+
+    sb.labelText = initObject.message;
+    sb.actionButtonText = initObject.actionText;
+    sb.timeoutMs = initObject.timeout;
     sbCurrEvent = ((evt) => {
         if (evt.detail.reason == 'action') {
             initObject.actionHandler();
@@ -965,6 +1021,14 @@ var mdcLineRipples = [].map.call(document.querySelectorAll('.mdc-line-ripple'), 
 });
 
 
+// Material Linear Progress
+export const mdcTopBarLoading = new MDCLinearProgress(document.querySelector('.s-topbar-loading'));
+
+var mdcLinearProgress = [].map.call(document.querySelectorAll('.mdc-linear-progress:not(.s-topbar-loading)'), function (el) {
+    return new MDCLinearProgress(el);
+});
+
+
 // Material Lists
 var mdcLists = [].map.call(document.querySelectorAll('.mdc-list:not(.mdc-menu__items):not(.mdc-select__list)'), function (el) {
     let elList = new MDCList(el);
@@ -1058,12 +1122,16 @@ const snackbar = new MDCSnackbar(document.querySelector('.mdc-snackbar'));
 
 
 // Material Selects
-var mdcSelects = [].map.call(document.querySelectorAll('.mdc-select'), function (el) {
+export var mdcSelects = [].map.call(document.querySelectorAll('.mdc-select'), function (el) {
     let mdcSel = new MDCSelect(el);
     let actionFn = el.getAttribute('data-action-fn');
     if (actionFn) {
         let fn = (typeof actionFn == "string") ? window[actionFn] : actionFn;
         mdcSel.listen('MDCSelect:change', () => fn(mdcSel.value));
+    }
+    if (el.hasAttribute('data-assigned-var')) {
+        MDCSelect.prototype.assignedVar = null;
+        mdcSel.assignedVar = el.getAttribute('id');
     }
     return mdcSel;
 });
@@ -1071,14 +1139,29 @@ var mdcSelects = [].map.call(document.querySelectorAll('.mdc-select'), function 
 
 // Material Tab
 var mdcTabBars = [].map.call(document.querySelectorAll('.mdc-tab-bar'), function (el) {
-    return new MDCTabBar(el);
+    let mdcTab = new MDCTabBar(el);
+    let actionFn = el.getAttribute('data-action-fn');
+    if (actionFn) {
+        let fn = (typeof actionFn == "string") ? window[actionFn] : actionFn;
+        mdcTab.listen('MDCTabBar:activated', (evt) => fn(evt.detail.index));
+    }
+    if (el.hasAttribute('data-assigned-var')) {
+        MDCTabBar.prototype.assignedVar = null;
+        mdcTab.assignedVar = el.getAttribute('id');
+    }
+    return mdcTab;
 });
 // document.querySelector('#mdc-tab-bar__id-noticias').addEventListener('MDCTabBar:activated', evt => showTabContent(evt));
 
 
 // Material Textfields
-var mdcTextInputs = [].map.call(document.querySelectorAll('.mdc-text-field'), function (el) {
-    return new MDCTextField(el);
+export var mdcTextInputs = [].map.call(document.querySelectorAll('.mdc-text-field'), function (el) {
+    let mdcTxt = new MDCTextField(el);
+    if (el.hasAttribute('data-assigned-var')) {
+        MDCTextField.prototype.assignedVar = null;
+        mdcTxt.assignedVar = el.getAttribute('id');
+    }
+    return mdcTxt;
 });
 
 
@@ -1088,7 +1171,7 @@ var mdcTFHelperTexts = [].map.call(document.querySelectorAll('.mdc-text-field-he
 });
 
 
-// Material Textfields
+// Material Textfields Icons
 var mdcTextInputsIcons = [].map.call(document.querySelectorAll('.mdc-text-field-icon'), function (el) {
     return new MDCTextFieldIcon(el);
 });

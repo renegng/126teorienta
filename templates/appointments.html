@@ -2,17 +2,18 @@
 {% block page_description %}126 Te Orienta Citas, Citas, Ver Citas, Mis Citas{% endblock %}
 {% block page_title %}126 Te Orienta Citas{% endblock %}
 {% block head_section %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jsCalendar.css') }}">
 {% endblock %}
 {% block body %}
 <main class="s-main-content">
     <div class="container-color-background">
         <div class="mdc-layout-grid container-size-xs">
             <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5-desktop mdc-layout-grid__cell--span-8-tablet 
                             mdc-layout-grid__cell--align-middle container-justify-center s-font-align-center">
                     <img class="resize-image-2fit-50" src="{{ url_for('static', filename='images/manifest/appointment.svg') }}" alt="Logo Funciones" />
                 </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet 
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-7-desktop mdc-layout-grid__cell--span-8-tablet 
                             mdc-layout-grid__cell--align-middle container-justify-center">
                     <div class="mdc-typography--headline2 s-font-color-primary">
                         Citas
@@ -25,107 +26,256 @@
         </div>
     </div>
     <div class="container-color-background">
-        <div class="mdc-layout-grid container-size-m">
+        <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet
-                            mdc-layout-grid__cell--align-top s-font-align-center">
-                    <h4 class="mdc-typography--headline4 s-font-color-secondary">
-                        Mis citas próximas
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5-desktop mdc-layout-grid__cell--span-8-tablet
+                            mdc-layout-grid__cell--align-top container-justify-center s-font-align-center">
+                    <h4 class="mdc-typography--headline4 s-font-color-primary">
+                        Selecciona una fecha
                     </h4>
-                    <div class="container-appointments-list">
-                        <div class="mdc-card">
-                            <div class="mdc-card__primary-action" tabindex="0">
-                                <div class="mdc-typography--headline5 s-font-color-primary s-mdc-card__appointment-service">Apoyo psicológico</div>
-                                <div class="mdc-typography--body2 s-mdc-card__appointment-date">Jueves 19 de Noviembre, 2020</div>
-                                <div class="mdc-typography--body2 s-font-color-secondary s-mdc-card__appointment-time">11:00 a.m. - 11:45 a.m.</div>
-                            </div>
-                            <div class="mdc-card__actions">
-                                <button class="mdc-button mdc-card__action mdc-card__action--button">
-                                    <div class="mdc-button__ripple"></div>
-                                    <i class="material-icons mdc-button__icon" aria-hidden="true">clear</i>
-                                    <span class="mdc-button__label">Cancelar</span>
-                                </button>
-                                <button class="mdc-button mdc-button--unelevated mdc-card__action mdc-card__action--button">
-                                    <div class="mdc-button__ripple"></div>
-                                    <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
-                                    <span class="mdc-button__label">Acceder</span>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="mdc-card">
-                            <div class="mdc-card__primary-action" tabindex="0">
-                                <div class="mdc-typography--headline5 s-font-color-primary s-mdc-card__appointment-service">Grupos de autoayuda</div>
-                                <div class="mdc-typography--body2 s-mdc-card__appointment-date">Jueves 19 de Noviembre, 2020</div>
-                                <div class="mdc-typography--body2 s-font-color-secondary s-mdc-card__appointment-time">11:00 a.m. - 11:45 a.m.</div>
-                            </div>
-                            <div class="mdc-card__actions">
-                                <button class="mdc-button mdc-card__action mdc-card__action--button">
-                                    <div class="mdc-button__ripple"></div>
-                                    <i class="material-icons mdc-button__icon" aria-hidden="true">clear</i>
-                                    <span class="mdc-button__label">Cancelar</span>
-                                </button>
-                                <button class="mdc-button mdc-button--unelevated mdc-card__action mdc-card__action--button">
-                                    <div class="mdc-button__ripple"></div>
-                                    <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
-                                    <span class="mdc-button__label">Acceder</span>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="mdc-card">
-                            <div class="mdc-card__primary-action" tabindex="0">
-                                <div class="mdc-typography--headline5 s-font-color-primary s-mdc-card__appointment-service">Asistencia legal</div>
-                                <div class="mdc-typography--body2 s-mdc-card__appointment-date">Jueves 19 de Noviembre, 2020</div>
-                                <div class="mdc-typography--body2 s-font-color-secondary s-mdc-card__appointment-time">11:00 a.m. - 11:45 a.m.</div>
-                            </div>
-                            <div class="mdc-card__actions">
-                                <button class="mdc-button mdc-card__action mdc-card__action--button">
-                                    <div class="mdc-button__ripple"></div>
-                                    <i class="material-icons mdc-button__icon" aria-hidden="true">clear</i>
-                                    <span class="mdc-button__label">Cancelar</span>
-                                </button>
-                                <button class="mdc-button mdc-button--unelevated mdc-card__action mdc-card__action--button">
-                                    <div class="mdc-button__ripple"></div>
-                                    <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
-                                    <span class="mdc-button__label">Acceder</span>
-                                </button>
-                            </div>
-                        </div>
-                        
+                    <div id="appointment-cal" class="auto-jsCalendar primary" data-language="es" data-month-format="month YYYY"
+                        data-day-format="DDD" data-first-day-of-the-week="2">
+                    </div>
+                    <div class="jsCalendar-caption">
+                        <ul class="mdc-list mdc-list--non-interactive">
+                            <li class="mdc-list-item">
+                                <i class="mdc-list-item__graphic material-icons s-font-color-primary">trip_origin</i>
+                                <span class="mdc-list-item__text mdc-typography--subtitle2">Fecha seleccionada</span>
+                            </li>
+                            <li class="mdc-list-item">
+                                <i class="mdc-list-item__graphic material-icons jsCalendar-caption-available">trip_origin</i>
+                                <span class="mdc-list-item__text mdc-typography--subtitle2">Citas agendadas</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet
+                {% if current_user.is_user_role(['adm', 'ori', 'abo', 'psi', 'soc', 'coo']) %}
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-7-desktop mdc-layout-grid__cell--span-8-tablet
                             mdc-layout-grid__cell--align-top s-font-align-center">
-                    {% if current_user.is_user_role(['adm', 'ori', 'abo', 'psi', 'soc', 'coo']) %}
-                    <h4 class="mdc-typography--headline4 s-font-color-secondary">
-                        Citas por aprobar
-                    </h4>
-                    {% elif current_user.is_user_role(['usr']) %}
-                    <h4 class="mdc-typography--headline4 s-font-color-secondary">
-                        Citas solicitadas
-                    </h4>
-                    {% endif %}
-                    <div class="container-appointments-list">
-                        <div class="mdc-card">
-                            <div class="mdc-card__primary-action" tabindex="0">
-                                <div class="mdc-typography--headline5 s-font-color-primary s-mdc-card__appointment-service">Apoyo social</div>
-                                <div class="mdc-typography--body2 s-mdc-card__appointment-date">Jueves 19 de Noviembre, 2020</div>
-                                <div class="mdc-typography--body2 s-font-color-secondary s-mdc-card__appointment-time">11:00 a.m. - 11:45 a.m.</div>
-                            </div>
-                            <div class="mdc-card__actions">
-                                <button class="mdc-button mdc-card__action mdc-card__action--button">
-                                    <div class="mdc-button__ripple"></div>
-                                    <i class="material-icons mdc-button__icon" aria-hidden="true">clear</i>
-                                    <span class="mdc-button__label">Rechazar</span>
-                                </button>
-                                <button class="mdc-button mdc-button--unelevated mdc-card__action mdc-card__action--button">
-                                    <div class="mdc-button__ripple"></div>
-                                    <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
-                                    <span class="mdc-button__label">Aceptar</span>
-                                </button>
+                    <div class="mdc-tab-bar container-appointments-tabs" role="tablist" data-action-fn="showAppointmentsTab">
+                        <div class="mdc-tab-scroller">
+                            <div class="mdc-tab-scroller__scroll-area">
+                                <div class="mdc-tab-scroller__scroll-content">
+                                    <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                                        <span class="mdc-tab__content">
+                                            <span class="mdc-tab__text-label s-font-weight-bold">
+                                                Mis citas
+                                            </span>
+                                        </span>
+                                        <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                            <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                        </span>
+                                        <span class="mdc-tab__ripple"></span>
+                                    </button>
+                                    <button class="mdc-tab" role="tab" aria-selected="true" tabindex="1">
+                                        <span class="mdc-tab__content">
+                                            <span class="mdc-tab__text-label s-font-weight-bold">
+                                                Citas creadas por mi
+                                            </span>
+                                        </span>
+                                        <span class="mdc-tab-indicator">
+                                            <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                        </span>
+                                        <span class="mdc-tab__ripple"></span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="container-appointments-list--empty">
+                        <p>
+                            <i class="material-icons s-font-size-xl s-font-color-secondary">event_busy</i>
+                        </p>
+                        <p class="mdc-typography--body1">
+                            No posees citas agendadas.
+                        </p>
+                        <p class="mdc-typography--caption s-font-color-secondary">
+                            Selecciona una fecha diferente que posea citas agendadas.
+                        </p>
+                    </div>
+                    <div id="container-appointments-list--createdby" class="container-appointments-list container--hidden">
+                        {% for appointment in appointments['appointments_created_by'] %}
+                        <div class="mdc-card container--hidden" data-app-sess-s="{{ appointment.date_timestamp }}">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-typography--headline5 s-font-color-primary s-mdc-card__appointment-service">
+                                    {{ appointment.service.name }}
+                                </div>
+                                <div class="s-mdc-card__appointment-date">
+                                    {{ appointment.date_scheduled }}
+                                </div>
+                                <div class="s-mdc-card__appointment-daytime">
+                                    {% if appointment.service.time_of_day == 'dawn' %}
+                                    <i class="material-icons s-icon-color-twitter">dark_mode</i>
+                                    {% elif appointment.service.time_of_day == 'morning' %}
+                                    <i class="material-icons s-font-color-chat-away">wb_sunny</i>
+                                    {% elif appointment.service.time_of_day == 'evening' %}
+                                    <i class="material-icons s-font-color-chat-transferred">wb_twilight</i>
+                                    {% elif appointment.service.time_of_day == 'night' %}
+                                    <i class="material-icons s-icon-color-linkedin">nights_stay</i>
+                                    {% endif %}
+                                    <div class="mdc-typography--body2">
+                                        {{ appointment.time_scheduled_start }} - {{ appointment.time_scheduled_end }}
+                                    </div>
+                                </div>
+                                <div class="s-mdc-card__appointment-createdfor">
+                                    <i class="material-icons s-font-color-primary">how_to_reg</i>
+                                    <div class="mdc-typography--body2">
+                                        {{ appointment.created_for.name }}
+                                    </div>
+                                </div>
+                                <div class="s-mdc-card__appointment-empassigned">
+                                    <i class="material-icons s-font-color-secondary">support_agent</i>
+                                    <div class="mdc-typography--body2">
+                                        {{ appointment.emp_assigned.name }}
+                                    </div>
+                                </div>
+                                <div class="mdc-typography--caption s-font-color-secondary s-mdc-card__appointment-createdby">
+                                    <b>Creado por:</b> {{ appointment.created_by.name }}
+                                </div>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <button class="mdc-button mdc-button--outlined mdc-card__action mdc-card__action--button mdc-button--color-cancel">
+                                    <div class="mdc-button__ripple"></div>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true">clear</i>
+                                    <span class="mdc-button__label">Cancelar</span>
+                                </button>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div id="container-appointments-list--assigned" class="container-appointments-list container--hidden">
+                        {% for appointment in appointments['appointments_created_for_e'] %}
+                        <div class="mdc-card container--hidden" data-app-sess-s="{{ appointment.date_timestamp }}">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-typography--headline5 s-font-color-primary s-mdc-card__appointment-service">
+                                    {{ appointment.service.name }}
+                                </div>
+                                <div class="s-mdc-card__appointment-date">
+                                    {{ appointment.date_scheduled }}
+                                </div>
+                                <div class="s-mdc-card__appointment-daytime">
+                                    {% if appointment.service.time_of_day == 'dawn' %}
+                                    <i class="material-icons s-icon-color-twitter">dark_mode</i>
+                                    {% elif appointment.service.time_of_day == 'morning' %}
+                                    <i class="material-icons s-font-color-chat-away">wb_sunny</i>
+                                    {% elif appointment.service.time_of_day == 'evening' %}
+                                    <i class="material-icons s-font-color-chat-transferred">wb_twilight</i>
+                                    {% elif appointment.service.time_of_day == 'night' %}
+                                    <i class="material-icons s-icon-color-linkedin">nights_stay</i>
+                                    {% endif %}
+                                    <div class="mdc-typography--body2">
+                                        {{ appointment.time_scheduled_start }} - {{ appointment.time_scheduled_end }}
+                                    </div>
+                                </div>
+                                <div class="s-mdc-card__appointment-createdfor">
+                                    <i class="material-icons s-font-color-primary">how_to_reg</i>
+                                    <div class="mdc-typography--body2">
+                                        {{ appointment.created_for.name }}
+                                    </div>
+                                </div>
+                                <div class="s-mdc-card__appointment-empassigned">
+                                    <i class="material-icons s-font-color-secondary">support_agent</i>
+                                    <div class="mdc-typography--body2">
+                                        {{ appointment.emp_assigned.name }}
+                                    </div>
+                                </div>
+                                <div class="mdc-typography--caption s-font-color-secondary s-mdc-card__appointment-createdby">
+                                    <b>Creado por:</b> {{ appointment.created_by.name }}
+                                </div>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <button class="mdc-button mdc-button--outlined mdc-card__action mdc-card__action--button mdc-button--color-cancel">
+                                    <div class="mdc-button__ripple"></div>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true">clear</i>
+                                    <span class="mdc-button__label">Cancelar</span>
+                                </button>
+                                <button class="mdc-button mdc-button--unelevated mdc-card__action mdc-card__action--button"
+                                        data-action-type="redirect" data-action-val="/chat/">
+                                    <div class="mdc-button__ripple"></div>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                    <span class="mdc-button__label">Acceder</span>
+                                </button>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div>
+                {% else %}
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-7-desktop mdc-layout-grid__cell--span-8-tablet
+                            mdc-layout-grid__cell--align-top s-font-align-center">
+                    <div class="mdc-tab-bar container-appointments-tabs" role="tablist" data-action-fn="showAppointmentsTab">
+                        <div class="mdc-tab-scroller">
+                            <div class="mdc-tab-scroller__scroll-area">
+                                <div class="mdc-tab-scroller__scroll-content">
+                                    <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                                        <span class="mdc-tab__content">
+                                            <span class="mdc-tab__text-label s-font-weight-bold">
+                                                Mis citas
+                                            </span>
+                                        </span>
+                                        <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                            <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                                        </span>
+                                        <span class="mdc-tab__ripple"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-appointments-list--empty">
+                        <p>
+                            <i class="material-icons s-font-size-xl s-font-color-secondary">event_busy</i>
+                        </p>
+                        <p class="mdc-typography--body1">
+                            No posees citas agendadas.
+                        </p>
+                        <p class="mdc-typography--caption s-font-color-secondary">
+                            Selecciona una fecha diferente que posea citas agendadas.
+                        </p>
+                    </div>
+                    <div id="container-appointments-list--for" class="container-appointments-list container--hidden">
+                        {% for appointment in appointments['appointments_created_for_u'] %}
+                        <div class="mdc-card container--hidden" data-app-sess-s="{{ appointment.date_timestamp }}">
+                            <div class="mdc-card__primary-action" tabindex="0">
+                                <div class="mdc-typography--headline5 s-font-color-primary s-mdc-card__appointment-service">
+                                    {{ appointment.service.name }}
+                                </div>
+                                <div class="s-mdc-card__appointment-date">
+                                    {{ appointment.date_scheduled }}
+                                </div>
+                                <div class="s-mdc-card__appointment-daytime">
+                                    {% if appointment.service.time_of_day == 'dawn' %}
+                                    <i class="material-icons s-icon-color-twitter">dark_mode</i>
+                                    {% elif appointment.service.time_of_day == 'morning' %}
+                                    <i class="material-icons s-font-color-chat-away">wb_sunny</i>
+                                    {% elif appointment.service.time_of_day == 'evening' %}
+                                    <i class="material-icons s-font-color-chat-transferred">wb_twilight</i>
+                                    {% elif appointment.service.time_of_day == 'night' %}
+                                    <i class="material-icons s-icon-color-linkedin">nights_stay</i>
+                                    {% endif %}
+                                    <div class="mdc-typography--body2">
+                                        {{ appointment.time_scheduled_start }} - {{ appointment.time_scheduled_end }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mdc-card__actions">
+                                <button class="mdc-button mdc-button--outlined mdc-card__action mdc-card__action--button mdc-button--color-cancel">
+                                    <div class="mdc-button__ripple"></div>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true">clear</i>
+                                    <span class="mdc-button__label">Cancelar</span>
+                                </button>
+                                <button class="mdc-button mdc-button--unelevated mdc-card__action mdc-card__action--button"
+                                        data-action-type="redirect" data-action-val="/chat/">
+                                    <div class="mdc-button__ripple"></div>
+                                    <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
+                                    <span class="mdc-button__label">Acceder</span>
+                                </button>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -135,14 +285,14 @@
 {% if current_user.is_user_role(['adm', 'ori', 'abo', 'psi', 'soc', 'coo']) %}
 <button id="floatingButton" class="mdc-fab mdc-fab--extended mdc-fab--fixed" aria-label="Create appointment"
         data-action-type="redirect" data-action-val="/appointments/create/admin/">
-{% elif current_user.is_user_role(['usr']) %}
-<button id="floatingButton" class="mdc-fab mdc-fab--extended mdc-fab--fixed" aria-label="Create appointment"
-        data-action-type="redirect" data-action-val="/appointments/create/">
-{% endif %}
     <div class="mdc-fab__ripple"></div>
     <span class="mdc-fab__label">Solicita una cita</span>
     <span class="material-icons mdc-fab__icon">add</span>
 </button>
+{% endif %}
 {% endblock %}
 {% block body_script_section %}
+<script src="{{ url_for('static', filename='js/jsCalendar.lang.es.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jsCalendar.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bundle/appointments-v.min.js') }}"></script>
 {% endblock %}

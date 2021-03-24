@@ -2,7 +2,7 @@ from datetime import datetime as dt
 from datetime import timezone as tz
 from flask import current_app as app
 from flask import jsonify
-from models import db, CatalogServices, CatalogOperations, CatalogUserRoles, RTCOnlineUsers, User, UserXRole
+from models import db, CatalogIDDocumentTypes, CatalogServices, CatalogOperations, CatalogUserRoles, RTCOnlineUsers, User, UserXRole
 from models import CatalogSurveysAnswerTypes, Surveys, SurveysQuestions
 
 # -----------------------------------------------------------------------------------------------------
@@ -26,6 +26,9 @@ def initPopulateDB():
 
     # Add Services Catalog
     populateServicesCatalog()
+
+    # Add ID Document Type Catalog
+    populateCatalogIDDocType()
 
     # Add Default Users
     populateDefaultUsers()
@@ -128,27 +131,88 @@ def populateDefaultUsers():
 
 
 # Populate Catalog Services Data
-def populateServicesCatalog():
+def populateServicesCatalog(column=None):
     try:
         app.logger.debug('** SWING_CMS ** - Populate Catalog Services')
 
-        # Add Services
-        psy_role = CatalogUserRoles.query.filter_by(name_short='psi').first()
-        psychology = CatalogServices(name='Apoyo psicológico', name_short='psi', service_user_role=psy_role.id)
-        db.session.add(psychology)
+        if column is None:
+            # Add Services
+            psy_role = CatalogUserRoles.query.filter_by(name_short='psi').first()
+            psychology = CatalogServices(name='Apoyo psicológico', name_short='psi', service_user_role=psy_role.id)
+            db.session.add(psychology)
 
-        law_role = CatalogUserRoles.query.filter_by(name_short='abo').first()
-        lawyer = CatalogServices(name='Asistencia legal', name_short='abo', service_user_role=law_role.id)
-        db.session.add(lawyer)
+            law_role = CatalogUserRoles.query.filter_by(name_short='abo').first()
+            lawyer = CatalogServices(name='Asistencia legal', name_short='abo', service_user_role=law_role.id)
+            db.session.add(lawyer)
 
-        soc_role = CatalogUserRoles.query.filter_by(name_short='soc').first()
-        social = CatalogServices(name='Apoyo social', name_short='soc', service_user_role=soc_role.id)
-        db.session.add(social)
+            soc_role = CatalogUserRoles.query.filter_by(name_short='soc').first()
+            social = CatalogServices(name='Apoyo social', name_short='soc', service_user_role=soc_role.id)
+            db.session.add(social)
 
-        groups = CatalogServices(name='Grupos de autoayuda', name_short='gaa')
-        db.session.add(groups)
+            groups = CatalogServices(name='Grupos de autoayuda', name_short='gaa')
+            db.session.add(groups)
+            
+            db.session.commit()
+
+        elif column == 'sur':
+            # Add Service's User Role
+            services = CatalogServices.query.all()
+            hasUpd = False
+            
+            for service in services:
+                usr_role = CatalogUserRoles.query.filter_by(name_short=service.name_short).first()
+                
+                if usr_role is not None:
+                    service.service_user_role = usr_role.id
+                    db.session.add(service)
+                    hasUpd = True
+            
+            if hasUpd:
+                db.session.commit()
         
-        db.session.commit()
+        elif column == 'sch':
+            # Add Service's Sessions Schedule
+            lawsrv = CatalogServices.query.filter_by(name_short='abo').first()
+            lawsrv.sessions_schedule = [{
+                'weeks': 'all',
+                'wdays': ['mon', 'tue', 'wed', 'thu', 'fri'],
+                'hours': [
+                    {'start_time': '9:00', 'duration': lawsrv.duration_minutes, 'break_time': lawsrv.break_minutes, 'tod': 'morning'},
+                    {'start_time': '11:00', 'duration': lawsrv.duration_minutes, 'break_time': lawsrv.break_minutes, 'tod': 'morning'},
+                    {'start_time': '13:00', 'duration': lawsrv.duration_minutes, 'break_time': lawsrv.break_minutes, 'tod': 'evening'},
+                    {'start_time': '15:00', 'duration': lawsrv.duration_minutes, 'break_time': lawsrv.break_minutes, 'tod': 'evening'}
+                ]
+            }]
+            db.session.add(lawsrv)
+
+            psysrv = CatalogServices.query.filter_by(name_short='psi').first()
+            psysrv.sessions_schedule = [{
+                'weeks': 'all',
+                'wdays': ['mon', 'tue', 'wed', 'thu', 'fri'],
+                'hours': [
+                    {'start_time': '8:00', 'duration': psysrv.duration_minutes, 'break_time': psysrv.break_minutes, 'tod': 'morning'},
+                    {'start_time': '10:00', 'duration': psysrv.duration_minutes, 'break_time': psysrv.break_minutes, 'tod': 'morning'},
+                    {'start_time': '14:00', 'duration': psysrv.duration_minutes, 'break_time': psysrv.break_minutes, 'tod': 'evening'}
+                ]
+            }]
+            db.session.add(psysrv)
+
+            socsrv = CatalogServices.query.filter_by(name_short='soc').first()
+            socsrv.sessions_schedule = [{
+                'weeks': 'all',
+                'wdays': ['mon', 'tue', 'wed', 'thu', 'fri'],
+                'hours': [
+                    {'start_time': '8:00', 'duration': psysrv.duration_minutes, 'break_time': psysrv.break_minutes, 'tod': 'morning'},
+                    {'start_time': '10:00', 'duration': psysrv.duration_minutes, 'break_time': psysrv.break_minutes, 'tod': 'morning'},
+                    {'start_time': '14:00', 'duration': psysrv.duration_minutes, 'break_time': psysrv.break_minutes, 'tod': 'evening'}
+                ]
+            }]
+            db.session.add(socsrv)
+
+            db.session.commit()
+
+        else: 
+            app.logger.debug('** SWING_CMS ** - Populate Catalog Services - Argument Invalid')
 
         return jsonify({ 'status': 'success' })
     except Exception as e:
@@ -269,6 +333,35 @@ def populateCatalogOperations():
         return jsonify({ 'status': 'error' })
 
 
+# Populate Catalog ID Document Type Data
+def populateCatalogIDDocType():
+    try:
+        app.logger.debug('** SWING_CMS ** - Populate ID Document Type')
+
+        # Add ID Document Type
+        nat_id = CatalogIDDocumentTypes(name='DUI', name_short='dui')
+        db.session.add(nat_id)
+
+        tax_id = CatalogIDDocumentTypes(name='NIT', name_short='nit')
+        db.session.add(tax_id)
+
+        passport = CatalogIDDocumentTypes(name='Pasaporte', name_short='pas')
+        db.session.add(passport)
+
+        driver_lic = CatalogIDDocumentTypes(name='Licencia de conducir', name_short='lic')
+        db.session.add(driver_lic)
+
+        res_lic = CatalogIDDocumentTypes(name='Carné de residencia', name_short='res')
+        db.session.add(res_lic)
+
+        db.session.commit()
+
+        return jsonify({ 'status': 'success' })
+    except Exception as e:
+        app.logger.error('** SWING_CMS ** - Populate ID Document Type Error: {}'.format(e))
+        return jsonify({ 'status': 'error' })
+
+
 # Populate Catalog User Roles Data
 def populateCatalogUserRoles():
     try:
@@ -310,6 +403,7 @@ def populateTable(dp_name, dp_options=None):
         app.logger.debug('** SWING_CMS ** - Populate Specified Table')
 
         data_procedures = {
+            "catalog_id_types": populateCatalogIDDocType,
             "catalog_operations": populateCatalogOperations,
             "catalog_services": populateServicesCatalog,
             "catalog_user_roles": populateCatalogUserRoles,
@@ -319,10 +413,11 @@ def populateTable(dp_name, dp_options=None):
             "survey_uss": populateSurveyUserSatisfaction
         }
 
-        if dp_options is not None:
-            data_procedures[dp_name](dp_options)
-        else:
-            data_procedures[dp_name]()
+        if callable(data_procedures[dp_name]):
+            if dp_options is not None:
+                data_procedures[dp_name](dp_options)
+            else:
+                data_procedures[dp_name]()
 
         return jsonify({ 'status': 'success' })
     except Exception as e:

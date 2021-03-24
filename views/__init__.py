@@ -6,12 +6,17 @@ from datetime import timezone as tz
 from firebase_admin import auth, credentials
 from flask import flash, render_template, jsonify, request, redirect, url_for
 from flask import current_app as app
+from flask_babel import Babel
 from flask_login import LoginManager, login_user, current_user, logout_user
 from models.models import crypto_key, db, es, User
 
 
 # Enable instance of SQLAlchemy
 db.init_app(app)
+
+
+# Enable Babel Internationalization
+babel = Babel(app)
 
 
 # Init CryptoKey

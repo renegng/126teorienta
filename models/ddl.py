@@ -12,9 +12,11 @@ from pathlib import Path
 app = Flask(__name__)
 
 # Configuration file from environment variable
+app.config['ENV'] = 'development'
+app.config['DEBUG'] = True
 sys.path.append((Path(__file__).parent.parent.resolve() / 'instance').as_posix())
 from config_models import configType as cfgmodels
-app.config.from_object(cfgmodels['development'])
+app.config.from_object(cfgmodels[app.config['ENV']])
 
 # Enable instance of SQLAlchemy
 db.init_app(app)
@@ -90,7 +92,7 @@ def main(argv):
 
         else:
             print("No command specified. Commands supported:")
-            print("$ python3 ddl.py [create_all | drop_all | populate_table | migrate | elastic_reindex]")
+            print("$ python3 ddl.py [create_all | drop_all | populate_db | migrate | elastic_reindex]")
 
 
 # Executes main() function if this file is executed as "__main__"
