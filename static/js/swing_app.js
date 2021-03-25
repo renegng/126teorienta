@@ -106,6 +106,7 @@ window.returnFormatDate = returnFormatDate;
 
 // Fetch API
 export function getFetch(url, actionFn = null, options = {}) {
+    mdcTopBarLoading.foundation_.adapter_.removeClass('container--hidden');
     mdcTopBarLoading.open();
     return fetch(url, options)
         .then((response) => {
@@ -121,6 +122,7 @@ export function getFetch(url, actionFn = null, options = {}) {
         .then((data) => {
             console.log('Request succeeded with JSON response: ', data);
             mdcTopBarLoading.close();
+            mdcTopBarLoading.foundation_.adapter_.addClass('container--hidden');
             if (actionFn) {
                 let fn = (typeof actionFn == "string") ? window[actionFn] : actionFn;
                 fn(data);
@@ -130,11 +132,13 @@ export function getFetch(url, actionFn = null, options = {}) {
         .catch(function (error) {
             console.log('Request failed: ', error);
             mdcTopBarLoading.close();
+            mdcTopBarLoading.foundation_.adapter_.addClass('container--hidden');
             return Promise.reject(error);
         });
 }
 
 export function postFetch(url, postData) {
+    mdcTopBarLoading.foundation_.adapter_.removeClass('container--hidden');
     mdcTopBarLoading.open();
     return fetch(url, {
         method: 'POST',
@@ -151,6 +155,7 @@ export function postFetch(url, postData) {
     .then((data) => {
         console.log('Request succeeded with JSON response: ', data);
         mdcTopBarLoading.close();
+        mdcTopBarLoading.foundation_.adapter_.addClass('container--hidden');
         if ('cmd' in data && data.cmd == 'redirectURL') {
             window.location.assign(data.action);
         }
@@ -159,6 +164,7 @@ export function postFetch(url, postData) {
     .catch(function (error) {
         console.log('Request failed: ', error);
         mdcTopBarLoading.close();
+        mdcTopBarLoading.foundation_.adapter_.addClass('container--hidden');
         return Promise.reject(error);
     });
 }

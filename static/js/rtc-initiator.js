@@ -859,12 +859,16 @@ function moreOptionsSelection(index) {
         case 0:
             mdcTransferDialogEl.open();
             break;
-        // End Chat with User Satisfaction Survey
+        // Appointment
         case 1:
+            window.open('/appointments/create/admin/');
+            break;
+        // End Chat with User Satisfaction Survey
+        case 2:
             endRTCSession(true);
             break;
         // End Chat without Survey
-        case 2:
+        case 3:
             endRTCSession();
             break;
     }
