@@ -3,7 +3,7 @@ from datetime import timezone as tz
 from elasticsearch import Elasticsearch
 from flask import jsonify
 from flask_login import UserMixin
-from flask_sqlalchemy import SQLAlchemy, orm
+from flask_sqlalchemy import SQLAlchemy, event, orm
 from operator import attrgetter
 from sqlalchemy_utils import EncryptedType
 from sqlalchemy_utils.types import JSONType

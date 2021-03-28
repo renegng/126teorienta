@@ -46,10 +46,11 @@ To install Swing CMS, follow the next steps (under Ubuntu 16.04):
 
     ~: git clone git@github.com:renegng/126teorienta.git
 
-4 - Inside the prevoius folder, install a Python 3.5 or greater virtual environment and the RDBMS (MySQL) prerequisites:
+4 - Inside the prevoius folder, install a Python 3.5 or greater virtual environment and the RDBMS (MySQL, ElasticSearch) prerequisites:
 
     ~: [python | python3 | python3.6 | python3.x] -m venv venv
     ~: sudo apt-get install build-essential python3-dev libmysqlclient-dev
+    ~: sudo apt-get install elasticsearch
 
 5 - Inside the prevoius folder, activate the virtual environment:
 
@@ -133,6 +134,7 @@ Proper credit for the following people/teams:
 - Google's Material Design, Workbox and Firebase team, for making the web awesome!
 - Polymer Project, for an amazing main HTML PWA Template structure.
 - Python, Flask, NodeJS, SQLAlchemy(-Utils), Migrate, Alembic, WTForms, Login, Cryptography GitHub and everyone's amazing frameworks.
+- MySQL, Firebase, ElasticSearch for amazing Databases with amazing features.
 - PeerJS, simple-peer, SaltyRTC for their wonderful frameworks to implement WebRTC.
 - Localforage for their simple and amazing localStorage wrapper.
 - jsCalendar for their amazing simple modern calendar library.
