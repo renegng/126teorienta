@@ -252,7 +252,9 @@ def _loginuser():
             user.datecreated = dt.now(tz.utc)
             user.cmuserid = '126-' + user.name.strip().upper()[0:1] + user.datecreated.strftime('-%y%m%d-%H%M%S')
             db.session.add(user)
-            db.session.flush()
+            
+            db.session.commit()
+            db.session.refresh(user)
 
             # Add User Role
             user_role = CatalogUserRoles.query.filter_by(name_short='usr').first()

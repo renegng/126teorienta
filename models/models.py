@@ -204,8 +204,8 @@ class ElasticMixin(object):
             when.append((ids[i], i))
         return cls.query.filter(cls.id.in_(ids)).order_by(db.case(when, value=cls.id)), total
 
-db.event.listen(db.session, 'before_commit', ElasticMixin.before_commit)
 db.event.listen(db.session, 'after_commit', ElasticMixin.after_commit)
+db.event.listen(db.session, 'before_commit', ElasticMixin.before_commit)
 
 
 # **************************************************************************
