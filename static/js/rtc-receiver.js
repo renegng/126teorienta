@@ -14,12 +14,15 @@ window.enableOfflineMsgs = enableOfflineMsgs;
 // Initiator Room ID
 const iRID = { 'id' : '' };
 
-// MDC Dialog - Disconnected, End RTC
+// MDC Dialog - Disconnected, End RTC, TOA
 var mdcDisconnectedDialogEl = null;
 var mdcEndRTCDialogEl = null;
+var mdcToaDialogEl = null;
 
 function initializeRTC() {
     console.log('Initializing SocketIO/SimplePeer');
+
+    mdcToaDialogEl.open();
 
     const socket = io({
         query: 'photoURL=' + encodeURIComponent(advStreams.myUserInfo.photoURL)

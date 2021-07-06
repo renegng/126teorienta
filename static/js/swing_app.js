@@ -907,6 +907,11 @@ if (transferDialogEl) {
     mdcTransferDialogEl = new MDCDialog(transferDialogEl);
 }
 
+var toaDialogEl = document.querySelector('#agreement-dialog');
+if (toaDialogEl) {
+    mdcToaDialogEl = new MDCDialog(toaDialogEl);
+}
+
 
 // Material Drawer & Top App Bar
 const drawerEl = document.querySelector('.mdc-drawer');

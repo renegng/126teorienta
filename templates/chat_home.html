@@ -211,7 +211,7 @@
                     </p>
                     <p class="s-font-align-center">
                         <button class="mdc-button mdc-button--raised mdc-button--color-secondary" aria-label="Complete survey" 
-                                alt="Complete survey" data-action-type="redirect" data-action-val="/">
+                                alt="Complete survey" data-action-type="redirect" data-action-val="https://forms.gle/pnKWweGEqAwpdGWv5">
                             <div class="mdc-button__ripple"></div>
                             <span class="mdc-button__label">Llenar formulario</span>
                         </button>
@@ -243,6 +243,27 @@
                         data-action-type="redirect" data-action-val="/chat/home/" data-mdc-dialog-button-default>
                         <div class="mdc-button__ripple"></div>
                         <span class="mdc-button__label">OK</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="mdc-dialog__scrim"></div>
+    </div>
+    <div id="agreement-dialog" class="mdc-dialog">
+        <div class="mdc-dialog__container">
+            <div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-labelledby="d-agreement-title"
+                aria-describedby="d-agreement-content">
+                <h2 class="mdc-dialog__title" id="d-agreement-title">Términos de Servicio y Política de Privacidad</h2>
+                <div class="mdc-dialog__content" id="d-agreement-content">
+                    Al presionar el botón de Aceptar, estaría aceptando nuestros <a href="/terminosdelservicio/"
+                        target="_blank">Términos de Servicio</a> y <a href="/politicaprivacidad/"
+                        target="_blank">Política de Privacidad</a>.
+                </div>
+                <div class="mdc-dialog__actions">
+                    <button type="button" class="mdc-button mdc-dialog__button mdc-button--raised" data-mdc-dialog-action="accept"
+                        data-mdc-dialog-button-default>
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">Aceptar</span>
                     </button>
                 </div>
             </div>

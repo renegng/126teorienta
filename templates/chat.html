@@ -105,23 +105,29 @@
                                 mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--align-middle container-chat--body">
                         <div class="container-chat--body-messages container-chat--body-messages-active">
                             <p class="container-chat--body-message-others">
-                                <span class="container-chat--body-message-message container-elevation-s' s-font-color-on-secondary">
+                                <span
+                                    class="container-chat--body-message-message container-elevation-s' s-font-color-on-secondary">
                                     ¡Hola! Gracias por ponerse en contacto con 126 Te Orienta, del Instituto Salvadoreño
                                     para el Desarrollo de la Mujer (ISDEMU), en un momento una de nuestras especialistas
                                     se comunicará con usted.
                                 </span>
-                                <span class="container-chat--body-message-message-time mdc-typography--caption s-font-color-on-surface"></span>
-                                <span class="container-chat--body-message-message container-elevation-s' s-font-color-on-secondary">
+                                <span
+                                    class="container-chat--body-message-message-time mdc-typography--caption s-font-color-on-surface"></span>
+                                <span
+                                    class="container-chat--body-message-message container-elevation-s' s-font-color-on-secondary">
                                     Durante nuestro horario de atención de lunes a viernes, de 8:00 a.m. a 8:00 p.m., te
                                     responderemos a más tardar en 10 min. Fuera de este horario, si se trata de una
                                     emergencia llama al número 911 de la Policía Nacional Civil.
                                 </span>
-                                <span class="container-chat--body-message-message-time mdc-typography--caption s-font-color-on-surface"></span>
-                                <span class="container-chat--body-message-message container-elevation-s' s-font-color-on-secondary">
+                                <span
+                                    class="container-chat--body-message-message-time mdc-typography--caption s-font-color-on-surface"></span>
+                                <span
+                                    class="container-chat--body-message-message container-elevation-s' s-font-color-on-secondary">
                                     Para efectos de registro, le solicitamos nos proporcione su nombre, edad y municipio
                                     donde vive. Tu información es confidencial.
                                 </span>
-                                <span class="container-chat--body-message-message-time mdc-typography--caption s-font-color-on-surface"></span>
+                                <span
+                                    class="container-chat--body-message-message-time mdc-typography--caption s-font-color-on-surface"></span>
                             </p>
                             <div class="s-loader">
                                 <div class="s-loader-bounce1"></div>
@@ -225,8 +231,9 @@
                         Si tienes más comentarios, haz click en el siguiente botón:
                     </p>
                     <div class="s-font-align-center">
-                        <button class="mdc-button mdc-button--raised mdc-button--color-secondary" aria-label="Complete survey" 
-                                alt="Complete survey" data-action-type="redirect" data-action-val="/">
+                        <button class="mdc-button mdc-button--raised mdc-button--color-secondary"
+                            aria-label="Complete survey" alt="Complete survey" data-action-type="redirect"
+                            data-action-val="/">
                             <div class="mdc-button__ripple"></div>
                             <span class="mdc-button__label">Llenar formulario</span>
                         </button>
@@ -258,6 +265,27 @@
                         data-action-type="redirect" data-action-val="/chat/" data-mdc-dialog-button-default>
                         <div class="mdc-button__ripple"></div>
                         <span class="mdc-button__label">OK</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="mdc-dialog__scrim"></div>
+    </div>
+    <div id="agreement-dialog" class="mdc-dialog">
+        <div class="mdc-dialog__container">
+            <div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-labelledby="d-agreement-title"
+                aria-describedby="d-agreement-content">
+                <h2 class="mdc-dialog__title" id="d-agreement-title">Términos de Servicio y Política de Privacidad</h2>
+                <div class="mdc-dialog__content" id="d-agreement-content">
+                    Al presionar el botón de Aceptar, estaría aceptando nuestros <a href="/terminosdelservicio/"
+                        target="_blank">Términos de Servicio</a> y <a href="/politicaprivacidad/"
+                        target="_blank">Política de Privacidad</a>.
+                </div>
+                <div class="mdc-dialog__actions">
+                    <button type="button" class="mdc-button mdc-dialog__button mdc-button--raised" data-mdc-dialog-action="accept"
+                        data-mdc-dialog-button-default>
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">Aceptar</span>
                     </button>
                 </div>
             </div>
