@@ -70,11 +70,11 @@ function establishRTC() {
             iceServers: [
                 {
                     urls: [
-                        'stun:stun.rxdbit.com'
+                        'stun:stun.126teorienta.gob.sv'
                     ]
                 },{
                     urls: [
-                        'turn:turn.rxdbit.com'
+                        'turn:turn.126teorienta.gob.sv'
                     ],
                     credential: 'cotnection',
                     username: 'cotusr'
